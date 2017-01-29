@@ -9,7 +9,7 @@ class AccountSidebar extends React.Component {
             <div className="list-group">
               <a className="list-group-item" href="/account/login">Login</a>
               <a className="list-group-item" href="/account/register">Register</a>
-              <a className="list-group-item" href="forgetpassword.html">Forgotten Password</a>
+              <a className="list-group-item" href="/account/forgotPassword">Forgotten Password</a>
               <a className="list-group-item" href="#">My Account</a>
               <a className="list-group-item" href="#">Address Book</a>
               <a className="list-group-item" href="#">Wish List</a>
