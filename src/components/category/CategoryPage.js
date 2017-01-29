@@ -1,13 +1,17 @@
 import React from 'react';
 import LeftPage from '../navigation/LeftPage';
+import CategoryBanner from './CategoryBanner';
+import ProductList from '../products/ProductList';
 
 class CategoryPage extends React.Component {
     render() {
       return (
-        <div className="row">
+        <div>
           <LeftPage />
-
-          <span>Category</span>
+          <div id="content" className="col-sm-9">
+            <CategoryBanner />
+            <ProductList />
+          </div>
         </div>
       );
     }
