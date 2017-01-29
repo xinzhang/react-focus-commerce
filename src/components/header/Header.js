@@ -16,7 +16,7 @@ class Header extends React.Component {
               </div>
               <div className="col-sm-4 col-xs-6 header-middle">
                   <div className="header-middle-top">
-                      <div id="logo"> <a href="index.html"><img src="image/logo.png" title="E-Commerce" alt="E-Commerce" className="img-responsive" /></a> </div>
+                      <div id="logo"> <a href="/"><img src="/image/logo.png" title="E-Commerce" alt="E-Commerce" className="img-responsive" /></a> </div>
                   </div>
               </div>
               <div className="col-sm-4 col-xs-6 header-right">
