@@ -14,6 +14,14 @@ class BlogApi {
       return error;
     });
   }
+
+  static getBlogCategories() {
+    return fetch('http://localhost:5000/api/blogcategories/').then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
 }
 
-export default BlogApi;  
+export default BlogApi;

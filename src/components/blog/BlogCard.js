@@ -28,8 +28,8 @@ class BlogCard extends React.Component {
 
 BlogCard.propTypes = {
   //blog: React.PropTypes.Object.isRequired,
-  id: React.PropTypes.number.isRequired,
-  from: React.PropTypes.string.isRequired
+  //id: React.PropTypes.number.isRequired,
+  //from: React.PropTypes.string.isRequired
 }
 
 

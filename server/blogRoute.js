@@ -50,4 +50,12 @@ router.get('/blogs/:id', function(req, res, next) {
   });
 });
 
+router.get('/blogcategories', function(req, res, next) {
+    readJSONFile('./data/blogCategories.json', function (err, data) {
+    if(err) { throw err; }
+    res.json(data);
+    res.end
+  });
+});
+
 module.exports = router;

@@ -28,3 +28,17 @@ export function loadBlogDetail(id) {
 export function loadBlogDetailSuccess(blog) {
   return {type: types.LOAD_BLOG_DETAIL_SUCESS, blog}
 }
+
+export function loadBlogCategories(id) {
+  return function(dispatch) {
+    return blogApi.getBlogCategories(id).then(data => {
+      dispatch(loadBlogCategoriesSuccess(data));
+    }).catch(error => {
+      throw(error);
+    });
+  }
+}
+
+export function loadBlogCategoriesSuccess(blogcategories) {
+  return {type: types.LOAD_BLOG_CATEGORIES_SUCCESS, blogcategories}
+}

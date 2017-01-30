@@ -1,6 +1,7 @@
 export default {
   products:[],
-  blogs:[],
+  blogs:[],  
+  blogcategories:[],
   categories:[],
   cart:{}
 }
