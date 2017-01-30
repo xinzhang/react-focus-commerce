@@ -17,7 +17,7 @@ function readJSONFile(filename, callback) {
 }
 
 router.get('/blogs', function(req, res, next) {
-    readJSONFile('blogs.json', function (err, data) {
+    readJSONFile('./data/blogs.json', function (err, data) {
     if(err) { throw err; }
     res.json(data);
     res.end
@@ -25,13 +25,28 @@ router.get('/blogs', function(req, res, next) {
 });
 
 router.get('/blogs/:id', function(req, res, next) {
-    readJSONFile('blogs.json', function (err, data) {
+    readJSONFile('./data/blogs.json', function (err, data) {
       if(err) { throw err; }
-      let element = data.Find(x=>{
-            x.id === req.id;
-      })
-      res.json(element);
-      res.end;    
+
+      let reqId = req.params.id;
+      console.log(reqId);
+
+      //let element = data.filter(function(d){
+      //  return d.id == reqId;
+      //});
+
+      let element = data.find(x => {
+        return x.id == reqId;
+      });
+
+      console.log(element);
+      if (element) {
+        res.json(element);
+      } else {
+        res.status(404).send("not found");
+      }
+
+      res.end;
   });
 });
 
