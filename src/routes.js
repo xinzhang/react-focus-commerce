@@ -21,7 +21,8 @@ export default (
     <Route path="/login" component={LoginPage} />
     <Route path="/blog" component={BlogPage}>
       <Route path="/blog/list" component={BlogList} />
-      <Route path="/blog/detail" component={BlogDetail} />
+      <Route path="/blog/list/:category" component={BlogList} />
+      <Route path="/blog/detail/:id" component={BlogDetail} />
     </Route>
     <Route path="/account" component={AccountPage}>
       <Route path="/account/register" component={RegisterPage} />

@@ -1,16 +1,41 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router';
 
 class BlogCategory extends React.Component {
+    constructor(props, context) {
+      super(props, context);
+    }
+
     render() {
+      console.log('start render');
       return (
         <div className="column-block">
           <div className="columnblock-title">Categories</div>
           <div className="blog-categories-block category_block">
-            <div className="list-group"> <a className="list-group-item" href="#">Audio</a> <a className="list-group-item" href="#">Gallery</a> <a className="list-group-item" href="#">Link</a> <a className="list-group-item" href="#">Quote</a> <a className="list-group-item" href="#">Uncategorized</a> <a className="list-group-item last" href="#">Video</a> </div>
+            <div className="list-group">
+              {
+                this.props.blogcategories.map(item =>
+                  <Link to={'/blog/list/'+ item} className="list-group-item">{item}</Link>
+                )
+              }
+            </div>
           </div>
         </div>
       );
     }
 }
 
-export default BlogCategory;
+BlogCategory.propTypes = {
+  //blogcategories: PropTypes.array.isRequired
+}
+
+function mapStateToProps(state, ownProps) {
+  console.log('start mapStateToProps');
+  console.log(state.blogcategories);
+  return {
+    blogcategories:state.blogcategories
+  }
+}
+
+export default connect(mapStateToProps)(BlogCategory);
