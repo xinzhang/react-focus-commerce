@@ -21,4 +21,6 @@ class BlogPage extends React.Component {
     }
 }
 
+
+
 export default BlogPage;
