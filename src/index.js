@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 
 import {loadBlogs} from './actions/blogActions';
 import {loadBlogCategories} from './actions/blogActions';
+import {loadProducts} from './actions/productActions';
 
 // ReactDOM.render(
 //   <App />,
@@ -20,6 +21,7 @@ import {loadBlogCategories} from './actions/blogActions';
 const store = configureStore();
 store.dispatch(loadBlogs());
 store.dispatch(loadBlogCategories());
+store.dispatch(loadProducts());
 
 ReactDOM.render(
   <Provider store={store}>

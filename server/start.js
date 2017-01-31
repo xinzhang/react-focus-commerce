@@ -1,7 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var blog = require('./blogRoute');
+var blogRoute = require('./blogRoute');
+var productRoute = require('./productRoute')
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -22,7 +23,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-app.use('/api/', blog);
+app.use('/api/', blogRoute);
+app.use('/api/', productRoute);
 
 app.listen(port);
 console.log('start to listening ' + port);

@@ -11,7 +11,7 @@ class ListFilter extends React.Component {
             </div>
             <a href="#" id="compare-total">Product Compare (0)</a> </div>
           <div className="col-md-1 text-right page-wrapper">
-            <label className="control-label" for="input-limit">Show:</label>
+            <label className="control-label" htmlFor="input-limit">Show:</label>
             <div className="limit">
               <select id="input-limit" className="form-control">
                 <option value="8" selected="selected">8</option>
@@ -23,7 +23,7 @@ class ListFilter extends React.Component {
             </div>
           </div>
           <div className="col-md-2 text-right sort-wrapper">
-            <label className="control-label" for="input-sort">Sort By:</label>
+            <label className="control-label" htmlFor="input-sort">Sort By:</label>
             <div className="sort-inner">
               <select id="input-sort" className="form-control">
                 <option value="ASC" selected="selected">Default</option>

@@ -1,6 +1,7 @@
 export default {
   products:[],
-  blogs:[],  
+  pageno: 0,
+  blogs:[],
   blogcategories:[],
   categories:[],
   cart:{}
