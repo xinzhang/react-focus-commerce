@@ -10,36 +10,28 @@ class ProductRelated extends React.Component {
     }
   }
 
-componentWillReceiveProps(nextProps) {
-  console.log('componentWillReceiveProps');
-  console.log(nextProps.products);
-  let abc = Object.assign([],[...nextProps.products]);
-  console.log(abc);
-  this.setState({
-    products: [...nextProps.products]
-  });
-  console.log(this.state);
-  console.log(this.state.products.length);
-}
+    componentWillReceiveProps(nextProps) {
+      console.log('componentWillReceiveProps');
+      console.log(nextProps.products);
+      let abc = Object.assign([],[...nextProps.products]);
+      console.log(abc);
+      this.setState({
+        products: [...nextProps.products]
+      });
+    }
 
     render() {
       console.log('product related render');
+      console.log(this.state.products);
       return (
         <div className="box">
-            <h3>products length: {this.state.products.length}</h3>
-            <h3>state value: {this.state.tempString}</h3>
-
-            {/*<div id="related-slidertab" className="row owl-carousel product-slider">*/}
-            <div>
-              {
-                this.state.products.map(p => {
-                  <div>
-                    <span>{p.name}</span>
-                    <ProductCard product={p} key={p.id} />
-                  </div>
-                })
-              }
+            <div id="related-slidertab" className="row owl-carousel product-slider">
+            {this.state.products.map(p =>
+                <ProductCard product={p} key={p.id} />
+            )}
             </div>
+            {/*<div id="related-slidertab" className="row owl-carousel product-slider">*/}
+
         </div>
       );
     }
