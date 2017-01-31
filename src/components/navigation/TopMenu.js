@@ -11,14 +11,14 @@ class TopMenu extends React.Component {
                 <div className="navbar-collapse">
                     <ul className="main-navigation">
                         <li><a href="/"   className="parent"  >Home</a> </li>
-                        <li><a href="/category"   className="parent"  >Electronics</a> </li>
-                        <li><a href="/category"   className="parent"  >Mobile</a> </li>
-                        <li><a href="/category"   className="parent"  >Fashio & Beauty</a> </li>
-                        <li><a href="/category"   className="parent"  >Audio</a> </li>
-                        <li><a href="/category"   className="parent"  >Home & Family</a> </li>
+                        <li><a href="/products"   className="parent"  >Electronics</a> </li>
+                        <li><a href="/products"   className="parent"  >Mobile</a> </li>
+                        <li><a href="/products"   className="parent"  >Fashio & Beauty</a> </li>
+                        <li><a href="/products"   className="parent"  >Audio</a> </li>
+                        <li><a href="/products"   className="parent"  >Home & Family</a> </li>
                         <li><a href="#" className="active parent">Page</a>
                             <ul>
-                                <li><a href="/category">Category Page</a></li>
+                                <li><a href="/products">Category Page</a></li>
                                 <li><a href="cart.html">Cart Page</a></li>
                                 <li><a href="checkout.html">Checkout Page</a></li>
                                 <li><a href="/blog/list" >Blog Page</a></li>

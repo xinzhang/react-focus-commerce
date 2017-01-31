@@ -24,13 +24,16 @@ class ProductPage extends React.Component {
 // }
 
 function mapStateToProps(state, ownProps) {
+  console.log('productpage state');
+  console.log(state);
 
   const prodId = ownProps.params.id;
   let product = { id: -1, name:'', pic_url:'', desc:'', price:0.0 ,tax:0.0, rating:0.0};
-  console.log(state);
+
   if (prodId && state.products.length > 0) {
       product = Object.assign({}, state.products.find(b => b.id == prodId));
   }
+
   console.log(product);
   return {
     product: product

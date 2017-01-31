@@ -30,8 +30,6 @@ ProductList.propTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('proeuctlist state');
-  console.log(state);
   return {
     products: state.products,
     pageno: state.pageno,

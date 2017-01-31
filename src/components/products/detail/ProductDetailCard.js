@@ -16,10 +16,16 @@ class ProductDetailCard extends React.Component {
             <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-1x"></i></span>
             <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-1x"></i></span>
             <span className="review-count">
-              <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">1 reviews</a> / <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a>
+              <a href="#">1 reviews</a> /
+              <a href="#">Write a review</a>
             </span>
               <hr />
-              <div className="addthis_toolbox addthis_default_style"><a className="addthis_button_facebook_like" ></a> <a className="addthis_button_tweet"></a> <a className="addthis_button_pinterest_pinit"></a> <a className="addthis_counter addthis_pill_style"></a></div>
+              <div className="addthis_toolbox addthis_default_style">
+                <a className="addthis_button_facebook_like" ></a>
+                <a className="addthis_button_tweet"></a>
+                <a className="addthis_button_pinterest_pinit"></a>
+                <a className="addthis_counter addthis_pill_style"></a>
+              </div>
           </div>
           <ul className="list-unstyled productinfo-details-top">
               <li>
