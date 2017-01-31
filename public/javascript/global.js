@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$('#main-banner,.gellery').owlCarousel({		
+	$('#main-banner,.gellery').owlCarousel({
 		autoPlay: 5000,
 		singleItem: true,
 		navigation: false,
@@ -8,7 +8,7 @@ $(document).ready(function() {
 		pagination: true,
 		transitionStyle : "fade"
 	});
-	
+
 	$('#content #special-slider').owlCarousel({
 		items: 4,
 		navigation: true,
@@ -70,13 +70,13 @@ $(document).ready(function() {
 		itemsTabletSmall : false,
 		itemsMobile : [479, 1]
 	});
-	
+
 	 $('#brand_carouse').owlCarousel({
         items: 5,
         navigation: true,
         pagination: false
     });
-	
+
 	$('#testimonial').owlCarousel({
 		items: 1,
 		autoPlay: true,
@@ -117,14 +117,13 @@ $(document).ready(function() {
 		itemsMobile : [479, 3]
 	});
 
-	
 });
 $(window).load(function() {
-$(".preloader").removeClass("loader");
-$(".preloader").css("display","none");
+		$(".preloader").removeClass("loader");
+		$(".preloader").css("display","none");
 });
-	
-$.fn.tabs = function() {
+
+$.fn.tabs = function() {	
 	var selector = this;
 	this.each(function() {
 		var obj = $(this);
@@ -142,9 +141,3 @@ $.fn.tabs = function() {
 	$(this).show();
 	$(this).first().click();
 };
-
-
-
-
-
-

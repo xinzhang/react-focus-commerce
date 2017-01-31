@@ -30,5 +30,6 @@ export default (
       <Route path="/account/forgotPassword" component={ForgotPassword} />
     </Route>
     <Route path="/category" component={CategoryPage} />
+    {/* <Route path="/product/detail" component={ProductPage}> */}
   </Route>
 );

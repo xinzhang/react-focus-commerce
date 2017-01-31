@@ -27,7 +27,7 @@ class ProductCard extends React.Component {
               <span className="price-tax">Ex Tax: {'$' + (this.props.product.price - this.props.product.tax)}</span>
             </p>
             <div className="rating">
-              <span className="fa fa-stack"> {this.props.product.rating}
+              <span className="fa fa-stack">
                 <i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star fa-stack-2x"></i><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i></span> <span className="fa fa-stack"><i className="fa fa-star-o fa-stack-2x"></i>
               </span>
             </div>
