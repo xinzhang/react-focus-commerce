@@ -9,7 +9,6 @@ export default function productReducer(state = initialState.products, action) {
     //   return Object.assign({}, state, {
     //    products: action.products
     //  })
-      console.log("products reducer");
       return action.products;
 
     default:

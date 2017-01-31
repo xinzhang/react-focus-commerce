@@ -5,6 +5,7 @@ export default function categoryReducer(state = initialState.categories, action)
   switch (action.type) {
     case types.LOAD_CATEGORIES_SUCESS:
       return action.categories;
+      
     default:
       return state;
   }

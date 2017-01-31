@@ -4,5 +4,6 @@ export default {
   blogs:[],
   blogcategories:[],
   categories:[],
-  cart:{}
+  cart:{},
+  relatedProducts:[],
 }

@@ -4,6 +4,7 @@ import products from './productReducer';
 import cart from './cartReducer';
 import categories from './categoryReducer';
 import blogcategories from './blogCategoriesReducer';
+import relatedProducts from './relatedProductsReducer';
 
 const rootReducer = combineReducers({
   // short hand property names
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   products,
   categories,
   cart,
-  blogcategories
+  blogcategories,
+  relatedProducts,
 })
 
 export default rootReducer;

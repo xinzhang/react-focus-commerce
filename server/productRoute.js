@@ -24,6 +24,17 @@ router.get('/products', function(req, res, next) {
   });
 });
 
+router.get('/relatedproducts/:id', function(req, res, next) {
+    readJSONFile('./data/products.json', function (err, data) {
+    if(err) { throw err; }
+    let reqId = req.params.id;
+    console.log("product related ", reqId);
+    
+    res.json(data);
+  });
+    res.end
+});
+
 router.get('/products/:pageno', function(req, res, next) {
     readJSONFile('./data/products.json', function (err, data) {
     if(err) { throw err; }
@@ -37,7 +48,7 @@ router.get('/product/:id', function(req, res, next) {
       if(err) { throw err; }
 
       let reqId = req.params.id;
-      console.log(reqId);
+      console.log("product detail ", reqId);
 
       //let element = data.filter(function(d){
       //  return d.id == reqId;

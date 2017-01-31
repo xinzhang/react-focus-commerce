@@ -12,7 +12,21 @@ export function loadProducts() {
 }
 
 export function loadProductsSuccess(products) {
-  return {type: types.LOAD_PRODUCTS_SUCESS, products}  
+  return {type: types.LOAD_PRODUCTS_SUCESS, products}
+}
+
+export function loadRelatedProducts(prodId) {
+  return function(dispatch) {
+    return ProductApi.getRelatedProducts(prodId).then(data => {
+      dispatch(loadRelatedProductsSuccess(data));
+    }).catch(error => {
+      throw(error);
+    });
+  }
+}
+
+export function loadRelatedProductsSuccess(relatedProducts) {
+  return {type: types.LOAD_RELATED_PRODUCTS_SUCESS, relatedProducts}
 }
 
 export function loadProductDetail(id) {

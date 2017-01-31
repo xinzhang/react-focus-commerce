@@ -15,8 +15,14 @@ class ProductDetail extends React.Component {
       // console.log(n);
       // $(n).tooltip();
       // $(ReactDOM.findDOMNode(this.refs.tooltip)).tooltip();
-      $(this.refs.test).tooltip();
+      //$(this.refs.test).tooltip();
     }
+    componentWillUpdate(nextProps, nextState){
+      console.log('product detail component will update');
+      // perform any preparations for an upcoming update
+      console.log(this.props.relatedProducts);
+    }
+
     render() {
       return (
         <div>
@@ -42,7 +48,7 @@ class ProductDetail extends React.Component {
               </div>
           </div>
           <h3 className="productblock-title">Related Products</h3>
-          <ProductRelated product={this.props.product} />
+          <ProductRelated products={this.props.relatedProducts} />
         </div>
       );
     }

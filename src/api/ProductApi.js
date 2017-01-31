@@ -7,6 +7,14 @@ class ProductApi {
     });
   }
 
+  static getRelatedProducts(prodId) {
+    return fetch('http://localhost:5000/api/relatedproducts/' + prodId).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
   static getProductDetail(id) {
     return fetch('http://localhost:5000/api/product/' + id).then(response => {
       return response.json();
