@@ -11,8 +11,8 @@ import BlogPage from './components/blog/BlogPage';
 import BlogList from './components/blog/BlogList';
 import BlogDetail from './components/blog/BlogDetail';
 
-import CategoryPage from './components/category/CategoryPage';
-
+import ProductListPage from './components/products/ProductListPage';
+import ProductPage from './components/products/ProductPage';
 
 export default (
   <Route path="/" component={App}>
@@ -29,7 +29,8 @@ export default (
       <Route path="/account/login" component={LoginPage} />
       <Route path="/account/forgotPassword" component={ForgotPassword} />
     </Route>
-    <Route path="/category" component={CategoryPage} />
+    <Route path="/products" component={ProductListPage} />
+    <Route path="/product/detail/:id" component={ProductPage} />
     {/* <Route path="/product/detail" component={ProductPage}> */}
   </Route>
 );

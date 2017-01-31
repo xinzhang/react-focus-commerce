@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import ListFilter from './ListFilter';
 import ListPager from './ListPager';
