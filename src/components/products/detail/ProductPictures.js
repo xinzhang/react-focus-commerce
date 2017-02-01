@@ -46,7 +46,7 @@ class ProductPictures extends React.Component {
                 <img src={this.props.product.pic_url} alt={this.props.product.name} title={this.props.product.name} className="img-responsive" />
               </Link>
             </li>
-            <OwlCarousel id="product-thumbnail" className="owl-carousel ows-theme" navigation="true">
+            <OwlCarousel id="product-thumbnail" className="owl-carousel ows-theme" navigation={true} pagination={false}>
                 {pictures}
             </OwlCarousel>
         </ul>

@@ -37,16 +37,15 @@ class ProductRelated extends React.Component {
 
       return (
         <div className="box">
-            <h3>this.state.products: {this.state.products.length}</h3>
             <div className="row product-slider">
-
-            <OwlCarousel id="related-slidertab" className="row owl-carousel product-slider" navigation="true" items="4">
+            <OwlCarousel id="related-slidertab" className="owl-carousel" navigation={true} pagination={false} items={4}>
               {this.state.products.map(p =>
                   <ProductCard product={p} key={p.id} showdesc="false" />
               )}
             </OwlCarousel>
-
             </div>
+
+
             {/*<div id="related-slidertab" className="row owl-carousel product-slider">*/}
 
         </div>

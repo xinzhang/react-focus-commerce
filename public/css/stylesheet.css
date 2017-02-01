@@ -1044,28 +1044,28 @@ h2.price {
 .productpage-title {
 	font-weight: bold;
 }
-.product-slider.owl-carousel {
+.product-slider .owl-carousel {
 	border: none;
 	box-shadow: none;
 	border-radius: 0;
 	margin-bottom: 0;
 	overflow: visible;
 }
-#content .blog-wrapper .owl-buttons, .product-slider.owl-carousel .owl-buttons {
+#content .blog-wrapper .owl-buttons, .product-slider .owl-carousel .owl-buttons {
 	position: absolute;
 	top: -60px;
 	width: 100%;
 }
-.product-slider.owl-carousel .owl-buttons div {
+.product-slider .owl-carousel .owl-buttons div {
 	opacity: 1;
 	font-size: 0;
 }
-.product-slider.owl-carousel .owl-buttons > div {
+.product-slider .owl-carousel .owl-buttons > div {
 	background: url("../image/sprite.png") no-repeat 0 0;
 	height: 20px;
 	width: 20px
 }
-#content .blog-wrapper .owl-buttons > div.owl-next, .product-slider.owl-carousel .owl-buttons > div.owl-next {
+#content .blog-wrapper .owl-buttons > div.owl-next, .product-slider .owl-carousel .owl-buttons > div.owl-next {
 	background-position: -13px -97px;
 	right: 0px;
 	left: auto;
@@ -1073,11 +1073,11 @@ h2.price {
 	width: 30px;
 	opacity: 1;
 }
-#content .blog-wrapper .owl-buttons > div.owl-next:hover, .product-slider.owl-carousel .owl-buttons > div.owl-next:hover {
+#content .blog-wrapper .owl-buttons > div.owl-next:hover, .product-slider .owl-carousel .owl-buttons > div.owl-next:hover {
 	background-position: -13px -131px;
 	border-color: #fe5723;
 }
-#content .blog-wrapper .owl-buttons > div.owl-prev, .product-slider.owl-carousel .owl-buttons > div.owl-prev {
+#content .blog-wrapper .owl-buttons > div.owl-prev, .product-slider .owl-carousel .owl-buttons > div.owl-prev {
 	background-position: -13px -28px;
 	left: auto;
 	right: 33px;
@@ -1085,7 +1085,7 @@ h2.price {
 	width: 30px;
 	opacity: 1;
 }
-#content .blog-wrapper .owl-buttons > div.owl-prev:hover, .product-slider.owl-carousel .owl-buttons > div.owl-prev:hover {
+#content .blog-wrapper .owl-buttons > div.owl-prev:hover, .product-slider .owl-carousel .owl-buttons > div.owl-prev:hover {
 	background-position: -13px -62px;
 	border-color: #fe5723;
 }
@@ -1182,10 +1182,10 @@ h2.price {
 .customtab-inner {
 	padding: 0;
 }
-.customtab .product-slider.owl-carousel .owl-buttons {
+.customtab .product-slider .owl-carousel .owl-buttons {
 	top: -60px;
 }
-/* CSS for Menu start */ 
+/* CSS for Menu start */
 
 .main-navigation > li {
 	display: inline-block;
@@ -1193,7 +1193,7 @@ h2.price {
 	list-style-type: none;
 	position: relative;
 }
-/* CSS for Menu level-1 */ 
+/* CSS for Menu level-1 */
 .main-navigation li a {
 	color: #000;
 	font-family: 'Arimo', Arial;
@@ -1299,9 +1299,9 @@ ul.main-navigation > li.menu-last ul ul {
 .main-navigation li li:hover > a {
 	color: #fff;
 }
-/* CSS for Menu end */ 
+/* CSS for Menu end */
 
-/* CSS for column start */ 
+/* CSS for column start */
 
 .col-2 .column-left, .col-2 .column-right {
 	width: 20%;
@@ -1315,10 +1315,10 @@ ul.main-navigation > li.menu-last ul ul {
 .col-3 #content {
 	width: 60%;
 }
-/* CSS for column end */ 
+/* CSS for column end */
 
-/* CSS for sidebar product block start */ 
-	
+/* CSS for sidebar product block start */
+
 .column-left .product-grid .product-grid-item, .column-right .product-grid .product-grid-item {
 	width: 100%;
 	padding: 0;
@@ -1395,10 +1395,10 @@ ul.main-navigation > li.menu-last ul ul {
 	margin: 0;
 	color: #404040;
 }
-.column-left .product-slider.owl-carousel, .column-right .product-slider.owl-carousel {
+.column-left .product-slider .owl-carousel, .column-right .product-slider .owl-carousel {
 	display: block;
 }
-.column-left .product-grid, .column-right .product-grid,  .column-left .product-slider.owl-carousel, .column-right .product-slider.owl-carousel {
+.column-left .product-grid, .column-right .product-grid,  .column-left .product-slider .owl-carousel, .column-right .product-slider .owl-carousel {
 	border: 1px solid #ddd;
 	margin: 0 0 20px;
 	padding: 20px 20px;
@@ -1408,12 +1408,12 @@ ul.main-navigation > li.menu-last ul ul {
 	margin: 0 0 5px;
 	font-weight: normal;
 }
-/* CSS for sidebar product block end */ 
+/* CSS for sidebar product block end */
 
 .column-left .list-group, .column-right .list-group {
 	margin: 0 0 20px;
 }
-/* CSS for Testimonial Start */ 
+/* CSS for Testimonial Start */
 .testimonial.owl-carousel {
 	border-radius: 0;
 	border: 1px solid #ddd;
@@ -1464,7 +1464,7 @@ ul.main-navigation > li.menu-last ul ul {
 .testimonial-item .test-image img {
 	width: 100%;
 }
-/* CSS for Testimonial End */ 
+/* CSS for Testimonial End */
 
 /* CSS for content Start */
 .category_block, .filter-block, .account-block, .affiliate-block, .information-block {
@@ -1975,7 +1975,7 @@ span.review-count, span.review-edit {
 /* CSS for Blog Sidebar End */
 
 	/* CSS for Blog content Start */
-	
+
 #content .blog .blog-wrapper li {
 	padding: 0 10px 20px;
 }
@@ -2122,9 +2122,9 @@ span.review-count, span.review-edit {
 	transition-duration: 500ms;
 }
 /* CSS for Blog-List End */
-	
+
 	/* CSS for Single-Blog-List Start  */
-	
+
 .singleblog-desc {
 	margin: 20px 0;
 }
@@ -2151,7 +2151,7 @@ span.review-count, span.review-edit {
 	left: 0;
 }
 /* CSS for Single-Blog-List End  */
-	
+
 /* CSS for Blog end */
 
 /* CSS for Blog List More Start */
@@ -2517,5 +2517,3 @@ div.dioprogress_size_l {
 	width: 100px;
 }
 /*about page end*/
-
-
