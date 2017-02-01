@@ -2,23 +2,11 @@ import React from 'react';
 import {Link} from 'react-router';
 
 import $ from 'jquery';
-//require("imports?$=jquery!./owl-carousel/owl.carousel.min.js")
-import OwlCarousel from 'react-owl-carousel';
 
 class ProductPictures extends React.Component {
 
     componentDidMount(){
       console.log(this.props.product);
-
-    //   $('#product-thumbnail').owlCarousel({
-    // 		navigation: true,
-    // 		pagination: false,
-    // 		itemsDesktop : [1199, 4],
-    // 		itemsDesktopSmall : [979, 3],
-    // 		itemsTablet : [768, 4],
-    // 		itemsTabletSmall : false,
-    // 		itemsMobile : [479, 3]
-    // 	});
     }
 
     render() {
@@ -27,17 +15,24 @@ class ProductPictures extends React.Component {
       for (let i=1; i<this.props.product.slider_pic_count+1; i++) {
         let largePicUrl=this.props.product.slider_pic_large_url.replace("%d", i);
         let smallPicUrl=this.props.product.slider_pic_small_url.replace("%d", i);
+
         let title=this.props.product.name;
+        let itemWidthStyle={width:"83px"};
 
         pictures.push(
+          <div className="owl-item" style={itemWidthStyle}>
           <div className="item" key={"pic_" + i}>
             <li className="image-additional">
               <a className="thumbnail fancybox" rel="gallery1"  href={largePicUrl} title={title}>
                 <img src={smallPicUrl} title={title} alt={title} />
               </a>
             </li>
+          </div>
         </div>);
       }
+
+      let style1={opacity: 1, display: "block"};
+      let wrapperStyle={width: "1162px", left: "0px", display: "block", transition: "all 1000ms ease", transform: "translate3d(-249px, 0px, 0px)"};
 
       let renderhtml = (
         <ul className="thumbnails">
@@ -46,9 +41,13 @@ class ProductPictures extends React.Component {
                 <img src={this.props.product.pic_url} alt={this.props.product.name} title={this.props.product.name} className="img-responsive" />
               </Link>
             </li>
-            <OwlCarousel id="product-thumbnail" className="owl-carousel ows-theme" navigation="true">
+            <div id="product-thumbnail" className="owl-carousel ows-theme" style={style1}>
+            <div class="owl-wrapper-outer">
+            <div class="owl-wrapper" style={wrapperStyle}>
                 {pictures}
-            </OwlCarousel>
+            </div>
+            </div>
+            </div>
         </ul>
       );
       console.log(renderhtml);

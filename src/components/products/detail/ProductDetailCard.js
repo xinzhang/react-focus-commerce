@@ -27,12 +27,13 @@ class ProductDetailCard extends React.Component {
                 <a className="addthis_counter addthis_pill_style"></a>
               </div>
           </div>
+
           <ul className="list-unstyled productinfo-details-top">
               <li>
-                  <h2 className="productpage-price">$122.00</h2>
+                  <h2 className="productpage-price">{'$' + this.props.product.price}</h2>
               </li>
               <li>
-                <span className="productinfo-tax">Ex Tax: $100.00</span>
+                <span className="productinfo-tax">Ex Tax: {'$' + (this.props.product.price - this.props.product.tax)}</span>
               </li>
           </ul>
           <hr />
@@ -48,11 +49,7 @@ class ProductDetailCard extends React.Component {
                   <span> In Stock</span></li>
           </ul>
           <hr />
-          <p className="product-desc"> More room to move.
-              With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-              Cover Flow.
-              Browse through your music collection by flipping..
-          </p>
+          <p className="product-desc"> {this.props.product.desc}</p>          
           <div id="product">
               <div className="form-group">
                   <label className="control-label qty-label" htmlFor="input-quantity">Qty</label>

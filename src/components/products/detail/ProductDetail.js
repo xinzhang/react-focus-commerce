@@ -18,9 +18,6 @@ class ProductDetail extends React.Component {
       //$(this.refs.test).tooltip();
     }
     componentWillUpdate(nextProps, nextState){
-      console.log('product detail component will update');
-      // perform any preparations for an upcoming update
-      console.log(this.props.relatedProducts);
     }
 
     render() {

@@ -7,6 +7,7 @@ import ListPager from './ListPager';
 import ProductCard from './ProductCard';
 
 class ProductList extends React.Component {
+    
     render() {
       return (
         <div className="row">
