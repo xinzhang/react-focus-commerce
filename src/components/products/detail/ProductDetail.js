@@ -24,9 +24,6 @@ class ProductDetail extends React.Component {
       return (
         <div>
           <div className="row">
-            This is my React component. <a ref="tooltip" title="Checkout my tooltip text.">Tooltips</a> are pretty helpful.
-          </div>
-          <div className="row">
               <div className="col-sm-6">
                   <ProductPictures product={this.props.product} />
               </div>
