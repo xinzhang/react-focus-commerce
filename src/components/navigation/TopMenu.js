@@ -30,7 +30,6 @@ class TopMenu extends React.Component {
                         <li><a href="/blog/list" className="parent"  >Blog</a></li>
                         <li><a href="about-us.html" >About us</a></li>
                         <li><a href="contact.html" >Contact Us</a> </li>
-
                     </ul>
                 </div>
             </div>

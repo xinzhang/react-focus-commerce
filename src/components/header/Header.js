@@ -1,16 +1,28 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as cartActions from '../../actions/cartActions';
+
 import CartDropdown from './CartDropdown';
 
 class Header extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  deleteCartItem(id) {
+    this.props.actions.removeShoppingCart(id);
+  }
+
   render() {
     return (
       <div className="container">
           <div className="header-inner">
               <div className="col-sm-4 col-xs-6 header-left">
                 <div className="shipping">
-                    <div className="shipping-img"></div>
-                    <div className="shipping-text">Free Shipping
-                      <span className="shipping-detail">Free on all products</span>
+                <div className="shipping-img"></div>
+                    <div className="shipping-text">
+                      <span className="shipping-detail"></span>
                     </div>
                 </div>
               </div>
@@ -20,7 +32,7 @@ class Header extends React.Component {
                   </div>
               </div>
               <div className="col-sm-4 col-xs-6 header-right">
-                  <CartDropdown />
+                  <CartDropdown cart={this.props.cart} deleteCartItem={this.deleteCartItem.bind(this)} />
                   <div id="search" className="input-group">
                       <input type="text" name="search" value="" placeholder="Search" className="form-control input-lg" />
                       <span className="input-group-btn">
@@ -33,4 +45,16 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state, ownProps) {
+  return {
+    cart: state.cart
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(cartActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

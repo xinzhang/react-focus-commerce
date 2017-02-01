@@ -14,6 +14,8 @@ import {loadBlogs} from './actions/blogActions';
 import {loadBlogCategories} from './actions/blogActions';
 import {loadProducts} from './actions/productActions';
 
+import {loadShoppingCart} from './actions/cartActions';
+
 // ReactDOM.render(
 //   <App />,
 //   document.getElementById('root')
@@ -23,6 +25,7 @@ const store = configureStore();
 store.dispatch(loadBlogs());
 store.dispatch(loadBlogCategories());
 store.dispatch(loadProducts());
+//store.dispatch(loadShoppingCart());
 
 ReactDOM.render(
   <Provider store={store}>
