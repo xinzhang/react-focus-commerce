@@ -8,6 +8,12 @@ export default function cartReducer(state = initialState.cart, action) {
     //  return action.cart;
 
     case types.ADD_SHOPING_CART_ITEM:
+        console.log('add shoping card item');
+        console.log(state);
+        console.log([
+          ...state,
+          Object.assign({}, action.cartItem)
+        ]);
         return [
           ...state,
           Object.assign({}, action.cartItem)

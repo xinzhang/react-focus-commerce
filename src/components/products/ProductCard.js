@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import AddCartButton from '../common/AddCartButton';
 
 class ProductCard extends React.Component {
     render() {
@@ -11,8 +12,7 @@ class ProductCard extends React.Component {
             </Link>
             <div className="button-group">
               <button type="button" className="wishlist" data-toggle="tooltip" title="Add to Wish List"><i className="fa fa-heart-o"></i></button>
-              <button type="button" className="addtocart-btn">Add to Cart</button>
-              <button type="button" className="compare" data-toggle="tooltip" title="Compare this Product"><i className="fa fa-exchange"></i></button>
+              <AddCartButton product={this.props.product} key={this.props.product.id} />              
             </div>
           </div>
           <div className="caption product-detail">
@@ -36,8 +36,8 @@ class ProductCard extends React.Component {
           </div>
           <div className="button-group">
             <button type="button" className="wishlist" data-toggle="tooltip" title="Add to Wish List"><i className="fa fa-heart-o"></i></button>
-            <button type="button" className="addtocart-btn">Add to Cart</button>
-            <button type="button" className="compare" data-toggle="tooltip" title="Compare this Product"><i className="fa fa-exchange"></i></button>
+            <AddCartButton product={this.props.product} />
+            {/*<button type="button" className="compare" data-toggle="tooltip" title="Compare this Product"><i className="fa fa-exchange"></i></button>*/}
           </div>
         </div>
       );
