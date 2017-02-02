@@ -23,4 +23,6 @@ export default {
   // }
   ],
   relatedProducts:[],
+  specialProducts:[],
+  latestProducts:[]
 }

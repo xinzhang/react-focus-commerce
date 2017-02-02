@@ -13,7 +13,6 @@ import { Provider } from 'react-redux';
 import {loadBlogs} from './actions/blogActions';
 import {loadBlogCategories} from './actions/blogActions';
 import {loadProducts} from './actions/productActions';
-
 import {loadShoppingCart} from './actions/cartActions';
 
 // ReactDOM.render(
@@ -25,8 +24,8 @@ const store = configureStore();
 store.dispatch(loadBlogs());
 store.dispatch(loadBlogCategories());
 store.dispatch(loadProducts());
-//store.dispatch(loadShoppingCart());
 
+//store.dispatch(loadShoppingCart());
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
