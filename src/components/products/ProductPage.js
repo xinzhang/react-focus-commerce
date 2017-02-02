@@ -14,12 +14,7 @@ class ProductPage extends React.Component {
 
     render() {
       return (
-        <div>
-          <LeftPage />
-          <div id="content" className="col-sm-9">
-            <ProductDetail product={this.props.product} relatedProducts={this.props.relatedProducts}/>
-          </div>
-        </div>
+        <ProductDetail product={this.props.product} relatedProducts={this.props.relatedProducts}/>        
       );
     }
 }

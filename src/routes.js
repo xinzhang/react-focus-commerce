@@ -11,8 +11,10 @@ import BlogPage from './components/blog/BlogPage';
 import BlogList from './components/blog/BlogList';
 import BlogDetail from './components/blog/BlogDetail';
 
+import ProductList from './components/products/ProductList';
 import ProductListPage from './components/products/ProductListPage';
 import ProductPage from './components/products/ProductPage';
+import CartPage from './components/cart/CartPage';
 
 export default (
   <Route path="/" component={App}>
@@ -29,8 +31,10 @@ export default (
       <Route path="/account/login" component={LoginPage} />
       <Route path="/account/forgotPassword" component={ForgotPassword} />
     </Route>
-    <Route path="/products" component={ProductListPage} />
-    <Route path="/product/detail/:id" component={ProductPage} />
-    {/* <Route path="/product/detail" component={ProductPage}> */}
+    <Route path="/products" component={ProductListPage}>
+      <Route path="/products/list" component={ProductList} />
+      <Route path="/products/detail/:id" component={ProductPage} />
+      <Route path="/products/cart" component={CartPage} />
+    </Route>
   </Route>
 );

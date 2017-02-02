@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router';
+import CartTotal from './CartTotal';
 
 class CartDropdown extends React.Component {
 
@@ -13,16 +15,11 @@ class CartDropdown extends React.Component {
 
   render() {
 
-    let subTotal = 0;
-    let taxTotal = 0;
     let allTotal = 0;
-
     let len = this.props.cart.length;
 
     for (let i=0; i<this.props.cart.length; i++){
       let item = this.props.cart[i];
-      subTotal += (item.qty * item.price);
-      taxTotal += (item.qty * item.tax);
       allTotal += (item.qty * item.total);
     }
 
@@ -56,23 +53,18 @@ class CartDropdown extends React.Component {
               </li>
               <li>
                   <div>
-                      <table className="table table-bordered">
-                          <tbody>
-                              <tr>
-                                  <td className="text-right"><strong>Sub-Total</strong></td>
-                                  <td className="text-right">${subTotal}</td>
-                              </tr>
-                              <tr>
-                                  <td className="text-right"><strong>Tax Total</strong></td>
-                                  <td className="text-right">${taxTotal}</td>
-                              </tr>
-                              <tr>
-                                  <td className="text-right"><strong>Total</strong></td>
-                                  <td className="text-right">${allTotal}</td>
-                              </tr>
-                          </tbody>
-                      </table>
-                      <p className="text-right"> <span className="btn-viewcart"><a href="cart.html"><strong><i className="fa fa-shopping-cart"></i> View Cart</strong></a></span> <span className="btn-checkout"><a href="checkout.html"><strong><i className="fa fa-share"></i> Checkout</strong></a></span> </p>
+                      <CartTotal cart={this.props.cart} />
+                      <p className="text-right">
+                        <span className="btn-viewcart">
+                          <a href="/products/cart">
+                            <strong><i className="fa fa-shopping-cart"></i> View Cart</strong>
+                          </a>
+                        </span>
+                        <span className="btn-checkout">
+                            <a href="checkout.html"><strong><i className="fa fa-share"></i> Checkout</strong>
+                            </a>
+                        </span>
+                      </p>
                   </div>
               </li>
           </ul>

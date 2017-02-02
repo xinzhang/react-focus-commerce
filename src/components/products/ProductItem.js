@@ -8,7 +8,7 @@ class ProductItem extends React.Component {
         <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div className="product-thumb transition">
                 <div className="image product-imageblock">
-                    <Link to={'/product/detail/'+ this.props.product.id}>
+                    <Link to={'/products/detail/'+ this.props.product.id}>
                       <img src={this.props.product.pic_small_url.replace('%d', this.props.product.id)} alt={this.props.product.name} title={this.props.product.name} className="img-responsive" />
                     </Link>
                     <div className="button-group">
@@ -19,7 +19,7 @@ class ProductItem extends React.Component {
                 </div>
                 <div className="caption product-detail">
                     <h4 className="product-name">
-                      <Link to={'/product/detail/'+ this.props.product.id}>
+                      <Link to={'/products/detail/'+ this.props.product.id}>
                         {this.props.product.name}
                       </Link>
                     </h4>

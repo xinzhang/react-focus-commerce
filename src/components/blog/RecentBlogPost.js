@@ -9,7 +9,6 @@ class RecentBlogPost extends React.Component {
             <div className="list-group">
               <a className="list-group-item" href="#">Gallery Post Format</a>
               <a className="list-group-item" href="#">Recent Posts</a>
-              <a className="list-group-item" href="#">Gallery Post Format</a>
               <a className="list-group-item" href="#">Standard Post Format</a>
               <a className="list-group-item last" href="#">Image Post Format</a>
             </div>

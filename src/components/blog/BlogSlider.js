@@ -12,9 +12,7 @@ class BlogSlider extends React.Component {
             <ul className="list-unstyled blog-wrapper" id="latest-blog">
 
             {this.props.blogs.map(item =>
-
                 <BlogSliderItem blog={item} key={item.id} />
-
             )}
             </ul>
             <div className="buttons text-right seeall">
@@ -27,7 +25,7 @@ class BlogSlider extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    blogs:state.blogs.slice(0, 5)
+    blogs:state.blogs.slice(0,5)
   }
 }
 

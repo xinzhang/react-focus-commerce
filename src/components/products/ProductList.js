@@ -5,12 +5,14 @@ import {bindActionCreators} from 'redux';
 import ListFilter from './ListFilter';
 import ListPager from './ListPager';
 import ProductCard from './ProductCard';
+import CategoryBanner from '../category/CategoryBanner';
 
 class ProductList extends React.Component {
-    
+
     render() {
       return (
         <div className="row">
+          <CategoryBanner />
           <ListFilter />
           <br />
           <div className="grid-list-wrapper">

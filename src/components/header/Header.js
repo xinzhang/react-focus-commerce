@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as cartActions from '../../actions/cartActions';
 
-import CartDropdown from './CartDropdown';
+import CartDropdown from '../cart/CartDropdown';
 
 class Header extends React.Component {
   constructor(props, context) {
