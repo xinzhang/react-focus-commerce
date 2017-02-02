@@ -18,7 +18,6 @@ class CartDropdown extends React.Component {
     let allTotal = 0;
 
     let len = this.props.cart.length;
-    console.log('render cart dropdown ' + len);
 
     for (let i=0; i<this.props.cart.length; i++){
       let item = this.props.cart[i];

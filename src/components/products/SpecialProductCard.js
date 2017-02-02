@@ -28,7 +28,7 @@ class SpecialProductCard extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    products: state.specialProducts
+    products: state.specialProducts.slice(0, 3)
   }
 }
 

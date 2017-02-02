@@ -5,3 +5,15 @@
 #product-thumbnail .owl-pagination {
   display:none;
 }
+
+#special-slidertab .owl-pagination {
+  display:none;
+}
+
+#latest-slidertab .owl-pagination {
+  display:none;
+}
+
+#bestseller-slidertab .owl-pagination {
+  display:none;
+}

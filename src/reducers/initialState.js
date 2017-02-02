@@ -24,5 +24,6 @@ export default {
   ],
   relatedProducts:[],
   specialProducts:[],
-  latestProducts:[]
+  latestProducts:[],
+  bestSellerProducts: []
 }

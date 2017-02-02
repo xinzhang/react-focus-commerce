@@ -8,6 +8,7 @@ import blogcategories from './blogCategoriesReducer';
 import relatedProducts from './relatedProductReducer';
 import specialProducts from './specialProductReducer';
 import latestProducts from './latestProductReducer';
+import bestSellerProducts from './bestSellerProductReducer';
 
 const rootReducer = combineReducers({
   // short hand property names
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   relatedProducts,
   specialProducts,
   latestProducts,
+  bestSellerProducts,
 })
 
 export default rootReducer;

@@ -32,9 +32,8 @@ export function loadRelatedProductsSuccess(relatedProducts) {
 export function loadSpecialProducts() {
   return function(dispatch) {
     return ProductApi.getAllProducts(0).then(data => {
-      let specialProducts = data.slice(0, 3);
-      console.log(specialProducts);
-      dispatch(loadSpecialProductsSuccess(specialProducts));
+      //let specialProducts = data.slice(0, 3);
+      dispatch(loadSpecialProductsSuccess(data));
     }).catch(error => {
       throw(error);
     });
@@ -48,7 +47,8 @@ export function loadSpecialProductsSuccess(specialProducts) {
 export function loadLatestProducts() {
   return function(dispatch) {
     return ProductApi.getAllProducts(0).then(data => {
-      dispatch(loadLatestProductsSuccess(data.slice(-3)));
+      //let prod = data.slice(-3);
+      dispatch(loadLatestProductsSuccess(data));
     }).catch(error => {
       throw(error);
     });
@@ -57,6 +57,20 @@ export function loadLatestProducts() {
 
 export function loadLatestProductsSuccess(latestProducts) {
   return {type: types.LOAD_LATEST_PRODUCTS_SUCESS, latestProducts}
+}
+
+export function loadBestSellerProducts() {
+  return function(dispatch) {
+    return ProductApi.getAllProducts(0).then(data => {
+      dispatch(loadBestSellerProductsSuccess(data));
+    }).catch(error => {
+      throw(error);
+    });
+  }
+}
+
+export function loadBestSellerProductsSuccess(bestSellerProducts) {
+  return {type: types.LOAD_BESTSELLER_PRODUCTS_SUCESS, bestSellerProducts}
 }
 
 export function loadProductDetail(id) {

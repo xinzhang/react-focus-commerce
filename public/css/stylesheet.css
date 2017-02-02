@@ -2258,7 +2258,7 @@ video {
 }
 /*   Slder Navigation Arrow    */
 
-.home-slider.owl-carousel {
+.home-slider .owl-carousel {
 	border: none;
 	box-shadow: none;
 	background: none;

@@ -28,7 +28,7 @@ class LatestProductCard extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    products: state.latestProducts
+    products: state.latestProducts.slice(0, 3)
   }
 }
 
