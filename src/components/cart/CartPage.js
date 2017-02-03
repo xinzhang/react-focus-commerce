@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Link} from 'react-router';
 
-import LeftPage from '../navigation/LeftPage';
 import * as cartActions from '../../actions/cartActions';
 
 import CartList from './CartList';
@@ -28,7 +27,7 @@ class CartPage extends React.Component {
                   <Link to={'/'} className="btn btn-default">Continue Shopping</Link>
                 </div>
                 <div className="pull-right">
-                  <Link to={'/checkout'} className="btn btn-default">Checkout</Link>
+                  <Link to={'/products/checkout'} className="btn btn-default">Checkout</Link>
                 </div>
               </div>
             </div>

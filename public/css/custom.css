@@ -17,3 +17,11 @@
 #bestseller-slidertab .owl-pagination {
   display:none;
 }
+
+.zero-height {
+  height: 0px;
+}
+
+.none-display {
+    display:none;
+}

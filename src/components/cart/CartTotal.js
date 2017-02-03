@@ -23,10 +23,10 @@ class CartTotal extends React.Component {
     }
 
     return (
-      <table class="table table-bordered">
+      <table className="table table-bordered">
         <tbody>
           <tr>
-            <td class="text-right"><strong>Sub-Total:</strong></td>
+            <td className="text-right"><strong>Sub-Total:</strong></td>
             <td className="text-right">${subTotal}</td>
           </tr>
           <tr>

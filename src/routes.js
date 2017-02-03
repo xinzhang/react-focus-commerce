@@ -15,6 +15,7 @@ import ProductList from './components/products/ProductList';
 import ProductListPage from './components/products/ProductListPage';
 import ProductPage from './components/products/ProductPage';
 import CartPage from './components/cart/CartPage';
+import CheckoutPage from './components/checkout/CheckoutPage';
 
 export default (
   <Route path="/" component={App}>
@@ -35,6 +36,7 @@ export default (
       <Route path="/products/list" component={ProductList} />
       <Route path="/products/detail/:id" component={ProductPage} />
       <Route path="/products/cart" component={CartPage} />
+      <Route path="/products/checkout" component={CheckoutPage} />
     </Route>
   </Route>
 );

@@ -61,7 +61,7 @@ class CartDropdown extends React.Component {
                           </a>
                         </span>
                         <span className="btn-checkout">
-                            <a href="checkout.html"><strong><i className="fa fa-share"></i> Checkout</strong>
+                            <a href="/products/checkout"><strong><i className="fa fa-share"></i> Checkout</strong>
                             </a>
                         </span>
                       </p>
