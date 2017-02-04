@@ -4,6 +4,7 @@ var path = require('path');
 
 var blogRoute = require('./routes/blogRoute');
 var productRoute = require('./routes/productRoute')
+var accountRoute = require('../routes/accountRoute');
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -29,6 +30,8 @@ app.use(express.static('./json'));
 
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);
+app.use('/api/', accountRoute);
+
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, './build', 'index.html'));
 });

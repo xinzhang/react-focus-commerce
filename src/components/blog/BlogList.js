@@ -9,7 +9,7 @@ class BlogList extends React.Component {
       return (
         <div>
           {this.props.blogs.map(item =>
-            <div>
+            <div key={item.id}>
               <BlogCard blog={item} key={item.id} from='list' />
             </div>
           )}

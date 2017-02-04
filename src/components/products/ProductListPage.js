@@ -6,7 +6,7 @@ import ProductList from '../products/ProductList';
 class ProductListPage extends React.Component {
     render() {
       return (
-        <div class="row">
+        <div className="row">
           <LeftPage />
           <div id="content" className="col-sm-9">
             {this.props.children}

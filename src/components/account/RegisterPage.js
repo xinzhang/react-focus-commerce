@@ -1,6 +1,39 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as accountActions from '../../actions/accountActions';
 
 class RegisterPage extends React.Component {
+
+    constructor(props, context) {
+      super(props, context);
+
+      this.state = {
+        account: Object.assign({}, this.props.account)
+      }
+
+      this.registerAccount = this.registerAccount.bind(this);
+      this.updateAccountState = this.updateAccountState.bind(this);
+  }
+
+  registerAccount(event) {
+      event.preventDefault();
+      this.setState({saving: true});
+      this.props.actions.registerAccount(this.state.account);
+  }
+
+  //update each field - you have to do it yourself there is no auto binding.
+  updateAccountState(event) {
+    console.log('register page');
+    console.log(event);
+
+      const field = event.target.name;
+      const acct = this.state.account;
+      acct[field] = event.target.value;
+      console.log(acct);
+      return this.setState({account: acct});
+  }
+
     render() {
       let hiddenStyle = {
         display:"none"
@@ -26,25 +59,25 @@ class RegisterPage extends React.Component {
                     <div className="form-group required">
                         <label htmlFor="input-firstname" className="col-sm-2 control-label">First Name</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-firstname" placeholder="First Name" value="" name="firstname" />
+                            <input type="text" className="form-control" id="input-firstname" placeholder="First Name"  name="firstname" onChange={this.updateAccountState} />
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-lastname" className="col-sm-2 control-label">Last Name</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-lastname" placeholder="Last Name" value="" name="lastname" />
+                            <input type="text" className="form-control" id="input-lastname" placeholder="Last Name" name="lastname" onChange={this.updateAccountState} />
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-email" className="col-sm-2 control-label">E-Mail</label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" id="input-email" placeholder="E-Mail" value="" name="email" />
+                            <input type="email" className="form-control" id="input-email" placeholder="E-Mail" name="email" onChange={this.updateAccountState} />
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-telephone" className="col-sm-2 control-label">Telephone</label>
                         <div className="col-sm-10">
-                            <input type="tel" className="form-control" id="input-telephone" placeholder="Telephone" value="" name="telephone" />
+                            <input type="tel" className="form-control" id="input-telephone" placeholder="Telephone" name="telephone" onChange={this.updateAccountState} />
                         </div>
                     </div>
                     <div className="form-group">
@@ -150,7 +183,7 @@ class RegisterPage extends React.Component {
                     <div className="pull-right">I have read and agree to the <a className="agree" href="#"><b>Privacy Policy</b></a>
                         <input type="checkbox" value="1" name="agree" />
                         &nbsp;
-                        <input type="submit" className="btn btn-primary" value="Continue" />
+                        <input type="submit" className="btn btn-primary" value="Continue" onClick={this.registerAccount}/>
                     </div>
                 </div>
             </form>
@@ -159,4 +192,16 @@ class RegisterPage extends React.Component {
     }
 }
 
-export default RegisterPage;
+function mapStateToProps(state, ownProps) {
+  return {
+    account: state.account
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(accountActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)( RegisterPage );

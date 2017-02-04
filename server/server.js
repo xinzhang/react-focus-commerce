@@ -2,7 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var blogRoute = require('../routes//blogRoute');
-var productRoute = require('../routes/productRoute')
+var productRoute = require('../routes/productRoute');
+var accountRoute = require('../routes/accountRoute');
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);
+app.use('/api/', accountRoute);
 
 app.listen(port);
 console.log('start to listening ' + port);

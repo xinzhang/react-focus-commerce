@@ -15,13 +15,13 @@ class CartPage extends React.Component {
         <div>
             <CartList cart={this.props.cart} />
 
-            <div class="row">
-              <div class="col-sm-4 col-sm-offset-8">
+            <div className="row">
+              <div className="col-sm-4 col-sm-offset-8">
                 <CartTotal cart={this.props.cart} />
               </div>
             </div>
 
-            <div class="row">
+            <div className="row">
               <div className="buttons">
                 <div className="pull-left">
                   <Link to={'/'} className="btn btn-default">Continue Shopping</Link>
@@ -41,6 +41,8 @@ class CartPage extends React.Component {
 // }
 
 function mapStateToProps(state, ownProps) {
+  console.log('cart page:');
+  console.log(state);
   return {
     cart: state.cart
   }

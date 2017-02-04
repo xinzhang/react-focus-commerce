@@ -25,5 +25,11 @@ export default {
   relatedProducts:[],
   specialProducts:[],
   latestProducts:[],
-  bestSellerProducts: []
+  bestSellerProducts: [],
+  account:{
+    firstname:'',
+    lastname:'',
+    email:'',
+    telephone:''
+  }
 }
