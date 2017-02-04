@@ -1,8 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var blogRoute = require('./blogRoute');
-var productRoute = require('./productRoute')
+var blogRoute = require('../routes//blogRoute');
+var productRoute = require('../routes/productRoute')
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-console.log('start setup');
+console.log('node express dev server start setup');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

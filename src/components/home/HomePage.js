@@ -54,7 +54,6 @@ class HomePage extends React.Component {
                 </div>
 
                 <BrandCarousel />
-
             </div>
           </div>
         </div>
