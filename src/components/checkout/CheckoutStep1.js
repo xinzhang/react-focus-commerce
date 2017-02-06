@@ -12,6 +12,7 @@ class CheckoutStep1 extends React.Component {
   }
 
     render() {
+      console.log("step 1 render" + this.props.step);
       return (
         <div className="panel panel-default">
           <div className="panel-heading">

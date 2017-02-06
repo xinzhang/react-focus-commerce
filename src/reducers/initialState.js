@@ -30,6 +30,17 @@ export default {
     firstname:'',
     lastname:'',
     email:'',
-    telephone:''
+    telephone:'',
+    address: {
+      address1:'',
+      address2:'',
+      suburb:'',
+      postcode:'',
+      country:'',
+      state:''
+    },
+    password:'',
+    confirm_password:'',
+    newsletter:0
   }
 }
