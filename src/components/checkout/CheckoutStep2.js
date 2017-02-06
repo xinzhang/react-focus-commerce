@@ -2,19 +2,43 @@ import React from 'react';
 import CountryList from '../common/CountryList';
 import PaymentZoneList from '../common/PaymentZoneList';
 
+import $ from 'jquery';
+
 class CheckoutStep2 extends React.Component {
+    constructor(props, context) {
+      super(props, context);
+
+      this.state = {
+        payment_address: "existing"
+      };
+
+      this.onAddressChanged = this.onAddressChanged.bind(this);
+      this.nextPanel = this.nextPanel.bind(this);
+    }
+
+    onAddressChanged(e) {
+      console.log(e);
+      this.setState({
+        payment_address: e.currentTarget.value
+      })
+    }
+
+    nextPanel() {
+      this.props.updateStep(3);
+    }
+
     render() {
       return (
         <div className="panel panel-default">
           <div className="panel-heading">
-            <h4 className="panel-title"><a className="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-payment-address" aria-expanded="false">Step 2: Billing Details <i className="fa fa-caret-down"></i></a></h4>
+            <h4 className="panel-title"><a id="#checkoutStep2" className="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-payment-address" aria-expanded={this.props.step == 2}>Step 2: Billing Details <i className="fa fa-caret-down"></i></a></h4>
           </div>
           <div id="collapse-payment-address" className="panel-collapse collapse zero-height" aria-expanded="false">
             <div className="panel-body">
               <form className="form-horizontal">
                 <div className="radio">
                   <label>
-                    <input type="radio" checked="checked" value="existing" name="payment_address" data-id="payment-existing" />
+                    <input type="radio" checked={this.state.payment_address === 'existing'}  value="existing" name="payment_address" data-id="payment-existing" onChange={this.onAddressChanged} />
                     I want to use an existing address</label>
                 </div>
                 <div id="payment-existing">
@@ -24,11 +48,12 @@ class CheckoutStep2 extends React.Component {
                 </div>
                 <div className="radio">
                   <label>
-                    <input type="radio" value="new" name="payment_address" data-id="payment-new" />
+                    <input type="radio" value="new" checked={this.state.payment_address === 'new'} name="payment_address" data-id="payment-new" onChange={this.onAddressChanged} />
                     I want to use a new address</label>
                 </div>
                 <br />
-                <div id="payment-new"  className="none-display">
+                {this.state.payment_address === "new" &&
+                <div id="payment-new" >
                   <div className="form-group required">
                     <label htmlFor="input-payment-firstname" className="col-sm-2 control-label">First Name</label>
                     <div className="col-sm-10">
@@ -60,9 +85,9 @@ class CheckoutStep2 extends React.Component {
                     </div>
                   </div>
                   <div className="form-group required">
-                    <label htmlFor="input-payment-city" className="col-sm-2 control-label">City</label>
+                    <label htmlFor="input-payment-suburb" className="col-sm-2 control-label">Suburb</label>
                     <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-city" placeholder="City" value="" name="city" />
+                      <input type="text" className="form-control" id="input-payment-suburb" placeholder="Suburb" value="" name="Suburb" />
                     </div>
                   </div>
                   <div className="form-group">
@@ -78,15 +103,16 @@ class CheckoutStep2 extends React.Component {
                     </div>
                   </div>
                   <div className="form-group required">
-                    <label htmlFor="input-payment-zone" className="col-sm-2 control-label">Region / State</label>
+                    <label htmlFor="input-payment-state" className="col-sm-2 control-label">State</label>
                     <div className="col-sm-10">
-                      <PaymentZoneList />
+                      <input type="text" className="form-control" id="input-payment-state" placeholder="State" value="" name="State" />
                     </div>
                   </div>
                 </div>
+                }
                 <div className="buttons clearfix">
                   <div className="pull-right">
-                    <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-address" value="Continue" />
+                    <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-address" value="Continue" onClick={this.nextPanel} />
                   </div>
                 </div>
               </form>
