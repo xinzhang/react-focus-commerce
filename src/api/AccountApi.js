@@ -21,9 +21,9 @@ class AccountApi {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify({account: acct})
+      body: JSON.stringify({email: acct.email, password:acct.password})
     });
-
+    
     return fetch(request).then(response => {
       return response.json();
     }).catch(error => {

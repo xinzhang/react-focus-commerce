@@ -1,5 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var passport = require('../passport');
+var session = require('express-session');
 
 var blogRoute = require('../routes//blogRoute');
 var productRoute = require('../routes/productRoute');
@@ -19,10 +23,14 @@ app.use(function(req, res, next) {
 
 console.log('node express dev server start setup');
 
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({secret: 'xz_react_focus_commerce'}));
+
+require(path.join(__dirname, '../passport'))(app);
 
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);

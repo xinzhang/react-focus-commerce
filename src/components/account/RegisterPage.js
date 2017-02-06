@@ -20,8 +20,6 @@ class RegisterPage extends React.Component {
     registerAccount(event) {
         event.preventDefault();
         this.setState({saving: true});
-        console.log('registeraccount');
-        console.log(this.state.account);
         this.props.actions.registerAccount(this.state.account);
     }
 
@@ -46,7 +44,6 @@ class RegisterPage extends React.Component {
       let hiddenStyle = {
         display:"none"
       };
-
       return (
         <div className="row">
             <h1>Register Account</h1>
@@ -185,6 +182,7 @@ class RegisterPage extends React.Component {
             </form>
         </div>
       );
+
     }
 }
 
