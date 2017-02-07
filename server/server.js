@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({secret: 'xz_react_focus_commerce'}));
 
-require(path.join(__dirname, '../passport'))(app);
+require('./passport')(app);
 
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);

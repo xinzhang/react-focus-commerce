@@ -26,10 +26,13 @@ class RegisterPage extends React.Component {
       this.disableButton = this.disableButton.bind(this);
     }
 
-    registerAccount(event) {
-        event.preventDefault();
-        this.setState({saving: true});
-        this.props.actions.registerAccount(this.state.account);
+    registerAccount(data) {
+        //event.preventDefault();
+        let o = Object.assign({}, this.state.account, data);
+
+        this.setState({account:o}, function() {
+          this.props.actions.registerAccount(this.state.account);
+        });
     }
 
     enableButton() {
@@ -99,7 +102,7 @@ class RegisterPage extends React.Component {
                     <div className="form-group">
                         <label htmlFor="input-telephone" className="col-sm-2 control-label">Telephone</label>
                         <div className="col-sm-10">
-                            <input type="tel" className="form-control" id="input-telephone" placeholder="Telephone" name="telephone" onChange={this.updateAccountState} />
+                            <MyInput type="text" className="form-control" id="input-telephone" placeholder="Telephone" name="telephone" onChange={this.updateAccountState} />
                         </div>
                     </div>
                 </fieldset>
@@ -109,25 +112,25 @@ class RegisterPage extends React.Component {
                     <div className="form-group required">
                         <label htmlFor="input-address-1" className="col-sm-2 control-label">Address 1</label>
                         <div className="col-sm-10">
-                            <MyInput type="text" className="form-control" id="input-address-1" placeholder="Address 1" name="address1" onChange={this.updateAccountAddress} required/>
+                            <MyInput type="text" className="form-control" id="input-address-1" placeholder="Address 1" name="address.address1" onChange={this.updateAccountAddress} required/>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="input-address-2" className="col-sm-2 control-label">Address 2</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-address-2" placeholder="Address 2" name="address2" onChange={this.updateAccountAddress}/>
+                            <MyInput type="text" className="form-control" id="input-address-2" placeholder="Address 2" name="address.address2" onChange={this.updateAccountAddress}/>
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-city" className="col-sm-2 control-label">Suburb</label>
                         <div className="col-sm-10">
-                            <MyInput type="text" className="form-control" id="input-city" placeholder="Suburb" name="suburb" onChange={this.updateAccountAddress} required/>
+                            <MyInput type="text" className="form-control" id="input-city" placeholder="Suburb" name="address.suburb" onChange={this.updateAccountAddress} required/>
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-postcode" className="col-sm-2 control-label">Post Code</label>
                         <div className="col-sm-10">
-                            <MyInput type="text" className="form-control" id="input-postcode" placeholder="Post Code" name="postcode" onChange={this.updateAccountAddress} required/>
+                            <MyInput type="text" className="form-control" id="input-postcode" placeholder="Post Code" name="address.postcode" onChange={this.updateAccountAddress} required/>
                         </div>
                     </div>
                     <div className="form-group required">
@@ -151,7 +154,7 @@ class RegisterPage extends React.Component {
                     <div className="form-group required">
                         <label htmlFor="input-zone" className="col-sm-2 control-label">State</label>
                         <div className="col-sm-10">
-                            <select className="form-control" id="input-zone" name="state">
+                            <select className="form-control" id="input-zone" name="address.state">
                                 <option value=""> --- Please Select --- </option>
                                 <option value="3513">Aberdeen</option>
                                 <option value="3514">Aberdeenshire</option>

@@ -21,9 +21,10 @@ class LoginPage extends React.Component {
     this.disableButton = this.disableButton.bind(this);
   }
 
-  login(event) {
-      event.preventDefault();
-      this.props.actions.login(this.state.account);
+  login(data) {
+      this.setState({account : {...this.state.account, ...data}}, function() {
+        this.props.actions.login(this.state.account);
+      });
   }
 
   enableButton() {
@@ -35,6 +36,7 @@ class LoginPage extends React.Component {
   }
 
   updateLoginData(event) {
+      console.log('updatelogindata');
       const field = event.target.name;
       const acct = this.state.account;
       acct[field] = event.target.value;
@@ -42,41 +44,42 @@ class LoginPage extends React.Component {
       return this.setState({account: acct});
   }
 
-    render() {
-      return (
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="well">
-              <h2>New Customer</h2>
-              <p><strong>Register Account</strong></p>
-              <p>By creating an account you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.</p>
-              <a className="btn btn-primary" href="/account/register">Continue</a>
-            </div>
+  render() {
+    return (
+      <div className="row">
+        <div className="col-sm-6">
+          <div className="well">
+            <h2>New Customer</h2>
+            <p><strong>Register Account</strong></p>
+            <p>By creating an account you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.</p>
+            <a className="btn btn-primary" href="/account/register">Continue</a>
           </div>
-
-          <div className="col-sm-6">
-            <div className="well">
-              <h2>Returning Customer</h2>
-              <p><strong>I am a returning customer</strong></p>
-              <Form onSubmit={this.login} method="post" onValid={this.enableButton} onInvalid={this.disableButton}>
-                <div className="form-group">
-                  <label htmlFor="input-email" className="control-label">E-Mail Address (*)</label>
-                  <MyInput type="text" className="form-control" id="input-email" placeholder="E-Mail Address" name="email" onChange={this.updateLoginData}
-                    validations="isEmail" validationError="This is not a valid email" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="input-password" className="control-label">Password (*)</label>
-                  <MyInput type="password" className="form-control" id="input-password" placeholder="Password" name="password" onChange={this.updateLoginData} required />
-                  <a href="/account/forgetpassword">Forgotten Password</a>
-                </div>
-                <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Login</button>
-              </Form>
-            </div>
-          </div>
-
         </div>
-      );
-    }
+
+        <div className="col-sm-6">
+          <div className="well">
+            <h2>Returning Customer</h2>
+            <p><strong>I am a returning customer</strong></p>
+            <Form onSubmit={this.login} method="post" onValid={this.enableButton} onInvalid={this.disableButton}>
+              <div className="form-group">
+                <label htmlFor="input-email" className="control-label">E-Mail Address (*)</label>
+                <MyInput type="text" className="form-control" id="input-email" placeholder="E-Mail Address" name="email" onChange={this.updateLoginData}
+                  validations="isEmail" validationError="This is not a valid email" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="input-password" className="control-label">Password (*)</label>
+                <MyInput type="password" className="form-control" id="input-password" placeholder="Password" name="password" onChange={this.updateLoginData} required />
+                <a href="/account/forgetpassword">Forgotten Password</a>
+              </div>
+              <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Login</button>
+            </Form>
+          </div>
+        </div>
+
+      </div>
+    );
+  }
+  
 }
 
 function mapStateToProps(state, ownProps) {
