@@ -5,12 +5,12 @@ module.exports = function (app) {
     app.use(passport.session());
 
     passport.serializeUser(function(user, done){
-        console.log('passport serialize user' + JSON.stringify(user));
+        console.log('passport serialize user ' + JSON.stringify(user));
         done(null, user);
     });
 
     passport.deserializeUser(function(user, done){
-        console.log('passport de-serialize user' + JSON.stringify(user))
+        console.log('passport de-serialize user ' + JSON.stringify(user))
         done(null, user);
     });
 

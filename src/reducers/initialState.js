@@ -41,6 +41,7 @@ export default {
     },
     password:'',
     confirm_password:'',
-    newsletter:0
+    newsletter:0,
+    error_message:''
   }
 }

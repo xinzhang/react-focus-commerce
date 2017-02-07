@@ -7,6 +7,9 @@ export default function accountReducer(state = initialState.account, action) {
     case types.ACCOUNT_LOGIN_SUCESS:
       return action.account;
 
+    case types.ACCOUNT_LOGIN_FAILURE:
+        return Object.assign({}, initialState.account, {error_message:action.error});
+
     case types.ACCOUNT_REGISTER_SUCESS:
       return action.account;
 

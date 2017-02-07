@@ -60,6 +60,9 @@ class LoginPage extends React.Component {
           <div className="well">
             <h2>Returning Customer</h2>
             <p><strong>I am a returning customer</strong></p>
+            {this.props.account.error_message != '' &&
+              <h3 className="validation-error">{this.props.account.error_message}</h3>
+            }
             <Form onSubmit={this.login} method="post" onValid={this.enableButton} onInvalid={this.disableButton}>
               <div className="form-group">
                 <label htmlFor="input-email" className="control-label">E-Mail Address (*)</label>
@@ -79,7 +82,7 @@ class LoginPage extends React.Component {
       </div>
     );
   }
-  
+
 }
 
 function mapStateToProps(state, ownProps) {

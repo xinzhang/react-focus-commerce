@@ -30,3 +30,7 @@
 .form-groupform-controlrequired select {
   border-color: #FF9696;
 }
+
+.validation-error {
+  color: #CC3333;
+}

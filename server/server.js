@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var passport = require('../passport');
 var session = require('express-session');
 
-var blogRoute = require('../routes//blogRoute');
+var blogRoute = require('../routes/blogRoute');
 var productRoute = require('../routes/productRoute');
 var accountRoute = require('../routes/accountRoute');
 
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({secret: 'xz_react_focus_commerce'}));
 
-require('./passport')(app);
+require('../passport')(app);
 
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);

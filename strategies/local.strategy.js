@@ -13,26 +13,28 @@ module.exports = function() {
     },
     function(username, password, done){
         console.log('local strategy check: ' + username);
-        done(null, true);
-        // mongodb.connect(dburl, function (err, db) {
-        //     var collection = db.collection('users');
-        //     collection.findOne({
-        //             email: username
-        //         },
-        //
-        //         function (err, results) {
-        //             console.log(JSON.stringify(results));
-        //
-        //             if (results != null && results.password === password) {
-        //                 var user = results;
-        //                 done(null, user);
-        //             } else {
-        //                 done(null, false, {message: 'Bad password'});
-        //             }
-        //         }
-        //
-        //     ); //end findOne
-        // }); //end connect
+
+        mongodb.connect(dburl, function (err, db) {
+            console.log('test mongodb');
+
+            var collection = db.collection('users');
+            collection.findOne({
+                    email: username
+                },
+
+                function (err, results) {
+                    console.log("mongodb results: " + JSON.stringify(results));
+
+                    if (results != null && results.password === password) {
+                        var user = results;
+                        done(null, user);
+                    } else {
+                        done(null, false, {message: 'Bad password'});
+                    }
+                }
+
+            ); //end findOne
+        }); //end connect
 
     })) //end passport use
 

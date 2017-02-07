@@ -30,32 +30,40 @@ router.post('/account/register', function(req, res, next) {
             });
 });
 
-router.post('/account/login', function(req, res, next) {
-      console.log("body parsing", req.body);
+// router.post('/account/login', function(req, res, next) {
+//       console.log("body parsing", req.body);
+//
+//       passport.authenticate('local', {
+//         session:false
+//       }, function(err, user, info) {
+//         console.log("Test:" + user);
+//         if (err) {
+//             console.log("Error1");
+//             return next(err);
+//         }
+//         if (!user) {
+//             console.log("Error2");
+//             return res.json(401, {
+//                 error: 'Auth Error!'
+//             });
+//         }
+//       });
+//
+//       // passport.authenticate('login', function (err, req, res) {
+//       //     //res.redirect('/auth/profile');
+//       //     if (err) { return next(err) };
+//       //     console.log('returned');
+//       //     res.json(req.account);
+//       // });
+// });
 
-      passport.authenticate('local', {
-        session:false
-      }, function(err, user, info) {
-        console.log("Test:" + user);
-        if (err) {
-            console.log("Error1");
-            return next(err);
-        }
-        if (!user) {
-            console.log("Error2");
-            return res.json(401, {
-                error: 'Auth Error!'
-            });
-        }
-      });
-
-      // passport.authenticate('login', function (err, req, res) {
-      //     //res.redirect('/auth/profile');
-      //     if (err) { return next(err) };
-      //     console.log('returned');
-      //     res.json(req.account);
-      // });
-});
+router.route('/account/login')
+    .post(passport.authenticate('local', {
+        failureredirect: '/'
+    }), function (req, res) {
+        //res.redirect('/auth/profile');
+        res.json(req.user);
+    });
 
 router.get('/account/logout', function(req, res){
       req.logout();

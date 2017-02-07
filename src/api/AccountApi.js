@@ -23,11 +23,15 @@ class AccountApi {
       }),
       body: JSON.stringify({email: acct.email, password:acct.password})
     });
-    
+
     return fetch(request).then(response => {
-      return response.json();
+      if (response.status == 401) {
+        throw("Wrong username or password.");
+      } else {
+        return response.json();
+      }
     }).catch(error => {
-      return error;
+      throw error;
     });
   }
 

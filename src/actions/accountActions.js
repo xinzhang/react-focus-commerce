@@ -18,15 +18,19 @@ export function registerAccountSuccess(account) {
 
 export function login(acct) {
   return function(dispatch) {
-    console.log('login action');
     return accountApi.login(acct).then(data => {
       dispatch(loginSuccess(data));
     }).catch(error => {
+      dispatch(loginFailure(error));
       throw(error);
     });
   }
 }
 
-export function loginSuccess(acct) {
-  return {type: types.ACCOUNT_LOGIN_SUCESS, acct}
+export function loginSuccess(account) {
+  return {type: types.ACCOUNT_LOGIN_SUCESS, account}
+}
+
+export function loginFailure(error) {
+  return {type: types.ACCOUNT_LOGIN_FAILURE, error}
 }
