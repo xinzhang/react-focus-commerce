@@ -3,22 +3,35 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as accountActions from '../../actions/accountActions';
 
+import { Form } from 'formsy-react';
+import MyInput from '../common/formsy/Input';
+
 class LoginPage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      account: Object.assign({}, this.props.account)
+      account: Object.assign({}, this.props.account),
+      canSubmit: false
     }
 
     this.login = this.login.bind(this);
     this.updateLoginData = this.updateLoginData.bind(this);
-
+    this.enableButton = this.enableButton.bind(this);
+    this.disableButton = this.disableButton.bind(this);
   }
 
   login(event) {
-      event.preventDefault();      
+      event.preventDefault();
       this.props.actions.login(this.state.account);
+  }
+
+  enableButton() {
+    this.setState({ canSubmit: true });
+  }
+
+  disableButton() {
+    this.setState({ canSubmit: false });
   }
 
   updateLoginData(event) {
@@ -45,18 +58,19 @@ class LoginPage extends React.Component {
             <div className="well">
               <h2>Returning Customer</h2>
               <p><strong>I am a returning customer</strong></p>
-              <form encType="multipart/form-data" method="post" action="login.html">
+              <Form onSubmit={this.login} method="post" onValid={this.enableButton} onInvalid={this.disableButton}>
                 <div className="form-group">
-                  <label htmlFor="input-email" className="control-label">E-Mail Address</label>
-                  <input type="text" className="form-control" id="input-email" placeholder="E-Mail Address" name="email" onChange={this.updateLoginData} />
+                  <label htmlFor="input-email" className="control-label">E-Mail Address (*)</label>
+                  <MyInput type="text" className="form-control" id="input-email" placeholder="E-Mail Address" name="email" onChange={this.updateLoginData}
+                    validations="isEmail" validationError="This is not a valid email" required />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="input-password" className="control-label">Password</label>
-                  <input type="password" className="form-control" id="input-password" placeholder="Password" name="password" onChange={this.updateLoginData} />
+                  <label htmlFor="input-password" className="control-label">Password (*)</label>
+                  <MyInput type="password" className="form-control" id="input-password" placeholder="Password" name="password" onChange={this.updateLoginData} required />
                   <a href="/account/forgetpassword">Forgotten Password</a>
                 </div>
-                <input type="submit" className="btn btn-primary" value="Login" onClick={this.login}/>
-              </form>
+                <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Login</button>
+              </Form>
             </div>
           </div>
 

@@ -2,6 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as accountActions from '../../actions/accountActions';
+import Formsy from 'formsy-react';
+import MyInput from '../common/formsy/Input';
+
+Formsy.addValidationRule('passwordEqual', (values, value) => {
+  return values.password == value;
+});
 
 class RegisterPage extends React.Component {
 
@@ -9,12 +15,15 @@ class RegisterPage extends React.Component {
       super(props, context);
 
       this.state = {
-        account: Object.assign({}, this.props.account)
+        account: Object.assign({}, this.props.account),
+        canSubmit: false
       }
 
       this.registerAccount = this.registerAccount.bind(this);
       this.updateAccountState = this.updateAccountState.bind(this);
       this.updateAccountAddress = this.updateAccountAddress.bind(this);
+      this.enableButton = this.enableButton.bind(this);
+      this.disableButton = this.disableButton.bind(this);
     }
 
     registerAccount(event) {
@@ -23,6 +32,13 @@ class RegisterPage extends React.Component {
         this.props.actions.registerAccount(this.state.account);
     }
 
+    enableButton() {
+      this.setState({ canSubmit: true });
+    }
+
+    disableButton() {
+      this.setState({ canSubmit: false });
+    }
     //update each field - you have to do it yourself there is no auto binding.
     updateAccountState(event) {
         const field = event.target.name;
@@ -48,7 +64,7 @@ class RegisterPage extends React.Component {
         <div className="row">
             <h1>Register Account</h1>
             <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p>
-            <form className="form-horizontal" encType="multipart/form-data" method="post" action="register.html">
+            <Formsy.Form className="form-horizontal" onSubmit={this.registerAccount} encType="multipart/form-data" method="post" onValid={this.enableButton} onInvalid={this.disableButton}>
                 <fieldset id="account">
                     <legend>Your Personal Details</legend>
                     <div style={hiddenStyle} className="form-group required">
@@ -64,22 +80,23 @@ class RegisterPage extends React.Component {
                     <div className="form-group required">
                         <label htmlFor="input-firstname" className="col-sm-2 control-label">First Name</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-firstname" placeholder="First Name"  name="firstname" onChange={this.updateAccountState} />
+                            <MyInput type="text" className="form-control" id="input-firstname" placeholder="First Name"  name="firstname" onChange={this.updateAccountState} required />
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-lastname" className="col-sm-2 control-label">Last Name</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-lastname" placeholder="Last Name" name="lastname" onChange={this.updateAccountState} />
+                            <MyInput type="text" className="form-control" id="input-lastname" placeholder="Last Name" name="lastname" onChange={this.updateAccountState} required/>
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-email" className="col-sm-2 control-label">E-Mail</label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" id="input-email" placeholder="E-Mail" name="email" onChange={this.updateAccountState} />
+                            <MyInput type="email" className="form-control" id="input-email" placeholder="E-Mail" name="email" onChange={this.updateAccountState}
+                              validations="isEmail" validationError="This is not a valid email" required/>
                         </div>
                     </div>
-                    <div className="form-group required">
+                    <div className="form-group">
                         <label htmlFor="input-telephone" className="col-sm-2 control-label">Telephone</label>
                         <div className="col-sm-10">
                             <input type="tel" className="form-control" id="input-telephone" placeholder="Telephone" name="telephone" onChange={this.updateAccountState} />
@@ -92,7 +109,7 @@ class RegisterPage extends React.Component {
                     <div className="form-group required">
                         <label htmlFor="input-address-1" className="col-sm-2 control-label">Address 1</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-address-1" placeholder="Address 1" name="address1" onChange={this.updateAccountAddress}/>
+                            <MyInput type="text" className="form-control" id="input-address-1" placeholder="Address 1" name="address1" onChange={this.updateAccountAddress} required/>
                         </div>
                     </div>
                     <div className="form-group">
@@ -104,13 +121,13 @@ class RegisterPage extends React.Component {
                     <div className="form-group required">
                         <label htmlFor="input-city" className="col-sm-2 control-label">Suburb</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-city" placeholder="Suburb" name="suburb" onChange={this.updateAccountAddress}/>
+                            <MyInput type="text" className="form-control" id="input-city" placeholder="Suburb" name="suburb" onChange={this.updateAccountAddress} required/>
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-postcode" className="col-sm-2 control-label">Post Code</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="input-postcode" placeholder="Post Code" name="postcode" onChange={this.updateAccountAddress}/>
+                            <MyInput type="text" className="form-control" id="input-postcode" placeholder="Post Code" name="postcode" onChange={this.updateAccountAddress} required/>
                         </div>
                     </div>
                     <div className="form-group required">
@@ -148,13 +165,15 @@ class RegisterPage extends React.Component {
                     <div className="form-group required">
                         <label htmlFor="input-password" className="col-sm-2 control-label">Password</label>
                         <div className="col-sm-10">
-                            <input type="password" className="form-control" id="input-password" placeholder="Password" name="password" onChange={this.updateAccountState} />
+                            <MyInput type="password" className="form-control" id="input-password" placeholder="Password" name="password" onChange={this.updateAccountState} required/>
                         </div>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="input-confirm" className="col-sm-2 control-label">Password Confirm</label>
                         <div className="col-sm-10">
-                            <input type="password" className="form-control" id="input-confirm" placeholder="Password Confirm" name="confirm_password" onChange={this.updateAccountState} />
+                            <MyInput type="password" className="form-control" id="input-confirm" placeholder="Password Confirm"
+                              name="confirm_password" onChange={this.updateAccountState} required
+                              validations="passwordEqual" validationError="The confirm password has to be the same as password" />
                         </div>
                     </div>
                 </fieldset>
@@ -176,10 +195,10 @@ class RegisterPage extends React.Component {
                     <div className="pull-right">I have read and agree to the <a className="agree" href="#"><b>Privacy Policy</b></a>
                         <input type="checkbox" value="1" name="agree" />
                         &nbsp;
-                        <input type="submit" className="btn btn-primary" value="Continue" onClick={this.registerAccount}/>
+                        <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Continue</button>
                     </div>
                 </div>
-            </form>
+            </Formsy.Form>
         </div>
       );
 

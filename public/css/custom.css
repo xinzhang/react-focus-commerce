@@ -25,3 +25,8 @@
 .none-display {
     display:none;
 }
+
+.form-groupform-controlrequired input,
+.form-groupform-controlrequired select {
+  border-color: #FF9696;
+}
