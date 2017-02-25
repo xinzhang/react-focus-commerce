@@ -11,6 +11,7 @@ module.exports = function() {
         usernameField: 'email',
         passwordField: 'password'
     },
+
     function(username, password, done){
         console.log('local strategy check: ' + username);
 
@@ -27,6 +28,9 @@ module.exports = function() {
 
                     if (results != null && results.password === password) {
                         var user = results;
+                        //strip off password.
+                        user.password = '';
+                        user.confirm_password = '';
                         done(null, user);
                     } else {
                         done(null, false, {message: 'Bad password'});

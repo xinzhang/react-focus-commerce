@@ -32,5 +32,5 @@ export function loginSuccess(account) {
 }
 
 export function loginFailure(error) {
-  return {type: types.ACCOUNT_LOGIN_FAILURE, error}
+  return {type: types.ACCOUNT_LOGIN_FAILURE, error: "Invalid username or password"}
 }

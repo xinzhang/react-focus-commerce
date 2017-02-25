@@ -2,12 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var passport = require('../passport');
+var passport = require('./passport');
 var session = require('express-session');
 
-var blogRoute = require('../routes/blogRoute');
-var productRoute = require('../routes/productRoute');
-var accountRoute = require('../routes/accountRoute');
+var blogRoute = require('./routes/blogRoute');
+var productRoute = require('./routes/productRoute');
+var accountRoute = require('./routes/accountRoute');
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({secret: 'xz_react_focus_commerce'}));
 
-require('../passport')(app);
+passport(app);
 
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);

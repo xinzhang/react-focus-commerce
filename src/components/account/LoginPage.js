@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as accountActions from '../../actions/accountActions';
@@ -7,6 +7,10 @@ import { Form } from 'formsy-react';
 import MyInput from '../common/formsy/Input';
 
 class LoginPage extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   constructor(props, context) {
     super(props, context);
 
@@ -26,6 +30,16 @@ class LoginPage extends React.Component {
         this.props.actions.login(this.state.account);
       });
   }
+
+  componentWillReceiveProps(nextProps) {
+    //if login correct, then redirect
+    console.log(nextProps.account);
+    if (nextProps.account.status === 'authenticated' && nextProps.account.email !== '' && nextProps.account.error_message === '') {
+      console.log('go to differnt location');
+      this.context.router.push('/');
+    }
+  }
+
 
   enableButton() {
     this.setState({ canSubmit: true });

@@ -27,6 +27,7 @@ export default {
   latestProducts:[],
   bestSellerProducts: [],
   account:{
+    status:'',
     firstname:'',
     lastname:'',
     email:'',
