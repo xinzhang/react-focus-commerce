@@ -17,6 +17,9 @@ import ProductPage from './components/products/ProductPage';
 import CartPage from './components/cart/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
 
+import AdminPage from './components/admin/AdminPage';
+import AdminCategoriesPage from './components/admin/AdminCategories';
+
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
@@ -38,5 +41,9 @@ export default (
       <Route path="/products/cart" component={CartPage} />
       <Route path="/products/checkout" component={CheckoutPage} />
     </Route>
+    <Route path="/admin" component={AdminPage}>
+    </Route>
+    <Route path="/admin/categories" component={AdminCategoriesPage} />
   </Route>
+
 );

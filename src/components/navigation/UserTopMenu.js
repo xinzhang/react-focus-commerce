@@ -1,6 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router';
 
-class TopMenu extends React.Component {
+class UserTopMenu extends React.Component {
     render() {
       return (
         <nav id="menu" className="navbar">
@@ -10,13 +11,12 @@ class TopMenu extends React.Component {
                 </div>
                 <div className="navbar-collapse">
                     <ul className="main-navigation">
-                        <li><a href="/"   className="parent"  >Home</a> </li>
-                        <li><a href="/products/list"   className="parent"  >Electronics</a> </li>
-                        <li><a href="/products/list"   className="parent"  >Mobile</a> </li>
-                        <li><a href="/products/list"   className="parent"  >Fashio & Beauty</a> </li>
-                        <li><a href="/products/list"   className="parent"  >Audio</a> </li>
-                        <li><a href="/products/list"   className="parent"  >Home & Family</a> </li>
-                        <li><a href="/blog/list" className="parent">Blog</a></li>
+                        <li><Link className="parent" to={'/'}>Home</Link></li>
+                        <li><Link className="parent" to={'/products/list'}>Electronics</Link></li>
+                        <li><Link className="parent" to={'/products/list'}>Mobile</Link></li>
+                        <li><Link className="parent" to={'/products/list'}>Fashion & Beauty</Link></li>
+                        <li><Link className="parent" to={'/products/list'}>Audio</Link></li>
+                        <li><Link className="parent" to={'/blog/list'}>Blog</Link></li>
                         <li><a href="about-us.html" >About us</a></li>
                         <li><a href="contact.html" >Contact Us</a> </li>
                     </ul>
@@ -27,4 +27,4 @@ class TopMenu extends React.Component {
     }
 }
 
-export default TopMenu;
+export default UserTopMenu;

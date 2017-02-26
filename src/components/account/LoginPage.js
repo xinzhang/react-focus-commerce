@@ -34,9 +34,11 @@ class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     //if login correct, then redirect
     console.log(nextProps.account);
-    if (nextProps.account.status === 'authenticated' && nextProps.account.email !== '' && nextProps.account.error_message === '') {
-      console.log('go to differnt location');
+    if (nextProps.account.status === 'authenticated' && nextProps.account.email !== '' && nextProps.account.role==='user' && nextProps.account.error_message === '') {
       this.context.router.push('/');
+    }
+    else if (nextProps.account.status === 'authenticated' && nextProps.account.email !== '' && nextProps.account.role==='admin' && nextProps.account.error_message === '') {
+      this.context.router.push('/admin');
     }
   }
 

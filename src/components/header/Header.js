@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as cartActions from '../../actions/cartActions';
@@ -28,17 +29,27 @@ class Header extends React.Component {
               </div>
               <div className="col-sm-4 col-xs-6 header-middle">
                   <div className="header-middle-top">
-                      <div id="logo"> <a href="/"><img src="/image/logo.png" title="E-Commerce" alt="E-Commerce" className="img-responsive" /></a> </div>
+                      <div id="logo">
+                        <Link to={'/'}>
+                          <img src="/image/logo.png" title="E-Commerce" alt="E-Commerce" className="img-responsive" />
+                        </Link>
+                      </div>
                   </div>
               </div>
-              <div className="col-sm-4 col-xs-6 header-right">
-                  <CartDropdown cart={this.props.cart} deleteCartItem={this.deleteCartItem.bind(this)} />
-                  <div id="search" className="input-group">
-                      <input type="text" name="search" value="" placeholder="Search" className="form-control input-lg" />
-                      <span className="input-group-btn">
-                      <button type="button" className="btn btn-default btn-lg"><i className="fa fa-search"></i></button>
-                      </span> </div>
-              </div>
+
+                  { this.props.account.role === 'admin' && this.props.account.status==='authenticated' &&
+                    <div className="col-sm-4 col-xs-6 header-right"><span>Admin</span></div>
+                  }
+                  { this.props.account.role !== 'admin' &&
+                  <div className="col-sm-4 col-xs-6 header-right">
+                    <CartDropdown cart={this.props.cart} deleteCartItem={this.deleteCartItem.bind(this)} />
+                    <div id="search" className="input-group">
+                        <input type="text" name="search" value="" placeholder="Search" className="form-control input-lg" />
+                        <span className="input-group-btn">
+                        <button type="button" className="btn btn-default btn-lg"><i className="fa fa-search"></i></button>
+                        </span> </div>
+                  </div>
+                }
           </div>
       </div>
     )
@@ -47,7 +58,8 @@ class Header extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    cart: state.cart
+    cart: state.cart,
+    account: state.account
   }
 }
 

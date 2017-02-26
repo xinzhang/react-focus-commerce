@@ -16,7 +16,8 @@ router.post('/account/register', function(req, res, next) {
 
     //update the account to DB
     let user = req.body.account;
-
+    user.role = 'user';
+    
             mongodb.connect(dburl, function (err, db) {
                 var collection = db.collection('users');
 

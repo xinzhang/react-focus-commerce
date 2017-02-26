@@ -20,6 +20,8 @@ import {loadShoppingCart} from './actions/cartActions';
 //   document.getElementById('root')
 // );
 
+console.log('store configured');
+
 const store = configureStore();
 store.dispatch(loadBlogs());
 store.dispatch(loadBlogCategories());

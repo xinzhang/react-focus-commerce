@@ -27,7 +27,11 @@ class Topbar extends React.Component {
                                   </li>
                                   }
                                   {this.props.account.status === 'authenticated' &&
-                                    <li className="dropdown"><a href="#" title="My Account" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> <span>Welcome {this.props.account.firstname}</span></a>
+                                    <li className="dropdown"><a href="#" title="My Account" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> <span>Welcome {this.props.account.firstname}</span><span className="caret"></span></a>
+                                      <ul className="dropdown-menu dropdown-menu-right">
+                                          <li><a href="/account/settings">Settings</a></li>
+                                          <li><a href="/account/logout">Log out</a></li>
+                                      </ul>
                                     </li>
                                   }
                                   <li><a href="#" id="wishlist-total" title="Wish List (0)"><i className="fa fa-heart"></i> <span>Wish List</span><span> (0)</span></a></li>

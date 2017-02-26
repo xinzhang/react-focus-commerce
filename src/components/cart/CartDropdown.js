@@ -56,13 +56,15 @@ class CartDropdown extends React.Component {
                       <CartTotal cart={this.props.cart} />
                       <p className="text-right">
                         <span className="btn-viewcart">
-                          <a href="/products/cart">
+
+                          <Link to={'/products/cart'}>
                             <strong><i className="fa fa-shopping-cart"></i> View Cart</strong>
-                          </a>
+                          </Link>
                         </span>
                         <span className="btn-checkout">
-                            <a href="/products/checkout"><strong><i className="fa fa-share"></i> Checkout</strong>
-                            </a>
+                          <Link to={'/products/checkout'}>
+                            <strong><i className="fa fa-share"></i> Checkout</strong>
+                          </Link>
                         </span>
                       </p>
                   </div>
