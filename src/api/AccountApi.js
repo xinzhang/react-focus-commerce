@@ -9,9 +9,13 @@ class AccountApi {
     });
 
     return fetch(request).then(response => {
-      return response.json();
+      if (response.status == 200) {
+        return response.json();
+      } else {
+        throw(response.text())
+      }
     }).catch(error => {
-      return error;
+      throw error;
     });
   }
 

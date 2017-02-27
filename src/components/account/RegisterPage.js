@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as accountActions from '../../actions/accountActions';
 import Formsy from 'formsy-react';
 import MyInput from '../common/formsy/Input';
+import MyCheckBox from '../common/formsy/CheckBox';
 
 Formsy.addValidationRule('passwordEqual', (values, value) => {
   return values.password == value;
 });
 
+Formsy.addValidationRule('agreementChecked', (values, value) => {
+  return values.agreement;
+});
+
 class RegisterPage extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
     constructor(props, context) {
       super(props, context);
@@ -59,6 +67,14 @@ class RegisterPage extends React.Component {
         return this.setState({account: acct});
     }
 
+    componentWillReceiveProps(nextProps) {
+      //if login correct, then redirect
+      console.log(nextProps.account);
+      if (nextProps.account.status === 'authenticated' && nextProps.account.email !== '' && nextProps.account.role==='user' && nextProps.account.error_message === '') {
+        this.context.router.push('/');
+      }
+    }
+
     render() {
       let hiddenStyle = {
         display:"none"
@@ -67,6 +83,11 @@ class RegisterPage extends React.Component {
         <div className="row">
             <h1>Register Account</h1>
             <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p>
+
+            {this.props.account.error_message != '' &&
+              <h3 className="validation-error">{this.props.account.error_message}</h3>
+            }
+
             <Formsy.Form className="form-horizontal" onSubmit={this.registerAccount} encType="multipart/form-data" method="post" onValid={this.enableButton} onInvalid={this.disableButton}>
                 <fieldset id="account">
                     <legend>Your Personal Details</legend>
@@ -138,7 +159,7 @@ class RegisterPage extends React.Component {
                         <div className="col-sm-10">
                             <select className="form-control" id="input-country" name="country" onChange={this.updateAccountAddress}>
                                 <option value=""> --- Please Select --- </option>
-                                <option value="13">Australia</option>
+                                <option selected="selected" value="13">Australia</option>
                                 <option value="30">Brazil</option>
                                 <option value="38">Canada</option>
                                 <option value="44">China</option>
@@ -146,7 +167,7 @@ class RegisterPage extends React.Component {
                                 <option value="129">Malaysia</option>
                                 <option value="150">Netherlands</option>
                                 <option value="193">South Africa</option>
-                                <option selected="selected" value="222">United Kingdom</option>
+                                <option value="222">United Kingdom</option>
                                 <option value="223">United States</option>
                             </select>
                         </div>
@@ -156,9 +177,13 @@ class RegisterPage extends React.Component {
                         <div className="col-sm-10">
                             <select className="form-control" id="input-zone" name="address.state">
                                 <option value=""> --- Please Select --- </option>
-                                <option value="3513">Aberdeen</option>
-                                <option value="3514">Aberdeenshire</option>
-                                <option value="3515">Anglesey</option>
+                                <option value="NSW">NSW</option>
+                                <option value="VIC">VIC</option>
+                                <option value="QLD">QLD</option>
+                                <option value="SQ">SA</option>
+                                <option value="WA">WA</option>
+                                <option value="ACT">ACT</option>
+                                <option value="NT">NT</option>
                             </select>
                         </div>
                     </div>
@@ -194,10 +219,18 @@ class RegisterPage extends React.Component {
                         </div>
                     </div>
                 </fieldset>
+                <fieldset>
+                  <legend>&nbsp;&nbsp;</legend>
+                  <div className="form-group">
+                      <MyCheckBox type="checkbox" id="agreement"
+                        name="agreement"
+                        validations="agreementChecked"
+                        validationError=""
+                        title={[" I have read and agree to the ", <a className="agree" href="#"><b>Privacy Policy</b></a> ]}/>
+                  </div>
+                </fieldset>
                 <div className="buttons">
-                    <div className="pull-right">I have read and agree to the <a className="agree" href="#"><b>Privacy Policy</b></a>
-                        <input type="checkbox" value="1" name="agree" />
-                        &nbsp;
+                    <div className="pull-right">
                         <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Continue</button>
                     </div>
                 </div>

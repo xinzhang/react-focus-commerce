@@ -11,7 +11,10 @@ export default function accountReducer(state = initialState.account, action) {
       return Object.assign({}, initialState.account, {error_message: action.error});
 
     case types.ACCOUNT_REGISTER_SUCESS:
-      return action.account;
+      return Object.assign({}, action.account, {status: 'authenticated'});
+
+    case types.ACCOUNT_REGISTER_FAILURE:
+      return Object.assign({}, initialState.account, {error_message: action.error});
 
     default:
       return state;

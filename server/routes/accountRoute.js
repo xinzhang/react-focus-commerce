@@ -17,18 +17,34 @@ router.post('/account/register', function(req, res, next) {
     //update the account to DB
     let user = req.body.account;
     user.role = 'user';
-    
-            mongodb.connect(dburl, function (err, db) {
-                var collection = db.collection('users');
 
-                collection.insert(user,
-                    function (err, results) {
-                        req.login(results.ops[0], function () {
-                            //res.redirect('/auth/profile');
-                            res.send(user);
-                        })
+    mongodb.connect(dburl, function (err, db) {
+        var collection = db.collection('users');
+
+        collection.findOne({
+                email: user.email
+            },
+
+            function (err, results) {
+                console.log("mongodb results: " + JSON.stringify(results));
+
+                if (results != null) {
+                    res.status(500).send("the username email has been existed.");                    
+                } else {
+                    //execute insert now
+                    collection.insert(user,
+                        function (err, results) {
+                            req.login(results.ops[0], function () {
+                                //res.redirect('/auth/profile');
+                                res.send(user);
+                            })
                     });
-            });
+                }
+            }
+        ); //end findOne
+
+    });//end mongodb connect
+
 });
 
 // router.post('/account/login', function(req, res, next) {

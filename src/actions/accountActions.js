@@ -7,6 +7,9 @@ export function registerAccount(acct) {
       console.log(data);
       dispatch(registerAccountSuccess(data));
     }).catch(error => {
+      console.log('registerAccount error');
+      console.log(error);
+      dispatch(registerAccountFailure(error));
       throw(error);
     });
   }
@@ -14,6 +17,10 @@ export function registerAccount(acct) {
 
 export function registerAccountSuccess(account) {
   return {type: types.ACCOUNT_REGISTER_SUCESS, account}
+}
+
+export function registerAccountFailure(error) {
+  return {type: types.ACCOUNT_REGISTER_FAILURE, error: "Register error"}
 }
 
 export function login(acct) {
