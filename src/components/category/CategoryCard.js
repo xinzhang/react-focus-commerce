@@ -1,46 +1,60 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class CategoryCard extends React.Component {
+
+  constructor(props, context){
+      super(props, context);
+
+      this.getItemLinks = this.getItemLinks.bind(this);
+  }
+
+    getItemLinks(item) {
+      var self = this;
+      return (
+        <ul>
+          {item.subcategories.map(subItem =>
+            <li><a href="#">{subItem.name}</a>
+            {subItem.subcategories && subItem.subcategories.length > 0 &&
+                self.getItemLinks(subItem)
+            }
+            </li>
+          )}
+        </ul>
+      );
+    }
+
     render() {
+      console.log(this.props.categories);
+
       return (
         <div className="column-block">
             <div className="columnblock-title">Categories</div>
             <div className="category_block">
                 <ul className="box-category treeview-list treeview">
-                    <li><a href="#" className="activSub">Desktops</a>
-                        <ul>
-                            <li><a href="#">PC</a></li>
-                            <li><a href="#">MAC</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" className="activSub">Laptops &amp; Notebooks</a>
-                        <ul>
-                            <li><a href="#">Macs</a></li>
-                            <li><a href="#">Windows</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" className="activSub">Components</a>
-                        <ul>
-                            <li><a href="#">Mice and Trackballs</a></li>
-                            <li><a href="#" className="activSub" >Monitors</a>
-                                <ul>
-                                    <li><a href="#"  >test 1</a></li>
-                                    <li><a href="#"  >test 2</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Windows</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Tablets</a></li>
-                    <li><a href="#">Software</a></li>
-                    <li><a href="#">Phones & PDAs</a></li>
-                    <li><a href="#">Cameras</a></li>
-                    <li><a href="#">MP3 Players</a></li>
+                    {this.props.categories && this.props.categories.map( item =>
+                      <li><a href="#" className="activSub">{item.name}</a>
+                      {item.subcategories && item.subcategories.length > 0 &&
+                          this.getItemLinks(item)
+                      }
+                      </li>
+                    )}
                 </ul>
             </div>
         </div>
       );
     }
+
+    componentDidMount() {
+      console.log('caregory card run categorytreeview()');
+      window.categorytreeview();
+    }
 }
 
-export default CategoryCard;
+function mapStateToProps(state, ownProps) {
+  return {
+    categories: state.categories
+  }
+}
+
+export default connect(mapStateToProps)(CategoryCard);

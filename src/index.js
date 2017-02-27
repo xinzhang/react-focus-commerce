@@ -14,6 +14,7 @@ import {loadBlogs} from './actions/blogActions';
 import {loadBlogCategories} from './actions/blogActions';
 import {loadProducts} from './actions/productActions';
 import {loadShoppingCart} from './actions/cartActions';
+import {loadCategories} from './actions/categoryActions';
 
 // ReactDOM.render(
 //   <App />,
@@ -25,6 +26,7 @@ console.log('store configured');
 const store = configureStore();
 store.dispatch(loadBlogs());
 store.dispatch(loadBlogCategories());
+store.dispatch(loadCategories());
 store.dispatch(loadProducts());
 
 //store.dispatch(loadShoppingCart());

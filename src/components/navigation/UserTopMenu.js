@@ -12,10 +12,9 @@ class UserTopMenu extends React.Component {
                 <div className="navbar-collapse">
                     <ul className="main-navigation">
                         <li><Link className="parent" to={'/'}>Home</Link></li>
-                        <li><Link className="parent" to={'/products/list'}>Electronics</Link></li>
-                        <li><Link className="parent" to={'/products/list'}>Mobile</Link></li>
-                        <li><Link className="parent" to={'/products/list'}>Fashion & Beauty</Link></li>
-                        <li><Link className="parent" to={'/products/list'}>Audio</Link></li>
+                        {this.props.categories != undefined && this.props.categories.map(item =>
+                          <li><Link className="parent" to={'/products/list/' + item.name} key={item.name}>{item.name}</Link></li>
+                        )}
                         <li><Link className="parent" to={'/blog/list'}>Blog</Link></li>
                         <li><a href="about-us.html" >About us</a></li>
                         <li><a href="contact.html" >Contact Us</a> </li>

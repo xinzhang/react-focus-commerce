@@ -10,9 +10,12 @@ import CategoryBanner from '../category/CategoryBanner';
 class ProductList extends React.Component {
 
     render() {
+
+      let title = this.props.params.category;
+
       return (
         <div className="row">
-          <CategoryBanner />
+          <CategoryBanner title={title}/>
           <ListFilter />
           <br />
           <div className="grid-list-wrapper">

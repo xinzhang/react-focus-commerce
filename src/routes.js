@@ -37,6 +37,7 @@ export default (
     </Route>
     <Route path="/products" component={ProductListPage}>
       <Route path="/products/list" component={ProductList} />
+      <Route path="/products/list/:category" component={ProductList} />
       <Route path="/products/detail/:id" component={ProductPage} />
       <Route path="/products/cart" component={CartPage} />
       <Route path="/products/checkout" component={CheckoutPage} />

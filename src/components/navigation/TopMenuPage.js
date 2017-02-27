@@ -12,7 +12,7 @@ class TopMenuPage extends React.Component {
             <AdminTopMenu />
           }
           { this.props.account.role !== 'admin' &&
-            <UserTopMenu />
+            <UserTopMenu categories={this.props.categories}/>
           }
         </div>
       );
@@ -21,7 +21,8 @@ class TopMenuPage extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    account: state.account
+    account: state.account,
+    categories: state.categories,
   }
 }
 

@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "name":"Eletronics",
+    "subcategories":[
+      {
+          "name":"Desktop",
+          "subcategories":[{"name":"PC"},{"name":"MAC"}]
+      },{
+          "name":"Laptops & Notebooks",
+          "subcategories":[{"name":"Macs"},{"name":"Windows"}]
+      },{
+          "name":"Components",
+          "subcategories":[{"name":"Monitors"},{"name":"Networks"},{"name":"Storage"}]
+      },{
+          "name":"Tablets"
+      },{
+        "name":"Software"
+      }
+    ]
+  },{
+    "name":"Fashion&Beauty",
+    "subcategories":[
+      {
+          "name":"Clothes"
+    },{
+        "name":"Shoes"
+    },{
+      "name":"Make up"
+    }
+  ]
+  },{
+    "name":"Nutrition"
+  }
+]
