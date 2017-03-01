@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import AdminProducts from './AdminProducts';
@@ -11,6 +11,19 @@ class AdminProductsPage extends React.Component {
       this.props.actions.getAdminProducts();
     }
 
+    static contextTypes = {
+      router: PropTypes.object
+    };
+
+    constructor(props) {
+        super(props);
+        this.gotoAddNewProduct = this.gotoAddNewProduct.bind(this);
+    }
+
+    gotoAddNewProduct() {
+      this.context.router.push('/admin/newproduct');
+    }
+
     render() {
       return (
         <div className="row">
@@ -18,7 +31,7 @@ class AdminProductsPage extends React.Component {
             <CategoryCard />
           </div>
           <div className="col-sm-9" id="content">
-              <button type="submit" className="btn btn-primary"><i className="fa fa-plus-square"></i> New Product</button>
+              <button type="submit" className="btn btn-primary" onClick={this.gotoAddNewProduct}><i className="fa fa-plus-square"></i> New Product</button>
               <br/>
               <AdminProducts products={this.props.products} />
           </div>
@@ -37,7 +50,7 @@ function mapStateToProps(state, ownProps) {
   return {
     products: products
   }
-  
+
 }
 
 function mapDispatchToProps(dispatch) {

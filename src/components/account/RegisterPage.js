@@ -51,7 +51,7 @@ class RegisterPage extends React.Component {
       this.setState({ canSubmit: false });
     }
     //update each field - you have to do it yourself there is no auto binding.
-    updateAccountState(event) {
+    updateAccountState(event) {      
         const field = event.target.name;
         const acct = this.state.account;
         acct[field] = event.target.value;

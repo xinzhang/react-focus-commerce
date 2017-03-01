@@ -20,6 +20,7 @@ import CheckoutPage from './components/checkout/CheckoutPage';
 import AdminPage from './components/admin/AdminPage';
 import AdminCategoriesPage from './components/admin/AdminCategories';
 import AdminProductsPage from './components/admin/AdminProductsPage';
+import AdminNewProductPage from './components/admin/AdminNewProductPage';
 
 export default (
   <Route path="/" component={App}>
@@ -47,6 +48,7 @@ export default (
     </Route>
     <Route path="/admin/categories" component={AdminCategoriesPage} />
     <Route path="/admin/products" component={AdminProductsPage} />
+    <Route path="/admin/newproduct" component={AdminNewProductPage} />
   </Route>
 
 );
