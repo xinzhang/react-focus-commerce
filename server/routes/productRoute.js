@@ -103,4 +103,38 @@ router.get('/categories', function(req, res, next){
   })
 });
 
+
+router.get('/admin/products', function(req, res, next){
+  mongodb.connect(dbUrl, function(err, db){
+      var collection = db.collection('products');
+      collection.find({}, function(err, results){
+        if (err) {
+          res.status(500).send(err.errorMessage)
+        }
+        var prods = [];
+        results.each( function(err, item){
+          if (err || !item) {
+            res.status(200).send(prods);
+            db.close();
+          }else {
+            prods.push(item);
+          }
+        });
+      }) //end find
+  })
+});
+
+router.post('/admin/products/new', function(req, res, next){
+  mongodb.connect(dbUrl, function(err, db){
+      var p = req.product;
+      var collection = db.collection('products');
+      collection.insertOne(p, function(err, result){
+        if (err) {
+          res.status(500).send(err.errorMessage);
+        }
+        res.status(200).send(p);
+      })
+  })
+});
+
 module.exports = router;

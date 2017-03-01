@@ -44,5 +44,8 @@ export default {
     confirm_password:'',
     newsletter:0,
     error_message:''
-  }
+  },
+
+  admin_products:[]
+    
 }

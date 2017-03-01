@@ -25,7 +25,6 @@ class CategoryCard extends React.Component {
     }
 
     render() {
-      console.log(this.props.categories);
 
       return (
         <div className="column-block">

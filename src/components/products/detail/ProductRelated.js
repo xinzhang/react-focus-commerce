@@ -28,6 +28,8 @@ class ProductRelated extends React.Component {
   }
 
     componentWillReceiveProps(nextProps) {
+      console.log('product related component will receive props');
+      
       this.setState({
         products: [...nextProps.products]
       });

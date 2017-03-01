@@ -9,6 +9,7 @@ import relatedProducts from './relatedProductReducer';
 import specialProducts from './specialProductReducer';
 import latestProducts from './latestProductReducer';
 import bestSellerProducts from './bestSellerProductReducer';
+import admin_products from './adminProductReducer';
 
 import account from './accountReducer';
 
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   specialProducts,
   latestProducts,
   bestSellerProducts,
-  account
+  account,
+  admin_products
 })
 
 export default rootReducer;
