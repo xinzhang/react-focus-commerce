@@ -132,7 +132,7 @@ router.post('/admin/products/new', function(req, res, next){
         if (err) {
           res.status(500).send(err.errorMessage);
         }
-        res.status(200).send(p);
+        res.status(200).send("OK");
       })
   })
 });
