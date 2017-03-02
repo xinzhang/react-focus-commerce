@@ -24,7 +24,9 @@ class AdminNewProduct extends React.Component {
     this.disableButton = this.disableButton.bind(this);
     this.updateProductState = this.updateProductState.bind(this);
     this.handleProductMainImageUpload = this.handleProductMainImageUpload.bind(this);
+    this.handleProductSliderImageUpload = this.handleProductSliderImageUpload.bind(this);
     this.uploadPic = this.uploadPic.bind(this);
+    this.uploadSliderPic = this.uploadSliderPic.bind(this);
   }
 
   submit(data) {
@@ -71,10 +73,49 @@ class AdminNewProduct extends React.Component {
     });
   }
 
+  uploadSliderPic(f, preset, property, idx){
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                     .field('upload_preset', preset)
+                     .field('use_filename', true)
+                     .field('unique_filename',false)
+                     .field('file', f);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        let tempObj ={};
+        tempObj[property] = response.body.secure_url;
+        console.log(tempObj);
+        let o = Object.assign({}, this.state.product, tempObj);
+        this.setState({
+          product:o
+        });
+      }
+    });
+  }
+
   handleProductMainImageUpload(files) {
     var f = files[0];
     this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "pic_small_url");
+    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "pic_url");
     this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "slider_pic_small_url");
+  }
+
+  handleProductSliderImageUpload(files) {
+    var length = files.length;
+    let o = Object.assign({}, this.state.product, {"slider_pic_count":length});
+    this.setState({
+      product:o
+    });
+
+    var f = files[0];
+    files.forEach( f => {
+      this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "pic_small_url");
+      this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "slider_pic_small_url");
+    });
   }
 
   render() {
@@ -94,12 +135,19 @@ class AdminNewProduct extends React.Component {
                     <MyInput type="text" className="form-control" id="input-prodductprice" placeholder="Product Price"  name="price" onChange={this.updateProductState} required />
                 </div>
             </div>
+            <div className="form-group required">
+                <label htmlFor="input-prodducttax" className="col-sm-2 control-label">Tax</label>
+                <div className="col-sm-10">
+                    <MyInput type="text" className="form-control" id="input-prodducttax" placeholder="Product Tax"  name="tax" onChange={this.updateProductState} required />
+                </div>
+            </div>
             <div className="form-group">
                 <label htmlFor="input-description" className="col-sm-2 control-label">Description</label>
                 <div className="col-sm-10">
-                    <input type="textarea" rows="5" className="form-control" id="input-description" placeholder="Product Description"  name="description" onChange={this.updateProductState}  />
+                    <textarea rows="5" className="form-control" id="input-description" placeholder="Product Description"  name="desc" onChange={this.updateProductState}  />
                 </div>
             </div>
+
             <div className="form-group">
               <label htmlFor="input-description" className="col-sm-2 control-label">Main Picture</label>
               <div className="col-sm-10">
@@ -114,6 +162,22 @@ class AdminNewProduct extends React.Component {
                   </div>}
               </div>
             </div>
+
+            <div className="form-group">
+              <label htmlFor="input-description" className="col-sm-2 control-label">Slider Picture</label>
+              <div className="col-sm-10">
+                  <Dropzone
+                      onDrop={this.handleProductSliderImageUpload} style={{height:"25px"}} multiple={true} accept="image/*">
+                      <div>Drop an image or click to select a few file to upload.</div>
+                  </Dropzone>
+                  {this.state.product.pic_small_url === '' ? null :
+                  <div>
+                    <p>{this.state.product.pic_small_url}</p>
+                    <img src={this.state.product.pic_small_url} />
+                  </div>}
+              </div>
+            </div>
+
             <div className="buttons">
                 <div className="pull-right">
                     <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Continue</button>
