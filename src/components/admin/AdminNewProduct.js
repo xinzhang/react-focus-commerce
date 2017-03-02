@@ -1,7 +1,14 @@
 import React, {PropTypes} from 'react';
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 
 import MyInput from '../common/formsy/Input';
 import Formsy from 'formsy-react';
+
+const CLOUDINARY_UPLOAD_PRESET_50x59 = 'product-qzzxnvvi-50x59';
+const CLOUDINARY_UPLOAD_PRESET_220x294 = 'product-aponwybu-220x294';
+
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/xz-cloudinary/upload';
 
 class AdminNewProduct extends React.Component {
   constructor(props, context) {
@@ -16,6 +23,8 @@ class AdminNewProduct extends React.Component {
     this.enableButton = this.enableButton.bind(this);
     this.disableButton = this.disableButton.bind(this);
     this.updateProductState = this.updateProductState.bind(this);
+    this.handleProductMainImageUpload = this.handleProductMainImageUpload.bind(this);
+    this.uploadPic = this.uploadPic.bind(this);
   }
 
   submit(data) {
@@ -40,6 +49,34 @@ class AdminNewProduct extends React.Component {
       return this.setState({product: prod});
   }
 
+  uploadPic(f, preset, property){
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                     .field('upload_preset', preset)
+                     .field('file', f);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        let tempObj ={};
+        tempObj[property] = response.body.secure_url;
+        console.log(tempObj);
+        let o = Object.assign({}, this.state.product, tempObj);
+        this.setState({
+          product:o
+        });
+      }
+    });
+  }
+
+  handleProductMainImageUpload(files) {
+    var f = files[0];
+    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "pic_small_url");
+    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "slider_pic_small_url");
+  }
+
   render() {
       return (
         <div className="row">
@@ -62,6 +99,20 @@ class AdminNewProduct extends React.Component {
                 <div className="col-sm-10">
                     <input type="textarea" rows="5" className="form-control" id="input-description" placeholder="Product Description"  name="description" onChange={this.updateProductState}  />
                 </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="input-description" className="col-sm-2 control-label">Main Picture</label>
+              <div className="col-sm-10">
+                  <Dropzone
+                      onDrop={this.handleProductMainImageUpload} style={{height:"25px"}} multiple={false} accept="image/*">
+                      <div>Drop an image or click to select a file to upload.</div>
+                  </Dropzone>
+                  {this.state.product.pic_small_url === '' ? null :
+                  <div>
+                    <p>{this.state.product.pic_small_url}</p>
+                    <img src={this.state.product.pic_small_url} />
+                  </div>}
+              </div>
             </div>
             <div className="buttons">
                 <div className="pull-right">
