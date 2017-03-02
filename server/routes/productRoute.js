@@ -126,8 +126,9 @@ router.get('/admin/products', function(req, res, next){
 
 router.post('/admin/products/new', function(req, res, next){
   mongodb.connect(dbUrl, function(err, db){
-      var p = req.product;
+      var p = req.body.product;
       var collection = db.collection('products');
+      
       collection.insert(p, function(err, result){
         if (err) {
           res.status(500).send(err.errorMessage);
