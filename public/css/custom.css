@@ -34,3 +34,14 @@
 .validation-error {
   color: #CC3333;
 }
+
+
+.img-wrap {
+    position: relative;
+}
+.img-wrap .close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+}

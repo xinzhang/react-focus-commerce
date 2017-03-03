@@ -15,7 +15,12 @@ class AdminNewProduct extends React.Component {
     super(props, context);
 
     this.state = {
-      product: {},
+      product: {
+        slider_pic_small_url:[],
+        slider_pic_small_ids:[],
+        slider_pic_large_url:[],
+        slider_pic_large_ids:[]
+      },
       canSubmit: false
     }
 
@@ -73,11 +78,10 @@ class AdminNewProduct extends React.Component {
     });
   }
 
-  uploadSliderPic(f, preset, property, idx){
+  uploadSliderPic(f, preset, property, idsProperty){
+    console.log(f);
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
                      .field('upload_preset', preset)
-                     .field('use_filename', true)
-                     .field('unique_filename',false)
                      .field('file', f);
 
     upload.end((err, response) => {
@@ -85,14 +89,14 @@ class AdminNewProduct extends React.Component {
         console.error(err);
       }
 
-      if (response.body.secure_url !== '') {
+      if (response.body.url !== '') {
         let tempObj ={};
-        tempObj[property] = response.body.secure_url;
-        console.log(tempObj);
+        this.state.product[property].push(response.body.url);
+        this.state.product[idsProperty].push(response.body.public_id)
         let o = Object.assign({}, this.state.product, tempObj);
         this.setState({
           product:o
-        });
+        }, ()=> console.log(this.state.product));
       }
     });
   }
@@ -101,21 +105,43 @@ class AdminNewProduct extends React.Component {
     var f = files[0];
     this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "pic_small_url");
     this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "pic_url");
-    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "slider_pic_small_url");
   }
 
   handleProductSliderImageUpload(files) {
     var length = files.length;
-    let o = Object.assign({}, this.state.product, {"slider_pic_count":length});
-    this.setState({
-      product:o
-    });
-
     var f = files[0];
-    files.forEach( f => {
-      this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "pic_small_url");
-      this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "slider_pic_small_url");
+    files.forEach( (f,idx) => {
+      this.uploadSliderPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "slider_pic_small_url", "slider_pic_small_ids");
+      this.uploadSliderPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "slider_pic_large_url", "slider_pic_large_ids");
     });
+  }
+
+  removeSliderPic(x, idx) {
+    console.log("remove pic");
+    console.log(x);
+    let upload = request.delete(CLOUDINARY_UPLOAD_URL + "?public_ids[]=" + x)
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+      this.state.product.slider_pic_small_url.splice(idx, 1)
+      this.state.product.slider_pic_small_ids.splice(idx, 1)
+    });
+  }
+
+  renderPicture(product) {
+    var result = []
+    for (let i=0;i<product.slider_pic_small_url.length;i++) {
+      let url = product.slider_pic_small_url[i];
+      let id = product.slider_pic_small_ids[i];
+      result.push(
+        <div className="img-wrap col-sm-1">
+          <span className="close" onClick={()=>this.removeSliderPic(id, i)}><i className="fa fa-times"></i></span>
+          <img src={url} />
+        </div>
+      )
+    }
+    return result;
   }
 
   render() {
@@ -167,14 +193,10 @@ class AdminNewProduct extends React.Component {
               <label htmlFor="input-description" className="col-sm-2 control-label">Slider Picture</label>
               <div className="col-sm-10">
                   <Dropzone
-                      onDrop={this.handleProductSliderImageUpload} style={{height:"25px"}} multiple={true} accept="image/*">
+                      onDrop={this.handleProductSliderImageUpload} style={{height:"60px"}} multiple={true} accept="image/*">
                       <div>Drop an image or click to select a few file to upload.</div>
                   </Dropzone>
-                  {this.state.product.pic_small_url === '' ? null :
-                  <div>
-                    <p>{this.state.product.pic_small_url}</p>
-                    <img src={this.state.product.pic_small_url} />
-                  </div>}
+                  {this.renderPicture(this.state.product)}
               </div>
             </div>
 
