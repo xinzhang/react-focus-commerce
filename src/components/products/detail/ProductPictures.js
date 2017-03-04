@@ -42,7 +42,7 @@ class ProductPictures extends React.Component {
       let renderhtml = (
         <ul className="thumbnails">
             <li>
-              <Link className="thumbnail fancybox" to={'/products/detail/'+ this.props.product.id}>
+              <Link className="thumbnail fancybox" to={'/products/detail/'+ this.props.product._id}>
                 <img src={this.props.product.pic_url} alt={this.props.product.name} title={this.props.product.name} className="img-responsive" />
               </Link>
             </li>

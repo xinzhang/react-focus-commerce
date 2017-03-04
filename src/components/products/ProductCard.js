@@ -7,17 +7,17 @@ class ProductCard extends React.Component {
       return (
         <div className="product-thumb transition">
           <div className="image product-imageblock">
-            <Link to={'/products/detail/'+ this.props.product.id}>
+            <Link to={'/products/detail/'+ this.props.product._id}>
               <img src={this.props.product.pic_url} alt={this.props.product.name} title={this.props.product.name} className="img-responsive" />
             </Link>
             <div className="button-group">
               <button type="button" className="wishlist" data-toggle="tooltip" title="Add to Wish List"><i className="fa fa-heart-o"></i></button>
-              <AddCartButton product={this.props.product} key={this.props.product.id} />
+              <AddCartButton product={this.props.product} key={this.props.product._id} />
             </div>
           </div>
           <div className="caption product-detail">
             <h4 className="product-name">
-              <Link to={'/products/detail/'+ this.props.product.id} title={this.props.product.name}>
+              <Link to={'/products/detail/'+ this.props.product._id} title={this.props.product.name}>
                 {this.props.product.name}
               </Link>
             </h4>

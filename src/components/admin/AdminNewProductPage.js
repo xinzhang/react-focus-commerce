@@ -8,6 +8,10 @@ import * as adminActions from '../../actions/adminActions';
 import CategoryCard from '../category/CategoryCard';
 
 class AdminNewProductPage extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
     componentDidMount() {
     }
 
@@ -20,6 +24,7 @@ class AdminNewProductPage extends React.Component {
       console.log('AdminNewProductPage submitNewProduct');
       console.log(prod);
       this.props.actions.addAdminProduct(prod);
+      this.context.router.push('/admin/products');
     }
 
     render() {

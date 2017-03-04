@@ -5,6 +5,8 @@ import request from 'superagent';
 import MyInput from '../common/formsy/Input';
 import Formsy from 'formsy-react';
 
+import cloudinary from 'cloudinary';
+
 const CLOUDINARY_UPLOAD_PRESET_50x59 = 'product-qzzxnvvi-50x59';
 const CLOUDINARY_UPLOAD_PRESET_220x294 = 'product-aponwybu-220x294';
 
@@ -14,8 +16,15 @@ class AdminNewProduct extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    cloudinary.config({
+      cloud_name: 'xz-cloudinary',
+      api_key: '112649942834417',
+      api_secret: 'N2J8CoBfPlCrK4xfha85bvc-GFI'
+    });
+
     this.state = {
       product: {
+        pic_small_url:'',
         slider_pic_small_url:[],
         slider_pic_small_ids:[],
         slider_pic_large_url:[],
@@ -32,10 +41,17 @@ class AdminNewProduct extends React.Component {
     this.handleProductSliderImageUpload = this.handleProductSliderImageUpload.bind(this);
     this.uploadPic = this.uploadPic.bind(this);
     this.uploadSliderPic = this.uploadSliderPic.bind(this);
+    this.removeProdPic = this.removeProdPic.bind(this);
+    //this.removeSliderPic = this.removeSliderPic.bind(this);
   }
 
+  
+
   submit(data) {
+    data.slider_pic_count = this.state.product.slider_pic_small_ids.length;
+    data.rating = 0;
     let o = Object.assign({}, this.state.product, data);
+
     console.log('admin new product call submit()');
     console.log(o);
     this.props.submit(o);
@@ -56,7 +72,7 @@ class AdminNewProduct extends React.Component {
       return this.setState({product: prod});
   }
 
-  uploadPic(f, preset, property){
+  uploadPic(f, preset, property, idProperty){
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
                      .field('upload_preset', preset)
                      .field('file', f);
@@ -69,7 +85,8 @@ class AdminNewProduct extends React.Component {
       if (response.body.secure_url !== '') {
         let tempObj ={};
         tempObj[property] = response.body.secure_url;
-        console.log(tempObj);
+        tempObj[idProperty] = response.body.public_id;
+
         let o = Object.assign({}, this.state.product, tempObj);
         this.setState({
           product:o
@@ -103,30 +120,57 @@ class AdminNewProduct extends React.Component {
 
   handleProductMainImageUpload(files) {
     var f = files[0];
-    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "pic_small_url");
-    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "pic_url");
+    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "pic_small_url", "pic_small_id");
+    this.uploadPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "pic_url", "pic_id");
   }
 
   handleProductSliderImageUpload(files) {
     var length = files.length;
-    var f = files[0];
+
     files.forEach( (f,idx) => {
       this.uploadSliderPic(f, CLOUDINARY_UPLOAD_PRESET_50x59, "slider_pic_small_url", "slider_pic_small_ids");
       this.uploadSliderPic(f, CLOUDINARY_UPLOAD_PRESET_220x294, "slider_pic_large_url", "slider_pic_large_ids");
     });
   }
 
-  removeSliderPic(x, idx) {
+  removeSliderPic(idx) {
     console.log("remove pic");
-    console.log(x);
-    let upload = request.delete(CLOUDINARY_UPLOAD_URL + "?public_ids[]=" + x)
-    upload.end((err, response) => {
-      if (err) {
-        console.error(err);
-      }
-      this.state.product.slider_pic_small_url.splice(idx, 1)
-      this.state.product.slider_pic_small_ids.splice(idx, 1)
+
+    let prod = this.state.product;
+    let ref = this;
+    console.log(prod);
+
+    let small_pubid = prod.slider_pic_small_ids[idx];
+    let large_pubid = prod.slider_pic_large_ids[idx];
+
+    cloudinary.uploader.destroy(small_pubid, function(result) {
+      prod.slider_pic_small_url.splice(idx, 1);
+      prod.slider_pic_small_ids.splice(idx, 1);
+      console.log(prod);
+      ref.setState({
+        product: prod
+      });
     });
+  }
+
+  removeProdPic() {
+      let prod = this.state.product;
+
+      cloudinary.uploader.destroy(this.state.product.pic_small_id, function(result) {
+        prod.pic_small_url = '';
+        prod.pic_small_id = '';
+        this.setState({
+          product: prod
+        });
+      });
+
+      cloudinary.uploader.destroy(this.state.product.pic_id, function(result) {
+        prod.pic_url = '';
+        prod.pic_id = '';
+        this.setState({
+          product: prod
+        });
+      });
   }
 
   renderPicture(product) {
@@ -136,7 +180,7 @@ class AdminNewProduct extends React.Component {
       let id = product.slider_pic_small_ids[i];
       result.push(
         <div className="img-wrap col-sm-1">
-          <span className="close" onClick={()=>this.removeSliderPic(id, i)}><i className="fa fa-times"></i></span>
+          <span className="close" onClick={this.removeSliderPic.bind(this, i)}><i className="fa fa-times"></i></span>
           <img src={url} />
         </div>
       )
@@ -182,10 +226,11 @@ class AdminNewProduct extends React.Component {
                       <div>Drop an image or click to select a file to upload.</div>
                   </Dropzone>
                   {this.state.product.pic_small_url === '' ? null :
-                  <div>
-                    <p>{this.state.product.pic_small_url}</p>
+                  <div className="img-wrap col-sm-1">
+                    <span className="close" onClick={this.removeProdPic.bind(this)}><i className="fa fa-times"></i></span>
                     <img src={this.state.product.pic_small_url} />
-                  </div>}
+                  </div>
+                  }
               </div>
             </div>
 
