@@ -17,7 +17,13 @@ class AdminNewProductPage extends React.Component {
 
     constructor(props) {
       super(props);
+
       this.submitNewProduct = this.submitNewProduct.bind(this);
+      this.submitUpdateProduct = this.submitUpdateProduct.bind(this);
+
+      if (this.props.params.id) {
+        this.props.actions.editAdminProduct(this.props.params.id);
+      }
     }
 
     submitNewProduct(prod) {
@@ -34,7 +40,12 @@ class AdminNewProductPage extends React.Component {
             <CategoryCard />
           </div>
           <div className="col-sm-9" id="content">
-            <AdminNewProduct account={this.props.account} submit={this.submitNewProduct} />
+            { this.props.params.id === undefined &&
+              <AdminNewProduct account={this.props.account} submit={this.submitNewProduct} />
+            }
+            { this.props.params.id &&
+              <AdminNewProduct account={this.props.account} submit={this.submitUpdateProduct} />
+            }
           </div>
         </div>
       );

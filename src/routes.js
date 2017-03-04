@@ -49,6 +49,7 @@ export default (
     <Route path="/admin/categories" component={AdminCategoriesPage} />
     <Route path="/admin/products" component={AdminProductsPage} />
     <Route path="/admin/newproduct" component={AdminNewProductPage} />
+    <Route path="/admin/editproduct/:id" component={AdminNewProductPage} />
   </Route>
 
 );
