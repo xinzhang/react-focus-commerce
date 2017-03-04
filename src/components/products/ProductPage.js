@@ -14,7 +14,7 @@ class ProductPage extends React.Component {
 
     render() {
       return (
-        <ProductDetail product={this.props.product} relatedProducts={this.props.relatedProducts}/>        
+        <ProductDetail product={this.props.product} relatedProducts={this.props.relatedProducts}/>
       );
     }
 }
@@ -30,7 +30,7 @@ function mapStateToProps(state, ownProps) {
   let relatedProducts = [];
 
   if (prodId && state.products.length > 0) {
-      product = Object.assign({}, state.products.find(b => b.id == prodId));
+      product = Object.assign({}, state.products.find(b => b._id == prodId));
   }
 
   if (prodId && state.relatedProducts.length > 0) {

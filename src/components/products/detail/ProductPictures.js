@@ -24,9 +24,9 @@ class ProductPictures extends React.Component {
     render() {
 
       var pictures = [];
-      for (let i=1; i<this.props.product.slider_pic_count+1; i++) {
-        let largePicUrl=this.props.product.slider_pic_large_url.replace("%d", i);
-        let smallPicUrl=this.props.product.slider_pic_small_url.replace("%d", i);
+      for (let i=0; i<this.props.product.slider_pic_count; i++) {
+        let largePicUrl=this.props.product.slider_pic_large_url[i];
+        let smallPicUrl=this.props.product.slider_pic_small_url[i];
         let title=this.props.product.name;
 
         pictures.push(
