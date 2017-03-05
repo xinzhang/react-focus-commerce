@@ -27,22 +27,7 @@ class AdminNewProduct extends React.Component {
     });
 
     this.state = {
-      product : {
-          id: -1,
-          name: '',
-          pic_url:'',
-          desc:'',
-          price:'',
-          tax:'',
-          rating: 0,
-          category:'',
-          subcategory: '',
-          pic_small_url:'',
-          slider_pic_small_url:[],
-          slider_pic_small_ids:[],
-          slider_pic_large_url:[],
-          slider_pic_large_ids:[]
-      },
+      product :this.props.product,
       canSubmit: false
     }
 
@@ -223,6 +208,7 @@ class AdminNewProduct extends React.Component {
   render() {
       console.log('admin new product render');
       console.log(this.state);
+      console.log(this.props.product);
       return (
         <div className="row">
           { this.renderTitle(this.state.product) }

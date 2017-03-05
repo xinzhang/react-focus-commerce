@@ -18,20 +18,21 @@ class AdminNewProductPage extends React.Component {
     constructor(props) {
       super(props);
 
-      this.submitNewProduct = this.submitNewProduct.bind(this);
-      this.submitUpdateProduct = this.submitUpdateProduct.bind(this);
+      this.submitProduct = this.submitProduct.bind(this);
       this.goBack = this.goBack.bind(this);
     }
 
-    submitNewProduct(prod) {
-      console.log('AdminNewProductPage submitNewProduct');
+    submitProduct(prod) {
+      console.log('AdminNewProductPage submitProduct');
       console.log(prod);
-      this.props.actions.addAdminProduct(prod);
-      this.context.router.push('/admin/products');
-    }
 
-    submitUpdateProduct(prod) {
-      this.props.actions.updateAdminProduct(prod);
+      if (prod._id == undefined) {
+        this.props.actions.addAdminProduct(prod);
+      }
+      else {
+        this.props.actions.updateAdminProduct(prod);
+      }
+
       this.context.router.push('/admin/products');
     }
 
@@ -42,19 +43,14 @@ class AdminNewProductPage extends React.Component {
     render() {
       console.log('admin new product page');
       console.log(this.props.params.id);
-
+      console.log(this.props.product);
       return (
         <div className="row">
           <div className="col-sm-3 hidden-xs column-left" id="column-left">
             <CategoryCard />
           </div>
           <div className="col-sm-9" id="content">
-            { this.props.params.id === undefined &&
-              <AdminNewProduct account={this.props.account} submit={this.submitNewProduct} product={this.props.product} goBack={this.goBack} />
-            }
-            { this.props.params.id &&
-              <AdminNewProduct account={this.props.account} submit={this.submitUpdateProduct} product={this.props.product} goBack={this.goBack}/>
-            }
+            <AdminNewProduct account={this.props.account} submit={this.submitProduct} product={this.props.product} goBack={this.goBack}/>
           </div>
         </div>
       );

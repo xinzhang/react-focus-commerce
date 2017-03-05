@@ -170,21 +170,25 @@ router.post('/admin/products/new', function(req, res, next){
   })
 });
 
-router.post('/admin/product/update', function(req, res, next) {
+router.post('/admin/products/update', function(req, res, next) {
 
   let prod = req.body.product;
   let id = prod._id
-  console.log("admin product detail ", reqId);
 
   mongodb.connect(dbUrl, function(err, db){
       var collection = db.collection('products');
-      collection.update({_id: id }, function(err, results){
+      collection.update({_id: id }, prod, function(err, results){
         if (err) {
           res.status(500).send(err.errorMessage);
         }
+
         if (results.length == 0){
           res.status(404).send("not found");
         }
+
+        console.log('succeed');
+        console.log(results[0]);
+
         res.status(200).send(results[0]);
       }) //end find
   })
