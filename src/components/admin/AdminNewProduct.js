@@ -205,10 +205,11 @@ class AdminNewProduct extends React.Component {
       return <h1>New product</h1>
   }
 
+    
   render() {
       console.log('admin new product render');
       console.log(this.state);
-      console.log(this.props.product);
+      console.log(this.props.categories);
       return (
         <div className="row">
           { this.renderTitle(this.state.product) }
@@ -237,7 +238,20 @@ class AdminNewProduct extends React.Component {
                     <textarea rows="5"  value={this.state.product.desc} className="form-control" id="input-description" placeholder="Product Description"  name="desc" onChange={this.updateProductState}  />
                 </div>
             </div>
-
+            <div className="form-group">
+                <label htmlFor="input-description" className="col-sm-2 control-label">Category</label>
+                <div className="col-sm-10">
+                  <select name="category" id="category" className="form-control" value={this.state.product.category}>
+                    <option value=""> -- Please select an option --</option>
+                    {this.props.categories.map( (cat, i) => {
+                      return (
+                        <option key={cat.name} value={cat.name}>
+                          {cat.name}
+                        </option>)
+                    }) }
+                  </select>
+                </div>
+            </div>
             <div className="form-group">
               <label htmlFor="input-description" className="col-sm-2 control-label">Main Picture</label>
               <div className="col-sm-10">

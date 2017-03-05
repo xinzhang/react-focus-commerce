@@ -177,7 +177,8 @@ router.post('/admin/products/update', function(req, res, next) {
 
   mongodb.connect(dbUrl, function(err, db){
       var collection = db.collection('products');
-      collection.update({_id: id }, prod, function(err, results){
+      console.log(prod);
+      collection.update( {_id:id }, prod, function(err, results){
         if (err) {
           res.status(500).send(err.errorMessage);
         }

@@ -50,7 +50,11 @@ class AdminNewProductPage extends React.Component {
             <CategoryCard />
           </div>
           <div className="col-sm-9" id="content">
-            <AdminNewProduct account={this.props.account} submit={this.submitProduct} product={this.props.product} goBack={this.goBack}/>
+            <AdminNewProduct account={this.props.account}
+              submit={this.submitProduct}
+              product={this.props.product}
+              categories={this.props.categories}
+              goBack={this.goBack}/>
           </div>
         </div>
       );
@@ -86,6 +90,7 @@ function mapStateToProps(state, ownProps) {
 
   return {
     account: state.account,
+    categories: state.categories,
     product: prod
   }
 
