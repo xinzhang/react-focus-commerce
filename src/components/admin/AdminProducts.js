@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ProductGrid from 'react-data-grid';
 
 class AdminProducts extends React.Component {
@@ -8,7 +8,7 @@ class AdminProducts extends React.Component {
   constructor(props) {
       super(props);
       this.rowGetter = this.rowGetter.bind(this);
-
+      this.onRowClick = this.onRowClick.bind(this);
       //no need to use state for now
       // this.state = {
       //   rows: []
@@ -23,15 +23,21 @@ class AdminProducts extends React.Component {
     ];
   }
 
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   rowGetter(i) {
-    console.log('rowgetter ' + i);
     return this.props.products[i];
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.setState({
-    //   rows: nextProps.products
-    // })
+  }
+
+  onRowClick(rowIdx, row) {
+      console.log(rowIdx);
+      console.log(row);
+      this.context.router.push('/admin/editproduct/' + row._id);
   }
 
   render() {
@@ -41,6 +47,7 @@ class AdminProducts extends React.Component {
         columns={this.cols}
         rowGetter={this.rowGetter}
         rowsCount={this.props.products.length}
+        onRowClick={this.onRowClick}
         minHeight={500}
         />
     );

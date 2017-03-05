@@ -20,10 +20,7 @@ class AdminNewProductPage extends React.Component {
 
       this.submitNewProduct = this.submitNewProduct.bind(this);
       this.submitUpdateProduct = this.submitUpdateProduct.bind(this);
-
-      if (this.props.params.id) {
-        this.props.actions.editAdminProduct(this.props.params.id);
-      }
+      this.goBack = this.goBack.bind(this);
     }
 
     submitNewProduct(prod) {
@@ -33,7 +30,19 @@ class AdminNewProductPage extends React.Component {
       this.context.router.push('/admin/products');
     }
 
+    submitUpdateProduct(prod) {
+      this.props.actions.updateAdminProduct(prod);
+      this.context.router.push('/admin/products');
+    }
+
+    goBack() {
+      this.context.router.push('/admin/products');
+    }
+
     render() {
+      console.log('admin new product page');
+      console.log(this.props.params.id);
+
       return (
         <div className="row">
           <div className="col-sm-3 hidden-xs column-left" id="column-left">
@@ -41,10 +50,10 @@ class AdminNewProductPage extends React.Component {
           </div>
           <div className="col-sm-9" id="content">
             { this.props.params.id === undefined &&
-              <AdminNewProduct account={this.props.account} submit={this.submitNewProduct} />
+              <AdminNewProduct account={this.props.account} submit={this.submitNewProduct} product={this.props.product} goBack={this.goBack} />
             }
             { this.props.params.id &&
-              <AdminNewProduct account={this.props.account} submit={this.submitUpdateProduct} />
+              <AdminNewProduct account={this.props.account} submit={this.submitUpdateProduct} product={this.props.product} goBack={this.goBack}/>
             }
           </div>
         </div>
@@ -54,8 +63,34 @@ class AdminNewProductPage extends React.Component {
 
 function mapStateToProps(state, ownProps) {
 
+  let prod = {
+      id: -1,
+      name: '',
+      pic_url:'',
+      desc:'',
+      price:'',
+      tax:'',
+      rating: 0,
+      category:'',
+      subcategory: '',
+      pic_small_url:'',
+      slider_pic_small_url:[],
+      slider_pic_small_ids:[],
+      slider_pic_large_url:[],
+      slider_pic_large_ids:[]
+
+  }
+  const prodId = ownProps.params.id;
+  if (prodId && state.products.length > 0 ) {
+    prod = Object.assign({}, state.products.find(p => p._id == prodId));
+  }
+
+  console.log('admin new product page mapStateToProps');
+  console.log(prod);
+
   return {
-    account: state.account
+    account: state.account,
+    product: prod
   }
 
 }

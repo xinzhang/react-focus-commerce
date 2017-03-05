@@ -13,9 +13,9 @@ var product = {
   "tax":20.0,
   "rating": 2.3,
   "pic_small_url": "/image/product/%dproduct50x59.jpg",
-  "slider_pic_small_url": "/image/product/pro-%d-220x294.jpg",
-  "slider_pic_large_url": "/image/product/product%d.jpg",
-  "slider_pic_count": 7,
+  "slider_pic_small_url": ["/image/product/pro-%d-220x294.jpg"],
+  "slider_pic_large_url": ["/image/product/product%d.jpg"],
+  "slider_pic_count": 1,
   "category":"Eletronics",
   "subcategory":"/Laptops & Notebooks/Macs"
 }

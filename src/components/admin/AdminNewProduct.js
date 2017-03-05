@@ -13,6 +13,10 @@ const CLOUDINARY_UPLOAD_PRESET_220x294 = 'product-aponwybu-220x294';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/xz-cloudinary/upload';
 
 class AdminNewProduct extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   constructor(props, context) {
     super(props, context);
 
@@ -23,12 +27,21 @@ class AdminNewProduct extends React.Component {
     });
 
     this.state = {
-      product: {
-        pic_small_url:'',
-        slider_pic_small_url:[],
-        slider_pic_small_ids:[],
-        slider_pic_large_url:[],
-        slider_pic_large_ids:[]
+      product : {
+          id: -1,
+          name: '',
+          pic_url:'',
+          desc:'',
+          price:'',
+          tax:'',
+          rating: 0,
+          category:'',
+          subcategory: '',
+          pic_small_url:'',
+          slider_pic_small_url:[],
+          slider_pic_small_ids:[],
+          slider_pic_large_url:[],
+          slider_pic_large_ids:[]
       },
       canSubmit: false
     }
@@ -45,7 +58,6 @@ class AdminNewProduct extends React.Component {
     //this.removeSliderPic = this.removeSliderPic.bind(this);
   }
 
-  
 
   submit(data) {
     data.slider_pic_count = this.state.product.slider_pic_small_ids.length;
@@ -173,6 +185,17 @@ class AdminNewProduct extends React.Component {
       });
   }
 
+  //set up state only when props ready
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveprops');
+    console.log(nextProps);
+
+    let product = nextProps.product;
+    this.setState({product: product}, function() {
+      console.log(this.state.product);
+    });
+  }
+
   renderPicture(product) {
     var result = []
     for (let i=0;i<product.slider_pic_small_url.length;i++) {
@@ -188,33 +211,44 @@ class AdminNewProduct extends React.Component {
     return result;
   }
 
+  renderTitle(product) {
+    console.log(product);
+
+    if (product._id !== undefined)
+      return <h1>Edit the product</h1>
+    else
+      return <h1>New product</h1>
+  }
+
   render() {
+      console.log('admin new product render');
+      console.log(this.state);
       return (
         <div className="row">
-          <h1>Add new product</h1>
+          { this.renderTitle(this.state.product) }
           <Formsy.Form className="form-horizontal" onSubmit={this.submit} encType="multipart/form-data" method="post" onValid={this.enableButton} onInvalid={this.disableButton}>
             <div className="form-group required">
                 <label htmlFor="input-prodductname" className="col-sm-2 control-label">Name</label>
                 <div className="col-sm-10">
-                    <MyInput type="text" className="form-control" id="input-prodductname" placeholder="Product Name"  name="name" onChange={this.updateProductState} required />
+                    <MyInput value={this.state.product.name} type="text" className="form-control" id="input-prodductname" placeholder="Product Name"  name="name" onChange={this.updateProductState} required />
                 </div>
             </div>
             <div className="form-group required">
                 <label htmlFor="input-prodductprice" className="col-sm-2 control-label">Price</label>
                 <div className="col-sm-10">
-                    <MyInput type="text" className="form-control" id="input-prodductprice" placeholder="Product Price"  name="price" onChange={this.updateProductState} required />
+                    <MyInput type="text" value={this.state.product.price} className="form-control" id="input-prodductprice" placeholder="Product Price"  name="price" onChange={this.updateProductState} required />
                 </div>
             </div>
             <div className="form-group required">
                 <label htmlFor="input-prodducttax" className="col-sm-2 control-label">Tax</label>
                 <div className="col-sm-10">
-                    <MyInput type="text" className="form-control" id="input-prodducttax" placeholder="Product Tax"  name="tax" onChange={this.updateProductState} required />
+                    <MyInput type="text"  value={this.state.product.tax} className="form-control" id="input-prodducttax" placeholder="Product Tax"  name="tax" onChange={this.updateProductState} required />
                 </div>
             </div>
             <div className="form-group">
                 <label htmlFor="input-description" className="col-sm-2 control-label">Description</label>
                 <div className="col-sm-10">
-                    <textarea rows="5" className="form-control" id="input-description" placeholder="Product Description"  name="desc" onChange={this.updateProductState}  />
+                    <textarea rows="5"  value={this.state.product.desc} className="form-control" id="input-description" placeholder="Product Description"  name="desc" onChange={this.updateProductState}  />
                 </div>
             </div>
 
@@ -226,10 +260,10 @@ class AdminNewProduct extends React.Component {
                       <div>Drop an image or click to select a file to upload.</div>
                   </Dropzone>
                   {this.state.product.pic_small_url === '' ? null :
-                  <div className="img-wrap col-sm-1">
-                    <span className="close" onClick={this.removeProdPic.bind(this)}><i className="fa fa-times"></i></span>
-                    <img src={this.state.product.pic_small_url} />
-                  </div>
+                    <div className="img-wrap col-sm-1">
+                      <span className="close" onClick={this.removeProdPic.bind(this)}><i className="fa fa-times"></i></span>
+                      <img src={this.state.product.pic_small_url} />
+                    </div>
                   }
               </div>
             </div>
@@ -246,8 +280,9 @@ class AdminNewProduct extends React.Component {
             </div>
 
             <div className="buttons">
+                <button type="submit" className="btn btn-default" onClick={this.props.goBack}>Back</button>
                 <div className="pull-right">
-                    <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Continue</button>
+                    <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Submit</button>
                 </div>
             </div>
           </Formsy.Form>
