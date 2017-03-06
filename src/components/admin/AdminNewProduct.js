@@ -5,11 +5,11 @@ import request from 'superagent';
 import MyInput from '../common/formsy/Input';
 import Formsy from 'formsy-react';
 
-import cloudinary from 'cloudinary';
+import SubcategoriesSelect from '../common/SubcategoriesSelect';
 
+import cloudinary from 'cloudinary';
 const CLOUDINARY_UPLOAD_PRESET_50x59 = 'product-qzzxnvvi-50x59';
 const CLOUDINARY_UPLOAD_PRESET_220x294 = 'product-aponwybu-220x294';
-
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/xz-cloudinary/upload';
 
 class AdminNewProduct extends React.Component {
@@ -40,6 +40,8 @@ class AdminNewProduct extends React.Component {
     this.uploadPic = this.uploadPic.bind(this);
     this.uploadSliderPic = this.uploadSliderPic.bind(this);
     this.removeProdPic = this.removeProdPic.bind(this);
+    this.categorySelected = this.categorySelected.bind(this);
+    this.subcategorySelected = this.subcategorySelected.bind(this);
     //this.removeSliderPic = this.removeSliderPic.bind(this);
   }
 
@@ -170,6 +172,21 @@ class AdminNewProduct extends React.Component {
       });
   }
 
+  categorySelected(event) {
+    const prod = this.state.product;
+    prod.category = event.target.value;
+    let subCat = Object.assign({}, this.props.categories.find(x => x.name === event.target.value));
+    this.setState({selectedCateogry: subCat, product: prod});
+  }
+
+  subcategorySelected(val) {
+    console.log('subcategorySelected');
+    console.log(val);
+    const prod = this.state.product;
+    prod.subcategory = val;
+    this.setState({product: prod});
+  }
+
   //set up state only when props ready
   componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveprops');
@@ -205,7 +222,7 @@ class AdminNewProduct extends React.Component {
       return <h1>New product</h1>
   }
 
-    
+
   render() {
       console.log('admin new product render');
       console.log(this.state);
@@ -241,7 +258,9 @@ class AdminNewProduct extends React.Component {
             <div className="form-group">
                 <label htmlFor="input-description" className="col-sm-2 control-label">Category</label>
                 <div className="col-sm-10">
-                  <select name="category" id="category" className="form-control" value={this.state.product.category}>
+                  <select name="category" id="category" className="form-control"
+                    value={this.state.product.category}
+                    onChange={this.categorySelected}>
                     <option value=""> -- Please select an option --</option>
                     {this.props.categories.map( (cat, i) => {
                       return (
@@ -252,6 +271,15 @@ class AdminNewProduct extends React.Component {
                   </select>
                 </div>
             </div>
+            <div className="form-group">
+                <label htmlFor="input-description" className="col-sm-2 control-label">Category</label>
+                <div className="col-sm-10">
+                  <SubcategoriesSelect
+                    category={this.state.selectedCateogry}
+                    subcategorySelected={this.subcategorySelected} />
+                </div>
+            </div>
+
             <div className="form-group">
               <label htmlFor="input-description" className="col-sm-2 control-label">Main Picture</label>
               <div className="col-sm-10">

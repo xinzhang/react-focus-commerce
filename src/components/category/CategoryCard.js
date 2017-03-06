@@ -14,7 +14,7 @@ class CategoryCard extends React.Component {
       return (
         <ul>
           {item.subcategories.map(subItem =>
-            <li><a href="#">{subItem.name}</a>
+            <li key={subItem.name}><a href="#">{subItem.name}</a>
             {subItem.subcategories && subItem.subcategories.length > 0 &&
                 self.getItemLinks(subItem)
             }
@@ -32,7 +32,7 @@ class CategoryCard extends React.Component {
             <div className="category_block">
                 <ul className="box-category treeview-list treeview">
                     {this.props.categories && this.props.categories.map( item =>
-                      <li><a href="#" className="activSub">{item.name}</a>
+                      <li key={item.name}><a href="#" className="activSub">{item.name}</a>
                       {item.subcategories && item.subcategories.length > 0 &&
                           this.getItemLinks(item)
                       }

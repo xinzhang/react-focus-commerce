@@ -18,7 +18,7 @@ class LatestProductCard extends React.Component {
           <h3 className="productblock-title">Latest</h3>
           <div className="row latest-grid product-grid">
           {this.props.products.map(item =>
-              <ProductItem product={item} key={item.id} />
+              <ProductItem product={item} key={item._id} />
           )}
           </div>
         </div>

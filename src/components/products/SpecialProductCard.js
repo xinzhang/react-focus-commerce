@@ -18,7 +18,7 @@ class SpecialProductCard extends React.Component {
           <h3 className="productblock-title">Specials</h3>
           <div className="row special-grid product-grid">
           {this.props.products.map(item =>
-              <ProductItem product={item} key={item.id} />
+              <ProductItem product={item} key={item._id} />
           )}
           </div>
         </div>

@@ -13,9 +13,9 @@ class UserTopMenu extends React.Component {
                     <ul className="main-navigation">
                         <li><Link className="parent" to={'/'}>Home</Link></li>
                         {this.props.categories != undefined && this.props.categories.map(item =>
-                          <li><Link className="parent" to={'/products/list/' + item.name} key={item.name}>{item.name}</Link></li>
+                          <li key={item._id}><Link className="parent" to={'/products/list/' + item.name}>{item.name}</Link></li>
                         )}
-                        <li><Link className="parent" to={'/blog/list'}>Blog</Link></li>
+                        <li><Link className="parent" to={'/blog/list'} key='blog'>Blog</Link></li>
                         <li><a href="about-us.html" >About us</a></li>
                         <li><a href="contact.html" >Contact Us</a> </li>
                     </ul>

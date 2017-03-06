@@ -28,7 +28,7 @@ class ProductsSlider extends React.Component {
             <div className="row product-slider">
             <OwlCarousel id={this.props.sliderType + "-slidertab"} className="owl-carousel" navigation={true} pagination={false} items={4}>
               {this.props.products.map(p =>
-                  <ProductCard product={p} key={p.id} showdesc="false" />
+                  <ProductCard product={p} key={p._id} showdesc="false" />
               )}
             </OwlCarousel>
             </div>
