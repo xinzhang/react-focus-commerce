@@ -30,7 +30,7 @@ class Topbar extends React.Component {
                                     <li className="dropdown"><a href="#" title="My Account" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> <span>Welcome {this.props.account.firstname}</span><span className="caret"></span></a>
                                       <ul className="dropdown-menu dropdown-menu-right">
                                           <li><a href="/account/settings">Settings</a></li>
-                                          <li><a href="/account/logout">Log out</a></li>
+                                          <li><a href="/">Log out</a></li>
                                       </ul>
                                     </li>
                                   }

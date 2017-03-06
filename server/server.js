@@ -8,6 +8,7 @@ var session = require('express-session');
 var blogRoute = require('./routes/blogRoute');
 var productRoute = require('./routes/productRoute');
 var accountRoute = require('./routes/accountRoute');
+var brandRoute = require('./routes/brandRoute');
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -35,6 +36,7 @@ passport(app);
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);
 app.use('/api/', accountRoute);
+app.use('/api/', brandRoute);
 
 app.listen(port);
 console.log('start to listening ' + port);

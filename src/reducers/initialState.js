@@ -4,6 +4,7 @@ export default {
   blogs:[],
   blogcategories:[],
   categories:[],
+  brands:[],
   cart:[
   //   { prod_id:1,
   //     prod_pic:'/image/product/7product50x59.jpg',
@@ -47,5 +48,5 @@ export default {
   },
 
   admin_products:[]
-    
+
 }

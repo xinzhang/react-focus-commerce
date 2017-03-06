@@ -3,6 +3,7 @@ import blogs from './blogReducer';
 import products from './productReducer';
 import cart from './cartReducer';
 import categories from './categoryReducer';
+import brands from './brandReducer';
 import blogcategories from './blogCategoriesReducer';
 
 import relatedProducts from './relatedProductReducer';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   blogs,
   products,
   categories,
+  brands,
   cart,
   blogcategories,
   relatedProducts,

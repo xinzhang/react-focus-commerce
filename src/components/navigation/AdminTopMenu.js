@@ -13,6 +13,7 @@ class AdminTopMenu extends React.Component {
                     <ul className="main-navigation">
                         <li><Link className="parent" to={'/'}>Back to home</Link></li>
                         <li><Link className="parent" to={'/admin/categories'}>Categories</Link></li>
+                        <li><Link className="parent" to={'/admin/brands'}>Brands</Link></li>
                         <li><Link className="parent" to={'/admin/products'}>Products</Link></li>
                         <li><Link className="parent" to={'/admin/users'}>Users</Link></li>
                         <li><Link className="parent" to={'/admin/prices'}>Prices</Link></li>

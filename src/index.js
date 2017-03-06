@@ -15,6 +15,7 @@ import {loadBlogCategories} from './actions/blogActions';
 import {loadProducts} from './actions/productActions';
 import {loadShoppingCart} from './actions/cartActions';
 import {loadCategories} from './actions/categoryActions';
+import {loadBrands} from './actions/brandActions';
 
 // ReactDOM.render(
 //   <App />,
@@ -28,6 +29,7 @@ store.dispatch(loadBlogs());
 store.dispatch(loadBlogCategories());
 store.dispatch(loadCategories());
 store.dispatch(loadProducts());
+store.dispatch(loadBrands());
 
 //store.dispatch(loadShoppingCart());
 ReactDOM.render(

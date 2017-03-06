@@ -35,8 +35,6 @@ class AdminProducts extends React.Component {
   }
 
   onRowClick(rowIdx, row) {
-      console.log(rowIdx);
-      console.log(row);
       this.context.router.push('/admin/editproduct/' + row._id);
   }
 
