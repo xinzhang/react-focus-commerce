@@ -4,6 +4,7 @@ var router = express.Router();
 var path = require('path');
 
 var mongodb = require('mongodb').MongoClient;
+var objectID = require('mongodb').ObjectID;
 var dbUrl = 'mongodb://localhost:27017/focus-commerce';
 
 function readJSONFile(filename, callback) {
@@ -173,24 +174,17 @@ router.post('/admin/products/new', function(req, res, next){
 router.post('/admin/products/update', function(req, res, next) {
 
   let prod = req.body.product;
-  let id = prod._id
+  let id = objectID(prod._id);
+  prod._id = id;
 
   mongodb.connect(dbUrl, function(err, db){
       var collection = db.collection('products');
-      console.log(prod);
       collection.update( {_id:id }, prod, function(err, results){
         if (err) {
           res.status(500).send(err.errorMessage);
         }
 
-        if (results.length == 0){
-          res.status(404).send("not found");
-        }
-
-        console.log('succeed');
-        console.log(results[0]);
-
-        res.status(200).send(results[0]);
+        res.status(200).send(prod);
       }) //end find
   })
 });

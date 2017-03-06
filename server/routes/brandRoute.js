@@ -4,6 +4,7 @@ var router = express.Router();
 var path = require('path');
 
 var mongodb = require('mongodb').MongoClient;
+var objectID = require('mongodb').ObjectID;
 var dbUrl = 'mongodb://localhost:27017/focus-commerce';
 
 router.get('/brands', function(req, res, next){
@@ -36,7 +37,9 @@ router.post('/admin/brands/update', function(req, res, next) {
       //run update or insert
       brands.map(x=> {
         if (x._id) {
-          collection.update({_id:x._id}, x);
+          var id = objectID(x._id);
+          x._id = id;
+          collection.update({_id:id}, x);
         } else {
           collection.insert(x);
         }

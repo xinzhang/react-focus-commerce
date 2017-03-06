@@ -10,9 +10,9 @@ class AdminProducts extends React.Component {
       this.rowGetter = this.rowGetter.bind(this);
       this.onRowClick = this.onRowClick.bind(this);
       //no need to use state for now
-      // this.state = {
-      //   rows: []
-      // }
+      this.state = {
+         products: []
+      }
   }
 
   createCols() {
@@ -28,10 +28,11 @@ class AdminProducts extends React.Component {
   };
 
   rowGetter(i) {
-    return this.props.products[i];
+    return this.state.products[i];
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({products: nextProps.products});
   }
 
   onRowClick(rowIdx, row) {
@@ -44,7 +45,7 @@ class AdminProducts extends React.Component {
       <ProductGrid
         columns={this.cols}
         rowGetter={this.rowGetter}
-        rowsCount={this.props.products.length}
+        rowsCount={this.state.products.length}
         onRowClick={this.onRowClick}
         minHeight={500}
         />
