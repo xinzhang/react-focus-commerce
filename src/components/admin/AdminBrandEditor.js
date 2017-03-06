@@ -9,7 +9,7 @@ class AdminBrandEditor extends React.Component {
       this.state = {
         rows: this.props.brands
       };
-
+    
       this.rowGetter = this.rowGetter.bind(this);
       this.addBrand = this.addBrand.bind(this);
       this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
@@ -23,8 +23,6 @@ class AdminBrandEditor extends React.Component {
   }
 
   rowGetter(i) {
-    console.log(i);
-    console.log(this.state.rows[i]);
     return this.state.rows[i];
   }
 
@@ -33,8 +31,6 @@ class AdminBrandEditor extends React.Component {
   }
 
   addBrand(){
-    console.log('add brand');
-    console.log(this.state.rows);
 
     let rows = this.state.rows.slice();
     rows.push({name:''})
@@ -44,34 +40,20 @@ class AdminBrandEditor extends React.Component {
   }
 
   handleGridRowsUpdated({ fromRow, toRow, updated }) {
-      console.log('handle updated');
-      console.log(this.state);
-
       let rows = this.state.rows.slice();
       let rowToUpdate = rows[toRow];
       console.log(rowToUpdate);
 
       let updatedRow = Object.assign({}, rowToUpdate, updated);
       rows[toRow] = updatedRow;
-      console.log(updatedRow);
+
       this.setState({ rows });
-
-      // for (let i = fromRow; i <= toRow; i++) {
-      //   let rowToUpdate = rows[i];
-      //   let updatedRow = React.addons.update(rowToUpdate, {$merge: updated});
-      //   rows[i] = updatedRow;
-      // }
-
-      // var array1 = this.state.rows.slice(0, toRow);
-      // var array2 = this.state.rows.slice(toRow, this.state.rows.length)
-      // var merged = Object.assign([], [...array1], [updated], [...array2]);
-      // //this.state.rows[toRow]= updated;
-      // this.setState({ rows: merged }, function() {
-      //   console.log(this.state);
-      // });
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({
+      rows: nextProps.brands
+    });
   }
 
   render() {

@@ -16,7 +16,18 @@ class AdminBrandsPage extends React.Component {
   }
 
   save(data) {
-    this.props.actions.updateAdminBrands(data);
+    var changeTracking = [];
+    data.map(x => {
+      if (x._id) {
+          let a = this.props.brands.find(y => y._id=== x._id)
+          if (a==undefined || a.name !==x.name) {
+            changeTracking.push(x);
+          }
+      } else {
+        changeTracking.push(x)
+      }
+    })
+    this.props.actions.updateAdminBrands(changeTracking);
   }
     render() {
 
@@ -26,7 +37,7 @@ class AdminBrandsPage extends React.Component {
 
           </div>
           <div className="col-sm-7" id="content">
-            <AdminBrandEditor brands={this.state.brands} onSave={this.save}/>
+            <AdminBrandEditor brands={this.props.brands} onSave={this.save}/>
           </div>
         </div>
       );
@@ -34,7 +45,7 @@ class AdminBrandsPage extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('adminbrands');
+  console.log('Admin Brands Page: admin brands');
   console.log(state);
 
   let brands = [];

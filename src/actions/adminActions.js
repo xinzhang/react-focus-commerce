@@ -14,6 +14,7 @@ export function getAdminProducts() {
 }
 
 export function getAdminProductsSuccess(products) {
+  console.log('getAdminProductsSuccess');
   return {type: types.LOAD_ADMIN_PRODUCTS_SUCESS, admin_products: products}
 }
 
@@ -71,9 +72,11 @@ export function updateAdminBrands(brands) {
 }
 
 export function updateAdminBrandsSuccess(data) {
-  return {type: types.UPDATE_ADMIN_BRANDS_SUCESS, brands: data}
+  console.log('return update brands success');
+  return {type: types.UPDATE_ADMIN_BRANDS_SUCCESS, brands: data}
 }
 
 export function updateAdminBrandsFailure(error) {
+  console.log('return udpate brands failure');
   return {type: types.UPDATE_ADMIN_BRANDS_FAILURE, error: "update admin brands failure"}
 }

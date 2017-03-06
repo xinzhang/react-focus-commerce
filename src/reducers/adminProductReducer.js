@@ -2,6 +2,7 @@ import * as types from '../actions/adminActionTypes';
 import initialState from './initialState';
 
 export default function adminProductReducer(state = initialState.admin_products, action) {
+    
   switch (action.type) {
 
     case types.LOAD_ADMIN_PRODUCTS_SUCESS:
