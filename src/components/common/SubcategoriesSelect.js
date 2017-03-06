@@ -21,23 +21,23 @@ class SubcategoriesSelect extends React.Component {
   }
 
   onChange(value) {
-        console.log('onChange', arguments);
+
         this.setState({ value });
   }
 
   onChangeChildren(value) {
-      console.log('onChangeChildren', arguments);
+
   }
 
   onSelect() {
     // use onChange instead
-    console.log('onSelect', arguments);
+
     this.setState({value: arguments[0]});
     this.props.subcategorySelected(arguments[0]);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('subcategory select componentWillReceiveProps');
+
     let result = [];
 
     if (nextProps.category) {
@@ -51,11 +51,11 @@ class SubcategoriesSelect extends React.Component {
           value:nextProps.value,
           currentCategory: nextProps.category.name
         }, function() {
-          console.log(this.state);
+          
         })
       }
     }
-    
+
   }
 
   convertToTreeDataSource(category) {

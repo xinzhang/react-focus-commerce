@@ -50,9 +50,6 @@ class AdminNewProduct extends React.Component {
     data.slider_pic_count = this.state.product.slider_pic_small_ids.length;
     data.rating = 0;
     let o = Object.assign({}, this.state.product, data);
-
-    console.log('admin new product call submit()');
-    console.log(o);
     this.props.submit(o);
   }
 
@@ -95,7 +92,7 @@ class AdminNewProduct extends React.Component {
   }
 
   uploadSliderPic(f, preset, property, idsProperty){
-    console.log(f);
+
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
                      .field('upload_preset', preset)
                      .field('file', f);
@@ -133,11 +130,9 @@ class AdminNewProduct extends React.Component {
   }
 
   removeSliderPic(idx) {
-    console.log("remove pic");
 
     let prod = this.state.product;
     let ref = this;
-    console.log(prod);
 
     let small_pubid = prod.slider_pic_small_ids[idx];
     let large_pubid = prod.slider_pic_large_ids[idx];
@@ -145,7 +140,7 @@ class AdminNewProduct extends React.Component {
     cloudinary.uploader.destroy(small_pubid, function(result) {
       prod.slider_pic_small_url.splice(idx, 1);
       prod.slider_pic_small_ids.splice(idx, 1);
-      console.log(prod);
+
       ref.setState({
         product: prod
       });
@@ -181,8 +176,6 @@ class AdminNewProduct extends React.Component {
   }
 
   subcategorySelected(val) {
-    console.log('subcategorySelected');
-    console.log(val);
     const prod = this.state.product;
     prod.subcategory = val;
     this.setState({product: prod});
@@ -190,14 +183,9 @@ class AdminNewProduct extends React.Component {
 
   //set up state only when props ready
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveprops');
-    console.log(nextProps);
-
     let product = nextProps.product;
     let cat = Object.assign({}, this.props.categories.find(x => x.name === product.category));
-    this.setState({selectedCateogry: cat, product: product}, function() {
-      console.log(this.state.product);
-    });
+    this.setState({selectedCateogry: cat, product: product});
   }
 
   renderPicture(product) {
@@ -216,8 +204,6 @@ class AdminNewProduct extends React.Component {
   }
 
   renderTitle(product) {
-    console.log(product);
-
     if (product._id !== undefined)
       return <h1>Edit the product</h1>
     else
@@ -226,9 +212,6 @@ class AdminNewProduct extends React.Component {
 
 
   render() {
-      console.log('admin new product render');
-      console.log(this.state);
-      console.log(this.props.categories);
       return (
         <div className="row">
           { this.renderTitle(this.state.product) }

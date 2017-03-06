@@ -13,6 +13,14 @@ class AdminNewProductPage extends React.Component {
   };
 
     componentDidMount() {
+      console.log('component did mount');
+      console.log(this.props.params);
+
+      const prodId = this.props.params.id;
+      if (prodId && this.props.product.id === -1 ) {
+        console.log('load admin products');
+        this.props.actions.getAdminProducts();
+      }
     }
 
     constructor(props) {
@@ -41,9 +49,6 @@ class AdminNewProductPage extends React.Component {
     }
 
     render() {
-      console.log('admin new product page');
-      console.log(this.props.params.id);
-      console.log(this.props.product);
       return (
         <div className="row">
           <div className="col-sm-3 hidden-xs column-left" id="column-left">
@@ -82,8 +87,8 @@ function mapStateToProps(state, ownProps) {
 
   }
   const prodId = ownProps.params.id;
-  if (prodId && state.products.length > 0 ) {
-    prod = Object.assign({}, state.products.find(p => p._id == prodId));
+  if (prodId && state.admin_products.length > 0 ) {
+    prod = Object.assign({}, state.admin_products.find(p => p._id == prodId));
   }
 
   console.log('admin new product page mapStateToProps');
