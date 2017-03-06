@@ -1,5 +1,6 @@
 import * as types from './adminActionTypes';
 import adminProductApi from '../api/AdminProductApi';
+import brandApi from '../api/BrandApi';
 
 export function getAdminProducts() {
   return function(dispatch) {
@@ -56,4 +57,23 @@ export function updateAdminProductSuccess(data) {
 
 export function updateAdminProductFailure(error) {
   return {type: types.UPDATE_ADMIN_PRODUCTS_FAILURE, error: "update admin product failure"}
+}
+
+export function updateAdminBrands(brands) {
+  return function(dispatch) {
+    return brandApi.updateBrands(brands).then(data => {
+      dispatch(updateAdminBrandsSuccess(data));
+    }).catch(error => {
+      dispatch(updateAdminBrandsFailure(error));
+      throw(error);
+    });
+  }
+}
+
+export function updateAdminBrandsSuccess(data) {
+  return {type: types.UPDATE_ADMIN_BRANDS_SUCESS, brands: data}
+}
+
+export function updateAdminBrandsFailure(error) {
+  return {type: types.UPDATE_ADMIN_BRANDS_FAILURE, error: "update admin brands failure"}
 }

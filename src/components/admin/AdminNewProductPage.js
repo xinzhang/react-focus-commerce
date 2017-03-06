@@ -54,6 +54,7 @@ class AdminNewProductPage extends React.Component {
               submit={this.submitProduct}
               product={this.props.product}
               categories={this.props.categories}
+              brands={this.props.brands}
               goBack={this.goBack}/>
           </div>
         </div>
@@ -91,6 +92,7 @@ function mapStateToProps(state, ownProps) {
   return {
     account: state.account,
     categories: state.categories,
+    brands: state.brands,
     product: prod
   }
 

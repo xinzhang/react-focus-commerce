@@ -12,5 +12,5 @@ export function loadBrands(id) {
 }
 
 export function loadBrandsSuccess(brands) {
-  return {type: types.LOAD_Brands_SUCESS, brands}
+  return {type: types.LOAD_BRANDS_SUCESS, brands}
 }

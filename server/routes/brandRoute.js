@@ -26,4 +26,27 @@ router.get('/brands', function(req, res, next){
   })
 });
 
+router.post('/admin/brands/update', function(req, res, next) {
+
+  let brands = req.body.brands;
+
+  mongodb.connect(dbUrl, function(err, db){
+      var collection = db.collection('brands');      
+      // collection.update( {_id:id }, prod, function(err, results){
+      //   if (err) {
+      //     res.status(500).send(err.errorMessage);
+      //   }
+      //
+      //   if (results.length == 0){
+      //     res.status(404).send("not found");
+      //   }
+      //
+      //   console.log('succeed');
+      //   console.log(results[0]);
+      //
+      //   res.status(200).send(results[0]);
+      // }) //end find
+      res.status(200).send(brands);
+  })
+});
 module.exports = router;

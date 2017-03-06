@@ -175,8 +175,9 @@ class AdminNewProduct extends React.Component {
   categorySelected(event) {
     const prod = this.state.product;
     prod.category = event.target.value;
-    let subCat = Object.assign({}, this.props.categories.find(x => x.name === event.target.value));
-    this.setState({selectedCateogry: subCat, product: prod});
+    prod.subcategory = event.target.value;
+    let cat = Object.assign({}, this.props.categories.find(x => x.name === event.target.value));
+    this.setState({selectedCateogry: cat, product: prod});
   }
 
   subcategorySelected(val) {
@@ -193,7 +194,8 @@ class AdminNewProduct extends React.Component {
     console.log(nextProps);
 
     let product = nextProps.product;
-    this.setState({product: product}, function() {
+    let cat = Object.assign({}, this.props.categories.find(x => x.name === product.category));
+    this.setState({selectedCateogry: cat, product: product}, function() {
       console.log(this.state.product);
     });
   }
@@ -204,7 +206,7 @@ class AdminNewProduct extends React.Component {
       let url = product.slider_pic_small_url[i];
       let id = product.slider_pic_small_ids[i];
       result.push(
-        <div className="img-wrap col-sm-1">
+        <div className="img-wrap col-sm-1" key={'pic_idx_'+i}>
           <span className="close" onClick={this.removeSliderPic.bind(this, i)}><i className="fa fa-times"></i></span>
           <img src={url} />
         </div>
@@ -256,6 +258,22 @@ class AdminNewProduct extends React.Component {
                 </div>
             </div>
             <div className="form-group">
+                <label htmlFor="input-description" className="col-sm-2 control-label">Brand</label>
+                <div className="col-sm-10">
+                  <select name="brand" id="brand" className="form-control"
+                    value={this.state.product.brand}
+                    onChange={this.updateProductState}>
+                    <option value=""> -- Please select an option --</option>
+                    {this.props.brands.map( (cat, i) => {
+                      return (
+                        <option key={cat.name} value={cat.name}>
+                          {cat.name}
+                        </option>)
+                    }) }
+                  </select>
+                </div>
+            </div>
+            <div className="form-group">
                 <label htmlFor="input-description" className="col-sm-2 control-label">Category</label>
                 <div className="col-sm-10">
                   <select name="category" id="category" className="form-control"
@@ -276,6 +294,7 @@ class AdminNewProduct extends React.Component {
                 <div className="col-sm-10">
                   <SubcategoriesSelect
                     category={this.state.selectedCateogry}
+                    value={this.state.product.subcategory}
                     subcategorySelected={this.subcategorySelected} />
                 </div>
             </div>

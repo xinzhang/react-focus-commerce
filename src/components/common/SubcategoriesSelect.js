@@ -8,9 +8,10 @@ class SubcategoriesSelect extends React.Component {
 
     this.state = {
       currentCategory:'',
-      inputvalue:'',
+      inputValue:'',
       value:'',
       tsOpen: false,
+      treeDataSource:[],
     }
 
     //this.onSearch = this.onSearch.bind(this);
@@ -36,26 +37,28 @@ class SubcategoriesSelect extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps');
+    console.log('subcategory select componentWillReceiveProps');
     let result = [];
 
     if (nextProps.category) {
-      if (this.state.currentCategory !== nextProps.category.name) {
+      if (this.state.currentCategory !== nextProps.category.name || this.state.currentCategory == undefined) {
         let obj = this.convertToTreeDataSource(nextProps.category);
         result.push(obj);
+
         this.setState({
           treeDataSource:result,
           inputValue:nextProps.category.name,
+          value:nextProps.value,
           currentCategory: nextProps.category.name
+        }, function() {
+          console.log(this.state);
         })
       }
     }
-
+    
   }
 
   convertToTreeDataSource(category) {
-    console.log('convertToTreeDataSource');
-    console.log(category);
 
     let obj = {};
     obj.label = category.name;

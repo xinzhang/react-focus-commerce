@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as brandActions from '../../actions/brandActions';
+import * as adminActions from '../../actions/adminActions';
+
 
 import AdminBrandEditor from './AdminBrandEditor';
 
@@ -11,8 +12,12 @@ class AdminBrandsPage extends React.Component {
       this.state = {
         brands:[]
       }
+      this.save = this.save.bind(this);
   }
 
+  save(data) {
+    this.props.actions.updateAdminBrands(data);
+  }
     render() {
 
       return (
@@ -21,7 +26,7 @@ class AdminBrandsPage extends React.Component {
 
           </div>
           <div className="col-sm-7" id="content">
-            <AdminBrandEditor brands={this.state.brands} />
+            <AdminBrandEditor brands={this.state.brands} onSave={this.save}/>
           </div>
         </div>
       );
@@ -45,7 +50,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(brandActions, dispatch)
+    actions: bindActionCreators(adminActions, dispatch)
   };
 }
 
