@@ -35,13 +35,10 @@ class AdminBrandsPage extends React.Component {
         <AdminBrandEditor brands={this.props.brands} onSave={this.save}/>
       );
     }
-    
+
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('Admin Brands Page: admin brands');
-  console.log(state);
-
   let brands = [];
   if (state.brands.length > 0) {
     brands = Object.assign([], [...state.brands]);
