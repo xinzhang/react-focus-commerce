@@ -10,9 +10,7 @@ class AccountPage extends React.Component {
             <AccountSidebar />
           </div>
           <div className="col-sm-9" id="content">
-
-              {this.props.children}
-            
+              {this.props.children}            
           </div>
         </div>
       );

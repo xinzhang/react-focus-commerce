@@ -28,7 +28,7 @@ class AdminProductsPage extends React.Component {
       return (
         <div className="row">
           <div className="col-sm-3 hidden-xs column-left" id="column-left">
-            <CategoryCard />
+              <CategoryCard />
           </div>
           <div className="col-sm-9" id="content">
               <button type="submit" className="btn btn-primary" onClick={this.gotoAddNewProduct}><i className="fa fa-plus-square"></i> New Product</button>

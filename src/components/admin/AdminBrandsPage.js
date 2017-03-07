@@ -29,19 +29,13 @@ class AdminBrandsPage extends React.Component {
     })
     this.props.actions.updateAdminBrands(changeTracking);
   }
+
     render() {
-
       return (
-        <div className="row">
-          <div className="col-sm-5 hidden-xs column-left" id="column-left">
-
-          </div>
-          <div className="col-sm-7" id="content">
-            <AdminBrandEditor brands={this.props.brands} onSave={this.save}/>
-          </div>
-        </div>
+        <AdminBrandEditor brands={this.props.brands} onSave={this.save}/>
       );
     }
+    
 }
 
 function mapStateToProps(state, ownProps) {
