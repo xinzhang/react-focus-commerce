@@ -34,61 +34,48 @@ class CategoriesEdit extends React.Component {
 
     renderTree(c){
       console.log('renderTree');
-        let styles = this.constructor.styles;
-
+        
         return(
-          <ul style={styles.treeUl} onClick={ () => this.hideshow(c)}>
-            <li style={styles.treeLi} key={c.name}><div style={styles.treeDiv}>{c.name}</div></li>
-            {c.subcategories && c.subcategories.length > 0 && c.status === 'expand' &&
-              c.subcategories.map(x => {
-                return this.renderTree(x);
-              })
-            }
-          </ul>
+          <ul className="asTree">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>
+        <input type="checkbox" hidden id="treeExp_3" />
+        <label for="treeExp_3">item 3</label>
+        <ul>
+            <li>item 3.1</li>
+            <li>
+                <input type="checkbox" hidden id="treeExp_3_2" />
+                <label for="treeExp_3_2">item 3.2</label>
+                <ul>
+                    <li>item 3.2.1</li>
+                    <li>item 3.2.2</li>
+                </ul>
+            </li>
+            <li>item 3.3</li>
+        </ul>
+    </li>
+    <li>
+        <input type="checkbox" hidden id="treeExp_4" />
+        <label for="treeExp_4">item 4</label>
+        <ul>
+            <li>item 4.1</li>
+            <li>item 4.2</li>
+        </ul>
+    </li>
+</ul>
         )
     }
 
     render() {
       console.log(this.state.categories);
       return (
-          <div style={this.constructor.styles.treeDiv}>
+          <div>
             {this.state.categories.map(c => {
-              c.status = 'expand';
               return this.renderTree(c)
             })}
           </div>
       );
-    }
-}
-
-CategoriesEdit.styles = {
-    treeUl:{
-      display: 'listItem !important',
-      listStyle:"none",
-      float: "left",
-      width: '100%',
-    },
-
-    treeLi: {
-      display: 'listItem !important',
-      paddingTop:"10px",
-      float: "left",
-      width: '100%',
-    },
-
-    treeDiv: {
-      float:"left"
-    },
-
-    treeExpand : {
-      width:'15px',
-      height:'15px'
-    },
-
-    treeCollapse: {
-      width:'15px',
-      height:'15px',
-      display:'none'
     }
 }
 
