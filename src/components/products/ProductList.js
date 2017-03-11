@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import * as actions from '../../actions/productActions';
 
 import ListFilter from './ListFilter';
 import ListPager from './ListPager';
@@ -8,6 +9,15 @@ import ProductCard from './ProductCard';
 import CategoryBanner from '../category/CategoryBanner';
 
 class ProductList extends React.Component {
+
+    constructor(props) {
+      super(props);
+
+      let title = this.props.params.category;
+      if (title !== '') {
+        this.props.actions.loadProductsByCategory(title);
+      }
+    }
 
     render() {
 
@@ -20,7 +30,7 @@ class ProductList extends React.Component {
           <br />
           <div className="grid-list-wrapper">
             {this.props.products.map(item =>
-              <div className="product-layout product-grid col-lg-3 col-md-4 col-sm-6 col-xs-12">
+              <div key={item._id} className="product-layout product-grid col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <ProductCard product={item} key={item._id} />
               </div>
             )}
@@ -42,4 +52,10 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(ProductList);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

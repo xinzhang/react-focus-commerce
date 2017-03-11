@@ -86,3 +86,13 @@ export function loadProductDetail(id) {
 export function loadProductDetailSuccess(product) {
   return {type: types.LOAD_Product_DETAIL_SUCESS, product}
 }
+
+export function loadProductsByCategory(category) {
+  return function(dispatch) {
+    return ProductApi.getProductsByCategory(category).then(data => {
+      dispatch(loadProductsSuccess(data));
+    }).catch(error => {
+      throw(error);
+    });
+  }
+}

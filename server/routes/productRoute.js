@@ -49,6 +49,30 @@ router.get('/products/:pageno', function(req, res, next) {
   })
 });
 
+router.get('/products/category/:category', function(req, res, next) {
+
+  cat = req.params.category;
+  console.log(cat);
+
+  mongodb.connect(dbUrl, function(err, db){
+      var collection = db.collection('products');
+      collection.find({category: cat}, function(err, results){
+        if (err) {
+          res.status(500).send(err.errorMessage)
+        }
+        var prods = [];
+        results.each( function(err, item){
+          if (err || !item) {
+            res.status(200).send(prods);
+            db.close();
+          }else {
+            prods.push(item);
+          }
+        });
+      }) //end find
+  })
+});
+
 router.get('/relatedproducts/:id', function(req, res, next) {
     readJSONFile(productJsonPath, function (err, data) {
     if(err) { throw err; }
