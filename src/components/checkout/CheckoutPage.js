@@ -23,6 +23,7 @@ class CheckoutPage extends React.Component {
       this.setState({
         currentStep : step
       })
+      
     }
 
     render() {

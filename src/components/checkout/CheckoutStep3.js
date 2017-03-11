@@ -1,4 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as accountActions from '../../actions/accountActions';
 import CountryList from '../common/CountryList';
 import PaymentZoneList from '../common/PaymentZoneList';
 

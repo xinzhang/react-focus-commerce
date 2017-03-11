@@ -1,4 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as accountActions from '../../actions/accountActions';
+
 import CountryList from '../common/CountryList';
 import PaymentZoneList from '../common/PaymentZoneList';
 
@@ -27,6 +31,9 @@ class CheckoutStep2 extends React.Component {
       this.props.updateStep(3);
     }
 
+    componentWillReceiveProps(nextProps) {
+    }
+
     render() {
       return (
         <div className="panel panel-default">
@@ -38,12 +45,16 @@ class CheckoutStep2 extends React.Component {
               <form className="form-horizontal">
                 <div className="radio">
                   <label>
-                    <input type="radio" checked={this.state.payment_address === 'existing'}  value="existing" name="payment_address" data-id="payment-existing" onChange={this.onAddressChanged} />
+                    <input type="radio" checked={this.state.payment_address === 'existing'}
+                      value="existing" name="payment_address" data-id="payment-existing"
+                      onChange={this.onAddressChanged} />
                     I want to use an existing address</label>
                 </div>
                 <div id="payment-existing">
                   <select className="form-control" name="address_id">
-                    <option selected="selected" value="4">22 Fizroy St, New town, NSW</option>
+                    <option selected="selected" value="4">
+                      {this.props.account.address.address1}, {this.props.account.address.suburb}, {this.props.account.address.postcode}
+                    </option>
                   </select>
                 </div>
                 <div className="radio">
@@ -123,4 +134,17 @@ class CheckoutStep2 extends React.Component {
     }
 }
 
-export default CheckoutStep2;
+
+function mapStateToProps(state, ownProps) {
+  return {
+    account: state.account
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(accountActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)( CheckoutStep2 );

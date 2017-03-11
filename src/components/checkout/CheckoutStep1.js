@@ -1,4 +1,5 @@
 import React from 'react';
+import LoginComponent from './LoginComponent';
 
 class CheckoutStep1 extends React.Component {
   constructor(props, context) {
@@ -12,7 +13,7 @@ class CheckoutStep1 extends React.Component {
   }
 
     render() {
-      console.log("step 1 render" + this.props.step);
+
       return (
         <div className="panel panel-default">
           <div className="panel-heading">
@@ -37,19 +38,11 @@ class CheckoutStep1 extends React.Component {
                   <p>By creating an account you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.</p>
                   <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-account" value="Continue" onClick={this.nextPanel} />
                 </div>
+
                 <div className="col-sm-6">
-                  <h2>Returning Customer</h2>
-                  <p>I am a returning customer</p>
-                  <div className="form-group">
-                    <label htmlFor="input-email" className="control-label">E-Mail</label>
-                    <input type="text" className="form-control" id="input-email" placeholder="E-Mail" value="" name="email" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="input-password" className="control-label">Password</label>
-                    <input type="password" className="form-control" id="input-password" placeholder="Password" value="" name="password" />
-                    <a href="http://localhost/opc001/index.php?route=account/forgotten">Forgotten Password</a></div>
-                  <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-login" value="Login" />
+                  <LoginComponent />
                 </div>
+
               </div>
             </div>
           </div>
