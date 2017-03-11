@@ -8,9 +8,18 @@ import * as adminActions from '../../actions/adminActions';
 import CategoriesEdit from '../common/CategoriesEdit';
 
 class AdminCategoriesPage extends React.Component {
+    constructor(props) {
+      super(props);
+      this.submit = this.submit.bind(this);
+    }
+
+    submit(categories) {
+      this.props.actions.updateCategories(categories);
+    }
+
     render() {
       return (
-          <CategoriesEdit categories={this.props.categories} />          
+          <CategoriesEdit categories={this.props.categories} submit={this.submit}/>
       );
     }
 }

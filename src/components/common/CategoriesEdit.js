@@ -11,6 +11,11 @@ class CategoriesEdit extends React.Component {
       this.editName = this.editName.bind(this);
       this.findNode = this.findNode.bind(this);
       this.findNodeArray = this.findNodeArray.bind(this);
+      this.submitCategories = this.submitCategories.bind(this);
+    }
+
+    submitCategories() {
+      this.props.submit(this.state.categories);
     }
 
     changestatus(c) {
@@ -98,24 +103,22 @@ class CategoriesEdit extends React.Component {
     renderTree(c, idx){
         //set defualt value
         if (!c.status) {
-          c.status = 'expand';
+          c.status = 'collapse';
         }
 
        return(
          <ul>
-           {c.subcategories && c.subcategories.length > 0 && c.status==="collapse" &&
-             <i className="glyphicon glyphicon-chevron-right" onClick={() => this.changestatus(c)}></i>
-           }
-           {c.subcategories && c.subcategories.length > 0 && c.status==="expand" &&
-             <i className="glyphicon glyphicon-chevron-down" onClick={()=> this.changestatus(c)}></i>
-           }
-
            <li key={c.name}>
+             {c.subcategories && c.subcategories.length > 0 && c.status==="collapse" &&
+               <i className="glyphicon glyphicon-chevron-right" onClick={() => this.changestatus(c)}></i>
+             }
+             {c.subcategories && c.subcategories.length > 0 && c.status==="expand" &&
+               <i className="glyphicon glyphicon-chevron-down" onClick={()=> this.changestatus(c)}></i>
+             }
               {!c.isEdit &&
-                <div>
-                  <div onDoubleClick={()=>this.edit(c)}>{c.name}</div>
-                  <i className="glyphicon glyphicon-plus" onClick={()=>this.addChild(c)}></i>
-                </div>
+                  <span onDoubleClick={()=>this.edit(c)}>{c.name}
+                    <i className="glyphicon glyphicon-plus" onClick={()=>this.addChild(c)}></i>
+                  </span>
               }
               {c.isEdit &&
                 <input type="text" idx={idx} defaultValue={c.name} name={c.name} onKeyDown={this.editName} />
@@ -131,80 +134,25 @@ class CategoriesEdit extends React.Component {
        )
     }
 
+    renderTopTree(c, idx) {
+      let arr = []
+      arr.push(this.renderTree(c, idx));
+      arr.push(<hr />)
+      return arr;
+    }
+
     render() {
       return (
         <div>
           {
-            this.state.categories.map( (c, idx) => this.renderTree(c, idx))
+            this.state.categories.map( (c, idx) => this.renderTopTree(c, idx))
           }
-          <hr />
           <p />
+          <button className="btn btn-submit" onClick={this.submitCategories}>Submit</button>
         </div>
       )
     }
 
-}
-
-CategoriesEdit.tree = {
-  name:'Electric',
-  status:'collapse',
-  subcategories:[
-    {
-      name:'desktop',
-    },
-    {
-      name:'tv',
-    },
-    {
-      name:'console',
-    },
-    {
-      name:'laptops',
-      status:'collapse',
-      subcategories:[{
-        name:'brand',
-        subcategories:[
-          {name:'ibm'},
-          {name:'lenova'},
-          {name:'dell'},
-          {name:'hp'}
-        ]
-      },
-      {
-          name:'memory',
-          status:'collapse',
-          subcategories:[
-            {name:'4g'},
-            {name:'8g'},
-            {name:'16g'}
-          ]
-      },
-      {
-          name:'disk',
-          status:'collapse',
-          subcategories:[
-            {name:'64G'},
-            {name:'128G'},
-            {name:'500G'},
-            {name:'1TB'}
-          ]
-      }
-    ]
-    },
-    {
-      name: 'software',
-      status:'collapse',
-      subcategories:[{
-        name:'office'
-      },{
-        name:'sql server'
-      },{
-        name:'photoshop'
-      },{
-        name:'atom'
-      }]
-    }
-  ]
 }
 
 export default CategoriesEdit;
