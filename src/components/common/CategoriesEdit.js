@@ -10,6 +10,7 @@ class CategoriesEdit extends React.Component {
 
       this.editName = this.editName.bind(this);
       this.findNode = this.findNode.bind(this);
+      this.findNodeParent = this.findNodeParent.bind(this);
       this.findNodeArray = this.findNodeArray.bind(this);
       this.submitCategories = this.submitCategories.bind(this);
     }
@@ -37,9 +38,12 @@ class CategoriesEdit extends React.Component {
     }
 
     edit(c) {
-      console.log('dbl click', c);
-
       c.isEdit = true;
+      this.setState({});
+    }
+
+    cancelEdit(c) {
+      c.isEdit = false;
       this.setState({});
     }
 
@@ -86,6 +90,23 @@ class CategoriesEdit extends React.Component {
       return null;
     }
 
+    findNodeParent(c, name) {
+      let result = null;
+      if (c.subcategories) {
+        for (let i=0; i<c.subcategories.length;i++) {
+          if (c.subcategories[i].name === name) {
+            result = c;
+            c.subcategories.splice(i, 1);
+            break;
+          } else {
+            result = this.findNodeParent(c.subcategories[i], name)
+          }
+        }
+      }//end if
+
+      return result;
+    }
+
     addChild(c) {
       c.status = 'expand';
       if (!c.subcategories) {
@@ -98,6 +119,13 @@ class CategoriesEdit extends React.Component {
       });
 
       this.setState({});
+    }
+
+    remove(c) {
+      this.state.categories.map( (n, idx) => {
+        let found = this.findNodeParent(n, c.name);
+      })
+      this.setState({})
     }
 
     renderTree(c, idx){
@@ -118,10 +146,14 @@ class CategoriesEdit extends React.Component {
               {!c.isEdit &&
                   <span onDoubleClick={()=>this.edit(c)}>{c.name}
                     <i className="glyphicon glyphicon-plus" onClick={()=>this.addChild(c)}></i>
+                    <i className="glyphicon glyphicon-remove" onClick={()=>this.remove(c)}></i>
                   </span>
               }
               {c.isEdit &&
-                <input type="text" idx={idx} defaultValue={c.name} name={c.name} onKeyDown={this.editName} />
+                <span>
+                  <input type="text" idx={idx} defaultValue={c.name} name={c.name} onKeyDown={this.editName} />
+                  <i className="glyphicon glyphicon-repeat" onClick={()=>this.cancelEdit(c)}></i>
+                </span>
               }
            </li>
 

@@ -14,7 +14,7 @@ class AdminCategoriesPage extends React.Component {
     }
 
     submit(categories) {
-      this.props.actions.updateCategories(categories);
+      this.props.actions.updateAdminCategories(categories);
     }
 
     render() {
