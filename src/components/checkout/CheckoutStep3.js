@@ -22,19 +22,24 @@ class CheckoutStep3 extends React.Component {
 
     updateAddress(addr) {
       console.log(addr);
-      this.props.updateOrder(addr);
+      this.setState({
+        shipping: addr
+      }, function() {
+        this.props.updateOrder(this.state);
+      });
     }
 
     onAddressChanged(e) {
-      console.log(e);
       this.setState({
         shipping_address: e.currentTarget.value
       })
     }
 
-    onOrderCommentChanged(e) {
+    onOrderShippingCommentChanged(e) {
       this.setState({
-        orderComment: e.target.value
+        shipping_comment: e.target.value
+      }, function() {
+        this.props.updateOrder(this.state);
       });
     }
 
@@ -74,9 +79,9 @@ class CheckoutStep3 extends React.Component {
                 {this.state.shipping_address === "new" &&
                   <PaymentAddress updated={this.updateAddress} />
                 }
-                <p><strong>Add Comments About Your Order</strong></p>
+                <p><strong>Add Comments About Your Shipping</strong></p>
                 <p>
-                  <textarea className="form-control" rows="8" name="comment" defaultValue="" onChange="{this.onOrderCommentChanged}"></textarea>
+                  <textarea className="form-control" rows="8" name="comment" defaultValue="" onChange="{this.onOrderShippingCommentChanged}"></textarea>
                 </p>
                 <div className="buttons clearfix">
                   <div className="pull-right">

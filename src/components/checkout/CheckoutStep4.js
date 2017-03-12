@@ -25,10 +25,7 @@ class CheckoutStep4 extends React.Component {
                   <input type="radio" checked="checked" value="cod" name="payment_method" />
                   Cash On Delivery </label>
               </div>
-              <p><strong>Add Comments About Your Order</strong></p>
-              <p>
-                <textarea className="form-control" rows="8" name="comment"></textarea>
-              </p>
+              
               <div className="buttons">
                 <div className="pull-right">I have read and agree to the <a className="agree" href="#"><b>Terms &amp; Conditions</b></a>
                   <input type="checkbox" value="1" name="agree" />

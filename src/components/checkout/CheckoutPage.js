@@ -20,7 +20,7 @@ class CheckoutPage extends React.Component {
 
         this.updateStep = this.updateStep.bind(this);
         this.updateBillAddress = this.updateBillAddress.bind(this);
-        this.updateOrderAddress = this.updateOrderAddress.bind(this);
+        this.updateShippingAddress = this.updateShippingAddress.bind(this);
         this.updateOrderPayment = this.updateOrderPayment.bind(this);
         this.submitOrder = this.submitOrder.bind(this);
     }
@@ -34,9 +34,9 @@ class CheckoutPage extends React.Component {
       })
     }
 
-    updateOrderAddress(orderAddr) {
-      let order = Object.assign({}, this.state.order, {delivery_address: orderAddr})
-
+    updateShippingAddress(orderAddr) {
+      let order = Object.assign({}, this.state.order, orderAddr)
+      console.log('checkoutpage update shipping address', order)
       this.setState({
         order: order
       })
@@ -57,12 +57,13 @@ class CheckoutPage extends React.Component {
         order: order
       }, function() {
         console.log('submit order', this.state.order);
+        
       })
     }
 
     updateStep(step) {
       console.log('parent updatestep triggered');
-      
+
       this.setState({
         currentStep : step
       })
