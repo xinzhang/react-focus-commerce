@@ -5,6 +5,8 @@ import * as accountActions from '../../actions/accountActions';
 import CountryList from '../common/CountryList';
 import PaymentZoneList from '../common/PaymentZoneList';
 
+import PaymentAddress from './PaymentAddress';
+
 class CheckoutStep3 extends React.Component {
     constructor(props, context) {
       super(props, context);
@@ -15,6 +17,12 @@ class CheckoutStep3 extends React.Component {
 
       this.onAddressChanged = this.onAddressChanged.bind(this);
       this.nextPanel = this.nextPanel.bind(this);
+      this.updateAddress = this.updateAddress.bind(this);
+    }
+
+    updateAddress(addr) {
+      console.log(addr);
+      this.props.updateOrder(addr);
     }
 
     onAddressChanged(e) {
@@ -24,8 +32,14 @@ class CheckoutStep3 extends React.Component {
       })
     }
 
+    onOrderCommentChanged(e) {
+      this.setState({
+        orderComment: e.target.value
+      });
+    }
+
     nextPanel() {
-      this.props.updateStep(4);
+      this.props.updateStep(4);      
     }
 
     render() {
@@ -42,78 +56,27 @@ class CheckoutStep3 extends React.Component {
                     <input type="radio" checked={this.state.shipping_address === 'existing'}  value="existing" name="payment_address" data-id="shipping-existing" onChange={this.onAddressChanged} />
                     I want to use an existing address</label>
                 </div>
+
                 <div id="shipping-existing">
                   <select className="form-control" name="address_id">
-                    <option selected="selected" value="4">22 Fizroy St, New town, NSW</option>
+                    <option selected="selected" value="4">
+                      {this.props.account.address.address1}, {this.props.account.address.suburb}, {this.props.account.address.postcode}
+                    </option>
                   </select>
                 </div>
+
                 <div className="radio">
                   <label>
                     <input type="radio" value="new" checked={this.state.shipping_address === 'new'} name="payment_address" data-id="payment-new" onChange={this.onAddressChanged} />
                     I want to use a new address</label>
                 </div>
                 <br />
-                {this.state.payment_address === "new" &&
-                <div id="payment-new" >
-                  <div className="form-group required">
-                    <label htmlFor="input-shipping-firstname" className="col-sm-2 control-label">First Name</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-firstname" placeholder="First Name" value="" name="firstname" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-shipping-lastname" className="col-sm-2 control-label">Last Name</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-lastname" placeholder="Last Name" value="" name="lastname" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="input-shipping-company" className="col-sm-2 control-label">Company</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-company" placeholder="Company" value="" name="company" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-shipping-address-1" className="col-sm-2 control-label">Address 1</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-address-1" placeholder="Address 1" value="" name="address_1" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="input-shipping-address-2" className="col-sm-2 control-label">Address 2</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-address-2" placeholder="Address 2" value="" name="address_2" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-shipping-suburb" className="col-sm-2 control-label">Suburb</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-suburb" placeholder="Suburb" value="" name="Suburb" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="input-shipping-postcode" className="col-sm-2 control-label">Post Code</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-postcode" placeholder="Post Code" value="" name="postcode" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-shipping-country" className="col-sm-2 control-label">Country</label>
-                    <div className="col-sm-10">
-                      <CountryList />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-shipping-state" className="col-sm-2 control-label">State</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-shipping-state" placeholder="State" value="" name="State" />
-                    </div>
-                  </div>
-                </div>
+                {this.state.shipping_address === "new" &&
+                  <PaymentAddress updated={this.updateAddress} />
                 }
                 <p><strong>Add Comments About Your Order</strong></p>
                 <p>
-                  <textarea className="form-control" rows="8" name="comment"></textarea>
+                  <textarea className="form-control" rows="8" name="comment" defaultValue="" onChange="{this.onOrderCommentChanged}"></textarea>
                 </p>
                 <div className="buttons clearfix">
                   <div className="pull-right">
@@ -128,4 +91,16 @@ class CheckoutStep3 extends React.Component {
     }
 }
 
-export default CheckoutStep3;
+function mapStateToProps(state, ownProps) {
+  return {
+    account: state.account
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(accountActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)( CheckoutStep3 );

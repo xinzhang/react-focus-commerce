@@ -6,6 +6,8 @@ import * as accountActions from '../../actions/accountActions';
 import CountryList from '../common/CountryList';
 import PaymentZoneList from '../common/PaymentZoneList';
 
+import PaymentAddress from './PaymentAddress';
+
 import $ from 'jquery';
 
 class CheckoutStep2 extends React.Component {
@@ -18,6 +20,12 @@ class CheckoutStep2 extends React.Component {
 
       this.onAddressChanged = this.onAddressChanged.bind(this);
       this.nextPanel = this.nextPanel.bind(this);
+      this.updateAddress = this.updateAddress.bind(this);
+    }
+
+    updateAddress(addr) {
+      console.log(addr);
+      this.props.updateOrder(addr);
     }
 
     onAddressChanged(e) {
@@ -50,6 +58,7 @@ class CheckoutStep2 extends React.Component {
                       onChange={this.onAddressChanged} />
                     I want to use an existing address</label>
                 </div>
+
                 <div id="payment-existing">
                   <select className="form-control" name="address_id">
                     <option selected="selected" value="4">
@@ -57,6 +66,7 @@ class CheckoutStep2 extends React.Component {
                     </option>
                   </select>
                 </div>
+
                 <div className="radio">
                   <label>
                     <input type="radio" value="new" checked={this.state.payment_address === 'new'} name="payment_address" data-id="payment-new" onChange={this.onAddressChanged} />
@@ -64,62 +74,7 @@ class CheckoutStep2 extends React.Component {
                 </div>
                 <br />
                 {this.state.payment_address === "new" &&
-                <div id="payment-new" >
-                  <div className="form-group required">
-                    <label htmlFor="input-payment-firstname" className="col-sm-2 control-label">First Name</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-firstname" placeholder="First Name" value="" name="firstname" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-payment-lastname" className="col-sm-2 control-label">Last Name</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-lastname" placeholder="Last Name" value="" name="lastname" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="input-payment-company" className="col-sm-2 control-label">Company</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-company" placeholder="Company" value="" name="company" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-payment-address-1" className="col-sm-2 control-label">Address 1</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-address-1" placeholder="Address 1" value="" name="address_1" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="input-payment-address-2" className="col-sm-2 control-label">Address 2</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-address-2" placeholder="Address 2" value="" name="address_2" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-payment-suburb" className="col-sm-2 control-label">Suburb</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-suburb" placeholder="Suburb" value="" name="Suburb" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="input-payment-postcode" className="col-sm-2 control-label">Post Code</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-postcode" placeholder="Post Code" value="" name="postcode" />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-payment-country" className="col-sm-2 control-label">Country</label>
-                    <div className="col-sm-10">
-                      <CountryList />
-                    </div>
-                  </div>
-                  <div className="form-group required">
-                    <label htmlFor="input-payment-state" className="col-sm-2 control-label">State</label>
-                    <div className="col-sm-10">
-                      <input type="text" className="form-control" id="input-payment-state" placeholder="State" value="" name="State" />
-                    </div>
-                  </div>
-                </div>
+                  <PaymentAddress updated={this.updateAddress} />
                 }
                 <div className="buttons clearfix">
                   <div className="pull-right">

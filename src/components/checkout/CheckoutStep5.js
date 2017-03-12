@@ -1,6 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class CheckoutStep5 extends React.Component {
+    constructor(props) {
+      super(props)
+
+      this.submitOrder = this.submitOrder.bind(this);
+    }
+
+    submitOrder(){
+      this.props.submitOrder(this.props.cart);
+    }
+
     render() {
       return (
         <div className="panel panel-default">
@@ -47,7 +58,8 @@ class CheckoutStep5 extends React.Component {
               </div>
               <div className="buttons">
                 <div className="pull-right">
-                  <input type="button" data-loading-text="Loading..." className="btn btn-primary" id="button-confirm" value="Confirm Order" />
+                  <input type="button" data-loading-text="Loading..." className="btn btn-primary"
+                    id="button-confirm" value="Confirm Order" onClick={this.submitOrder} />
                 </div>
               </div>
             </div>
@@ -57,4 +69,12 @@ class CheckoutStep5 extends React.Component {
     }
 }
 
-export default CheckoutStep5;
+
+function mapStateToProps(state, ownProps) {
+  return {
+    account: state.account,
+    cart: state.cart
+  }
+}
+
+export default connect(mapStateToProps)( CheckoutStep5 );
