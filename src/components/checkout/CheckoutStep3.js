@@ -39,7 +39,7 @@ class CheckoutStep3 extends React.Component {
     }
 
     nextPanel() {
-      this.props.updateStep(4);      
+      this.props.updateStep(4);
     }
 
     render() {
@@ -80,7 +80,9 @@ class CheckoutStep3 extends React.Component {
                 </p>
                 <div className="buttons clearfix">
                   <div className="pull-right">
-                    <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-address" value="Continue" onClick={this.nextPanel} />
+                    <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-address"
+                      data-parent="#accordion" data-toggle="collapse" href="#collapse-payment-method"
+                      value="Continue" onClick={this.nextPanel} />
                   </div>
                 </div>
               </form>

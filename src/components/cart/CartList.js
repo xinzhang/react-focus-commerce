@@ -5,7 +5,7 @@ class CartList extends React.Component {
     render() {
       return (
         <div>
-        <h1>Shopping Cart                &nbsp;(10.00kg) </h1>
+        <h1>Shopping Cart                &nbsp;</h1>
         <form encType="multipart/form-data" method="post" action="#">
           <div className="table-responsive">
             <table className="table table-bordered">

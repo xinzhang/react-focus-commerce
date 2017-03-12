@@ -62,22 +62,7 @@ class CheckoutPage extends React.Component {
 
     updateStep(step) {
       console.log('parent updatestep triggered');
-      if (step === 2) {
-        console.log('step2');
-        $('#collapse-payment-address').collapse('toggle');
-      }
-      else if (step === 3) {
-        console.log('step2');
-        $('#collapse-shipping-address').collapse('toggle');
-      }
-      else if (step === 4) {
-        console.log('step2');
-        $('#collapse-payment-method').collapse('toggle');
-      }
-      else if (step === 5) {
-        $('#collapse-checkout-confirm').collapse('toggle');
-      }
-
+      
       this.setState({
         currentStep : step
       })

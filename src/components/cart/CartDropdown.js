@@ -28,6 +28,7 @@ class CartDropdown extends React.Component {
           <button type="button" className="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button">
             <span id="cart-total">{this.props.cart.length} item(s) - ${allTotal}</span><i className="fa fa-caret-down"></i>
           </button>
+
           <ul className="dropdown-menu pull-right cart-dropdown-menu">
               <li>
                   <table className="table table-striped">
@@ -55,17 +56,18 @@ class CartDropdown extends React.Component {
                   <div>
                       <CartTotal cart={this.props.cart} />
                       <p className="text-right">
-                        <span className="btn-viewcart">
-
+                        <span className="btn-viewcart dropdown-toggle cart-dropdown-button">
                           <Link to={'/products/cart'}>
                             <strong><i className="fa fa-shopping-cart"></i> View Cart</strong>
                           </Link>
                         </span>
-                        <span className="btn-checkout">
+                        &nbsp;&nbsp;
+                        <span className="btn-checkout dropdown-toggle cart-dropdown-button">
                           <Link to={'/products/checkout'}>
                             <strong><i className="fa fa-share"></i> Checkout</strong>
                           </Link>
                         </span>
+
                       </p>
                   </div>
               </li>

@@ -36,7 +36,9 @@ class CheckoutStep1 extends React.Component {
                       Guest Checkout</label>
                   </div>
                   <p>By creating an account you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.</p>
-                  <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-account" value="Continue" onClick={this.nextPanel} />
+                  <input type="button" className="btn btn-primary"
+                    data-loading-text="Loading..." id="button-account" value="Continue" onClick={this.nextPanel}
+                    data-parent="#accordion" data-toggle="collapse" href="#collapse-payment-address" />
                 </div>
 
                 <div className="col-sm-6">

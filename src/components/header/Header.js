@@ -43,6 +43,7 @@ class Header extends React.Component {
                   { this.props.account.role !== 'admin' &&
                   <div className="col-sm-4 col-xs-6 header-right">
                     <CartDropdown cart={this.props.cart} deleteCartItem={this.deleteCartItem.bind(this)} />
+
                     <div id="search" className="input-group">
                         <input type="text" name="search" value="" placeholder="Search" className="form-control input-lg" />
                         <span className="input-group-btn">

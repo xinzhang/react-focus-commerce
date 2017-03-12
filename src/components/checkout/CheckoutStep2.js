@@ -78,7 +78,9 @@ class CheckoutStep2 extends React.Component {
                 }
                 <div className="buttons clearfix">
                   <div className="pull-right">
-                    <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-address" value="Continue" onClick={this.nextPanel} />
+                    <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-address"
+                    data-parent="#accordion" data-toggle="collapse" href="#collapse-shipping-address"
+                    value="Continue" onClick={this.nextPanel} />
                   </div>
                 </div>
               </form>

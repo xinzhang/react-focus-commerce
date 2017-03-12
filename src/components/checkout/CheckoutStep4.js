@@ -33,7 +33,9 @@ class CheckoutStep4 extends React.Component {
                 <div className="pull-right">I have read and agree to the <a className="agree" href="#"><b>Terms &amp; Conditions</b></a>
                   <input type="checkbox" value="1" name="agree" />
                   &nbsp;
-                  <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-method" value="Continue" onClick={this.nextPanel} />
+                  <input type="button" className="btn btn-primary" data-loading-text="Loading..." id="button-payment-method"
+                      data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm"
+                      value="Continue" onClick={this.nextPanel} />
                 </div>
               </div>
             </div>
