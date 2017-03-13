@@ -20,8 +20,18 @@ class ProductList extends React.Component {
       }
     }
 
-    render() {
+    componentWillReceiveProps(nextProps){
 
+      let currentTitle = this.props.params.category
+      let nextTitle = nextProps.params.category;
+
+      if (currentTitle !== nextTitle) {
+        console.log("previous:", currentTitle, " next:", nextTitle, " reload.");
+        this.props.actions.loadProductsByCategory(nextTitle);
+      }
+    }
+
+    render() {
       let title = this.props.params.category;
 
       return (
