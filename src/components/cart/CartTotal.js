@@ -17,9 +17,9 @@ class CartTotal extends React.Component {
 
     for (let i=0; i<this.props.cart.length; i++){
       let item = this.props.cart[i];
-      subTotal += (item.qty * item.price);
-      taxTotal += (item.qty * item.tax);
-      allTotal += (item.qty * item.total);
+      subTotal += Number(item.qty * item.price);
+      taxTotal += Number(item.qty * item.tax);
+      allTotal += Number(item.qty * item.total);
     }
 
     return (

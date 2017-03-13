@@ -1,5 +1,8 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as orderActions from '../../actions/orderActions';
 
 import $ from 'jquery';
 
@@ -51,14 +54,16 @@ class CheckoutPage extends React.Component {
     }
 
     submitOrder(cart) {
-
       let order = Object.assign({}, this.state.order, {cart: cart})
+      order.userId = this.state.account._id;
+
       this.setState({
         order: order
       }, function() {
         console.log('submit order', this.state.order);
-        
-      })
+        this.props.actions.sumbitOrder(this.state.order);
+      });
+      
     }
 
     updateStep(step) {
@@ -86,4 +91,17 @@ class CheckoutPage extends React.Component {
     }
 }
 
-export default CheckoutPage;
+
+function mapStateToProps(state, ownProps) {
+  return {
+    account: state.account
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(orderActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (CheckoutPage );

@@ -16,13 +16,13 @@ class AddCartButton extends React.Component {
     let prod = this.props.product;
 
     let cartItem = {
-      prod_id: prod.id,
-      prod_pic:'/image/product/7product50x59.jpg',
+      prod_id: prod._id,
+      prod_pic:prod.pic_small_url,
       name: prod.name,
       qty: 1,
       price: prod.price,
       tax: prod.tax,
-      total: (prod.price + prod.tax)
+      total: (Number(prod.price) + Number(prod.tax))
     }
 
     this.props.actions.addShoppingCart(cartItem);

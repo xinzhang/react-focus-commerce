@@ -15,6 +15,7 @@ class ProductList extends React.Component {
 
       let title = this.props.params.category;
       if (title !== '') {
+        console.log('load category', title);
         this.props.actions.loadProductsByCategory(title);
       }
     }

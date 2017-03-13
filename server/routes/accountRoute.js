@@ -29,13 +29,14 @@ router.post('/account/register', function(req, res, next) {
                 console.log("mongodb results: " + JSON.stringify(results));
 
                 if (results != null) {
-                    res.status(500).send("the username email has been existed.");                    
+                    res.status(500).send("the username email has been existed.");
                 } else {
                     //execute insert now
-                    collection.insert(user,
-                        function (err, results) {
+                    collection.insertOne(user,
+                        function (err, result) {
                             req.login(results.ops[0], function () {
                                 //res.redirect('/auth/profile');
+                                user._id = result.insertedId;
                                 res.send(user);
                             })
                     });
@@ -78,7 +79,7 @@ router.route('/account/login')
     .post(passport.authenticate('local', {
         failureredirect: '/'
     }), function (req, res) {
-        //res.redirect('/auth/profile');
+        //res.redirect('/auth/profile');        
         res.json(req.user);
     });
 

@@ -14,6 +14,9 @@ import admin_products from './adminProductReducer';
 
 import account from './accountReducer';
 
+import orders from './orderReducer';
+
+
 const rootReducer = combineReducers({
   // short hand property names
   blogs,
@@ -27,7 +30,8 @@ const rootReducer = combineReducers({
   latestProducts,
   bestSellerProducts,
   account,
-  admin_products
+  admin_products,
+  orders
 })
 
 export default rootReducer;

@@ -20,7 +20,7 @@ class CartDropdown extends React.Component {
 
     for (let i=0; i<this.props.cart.length; i++){
       let item = this.props.cart[i];
-      allTotal += (item.qty * item.total);
+      allTotal += (Number(item.qty) * Number(item.total));
     }
 
     return (

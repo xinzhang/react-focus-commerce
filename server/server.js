@@ -10,6 +10,7 @@ var productRoute = require('./routes/productRoute');
 var accountRoute = require('./routes/accountRoute');
 var brandRoute = require('./routes/brandRoute');
 var categoryRoute = require('./routes/categoryRoute');
+var orderRoute = require('./routes/orderRoute');
 
 var app = express();
 var port = process.env.PORT || 5000;
@@ -39,6 +40,7 @@ app.use('/api/', productRoute);
 app.use('/api/', accountRoute);
 app.use('/api/', brandRoute);
 app.use('/api/', categoryRoute);
+app.use('/api/', orderRoute);
 
 app.listen(port);
 console.log('start to listening ' + port);

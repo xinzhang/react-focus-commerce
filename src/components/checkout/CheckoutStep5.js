@@ -23,8 +23,8 @@ class CheckoutStep5 extends React.Component {
 
       for (let i=0; i<this.props.cart.length; i++){
         let item = this.props.cart[i];
-        subTotal += (item.qty * item.price);
-        allTotal += (item.qty * item.total);
+        subTotal += (Number(item.qty) * Number(item.price));
+        allTotal += (Number(item.qty) * Number(item.total));
       }
 
       return (
@@ -83,7 +83,6 @@ class CheckoutStep5 extends React.Component {
       );
     }
 }
-
 
 function mapStateToProps(state, ownProps) {
   return {

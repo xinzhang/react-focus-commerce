@@ -47,6 +47,6 @@ export default {
     error_message:''
   },
 
-  admin_products:[]
-
+  admin_products:[],
+  orders:[]
 }

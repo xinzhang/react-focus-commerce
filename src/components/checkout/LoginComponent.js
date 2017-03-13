@@ -30,17 +30,21 @@ class LoginComponent extends React.Component {
       });
    }
 
+   checkIfLoginAready(account) {
+     if (account.status === 'authenticated'
+       && account.email !== ''
+       && account.error_message === '') {
+       console.log('authenticated');
+       this.setState({showUser: true});
+     }
+   }
+
+   componentWillMount() {
+     this.checkIfLoginAready(this.props.account);
+   }
+
   componentWillReceiveProps(nextProps) {
-    //if login correct, then redirect
-    console.log(nextProps.account);
-
-    if (nextProps.account.status === 'authenticated'
-      && nextProps.account.email !== ''
-      && nextProps.account.error_message === '') {
-      console.log('authenticated');
-      this.setState({showUser: true});
-    }
-
+    this.checkIfLoginAready(nextProps.account);
   }
 
   enableButton() {
@@ -83,7 +87,7 @@ class LoginComponent extends React.Component {
           }
 
           {this.state.showUser  &&
-            <h3>You have logged in. Your details will be populated</h3>       
+            <h3>You have logged in as {this.props.account.email}. <br/> Your information such as addresses will be filled in automatically</h3>
           }
         </div>
       );

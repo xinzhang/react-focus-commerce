@@ -8,16 +8,23 @@ export default function cartReducer(state = initialState.cart, action) {
     //  return action.cart;
 
     case types.ADD_SHOPING_CART_ITEM:
-        console.log('add shoping card item');
-        console.log(state);
-        console.log([
-          ...state,
-          Object.assign({}, action.cartItem)
-        ]);
-        return [
-          ...state,
-          Object.assign({}, action.cartItem)
-        ]
+        //check if the state alredy have the item, if it is, then add one by qty
+        let ret = state.filter(item => item.prod_id === action.cartItem.prod_id);
+        if (ret != null && ret.length==1) {
+          return state.map( item => {
+                  if (item.prod_id == action.cartItem.prod_id) {
+                    action.cartItem.qty += item.qty;
+                    return action.cartItem;
+                  }
+                  return item;
+            });
+        }
+        else {
+          return [
+            ...state,
+            Object.assign({}, action.cartItem)
+          ]
+      }
 
     case types.REMOVE_SHOPING_CART_ITEM:
 
@@ -30,10 +37,16 @@ export default function cartReducer(state = initialState.cart, action) {
         return newState;
 
     case types.UDPATE_SHOPING_CART_ITEM:
-        return [
-          ...state.filter(item => item.prod_id != action.prod_id),
-          Object.assign({}, action.cartItem)
-        ]
+        // return [
+        //   ...state.filter(item => item.prod_id != action.prod_id),
+        //   Object.assign({}, action.cartItem)
+        // ]
+        return state.map( item => {
+                if (item.prod_id == action.prod_id) {
+                  return action.cartItem;
+                }
+                return item;
+          });
 
     default:
       return state;
