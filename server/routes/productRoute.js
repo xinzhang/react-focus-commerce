@@ -162,6 +162,16 @@ router.get('/categories', function(req, res, next){
 
 
 router.get('/admin/products', function(req, res, next){
+  if (!req.user) {
+    res.status(401).end();
+    return;
+  }
+
+  if (req.user && req.user.role !== 'admin') {
+    res.status(401).end();
+    return;
+  }
+
   mongodb.connect(dbUrl, function(err, db){
       var collection = db.collection('products');
       collection.find({}, function(err, results){
@@ -182,6 +192,16 @@ router.get('/admin/products', function(req, res, next){
 });
 
 router.post('/admin/products/new', function(req, res, next){
+  if (!req.user) {
+    res.status(401).end();
+    return;
+  }
+
+  if (req.user && req.user.role !== 'admin') {
+    res.status(401).end();
+    return;
+  }
+
   mongodb.connect(dbUrl, function(err, db){
       var p = req.body.product;
       var collection = db.collection('products');
@@ -196,6 +216,15 @@ router.post('/admin/products/new', function(req, res, next){
 });
 
 router.post('/admin/products/update', function(req, res, next) {
+  if (!req.user) {
+    res.status(401).end();
+    return;
+  }
+
+  if (req.user && req.user.role !== 'admin') {
+    res.status(401).end();
+    return;
+  }
 
   let prod = req.body.product;
   let id = objectID(prod._id);
