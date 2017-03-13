@@ -29,6 +29,16 @@ router.get('/brands', function(req, res, next){
 
 router.post('/admin/brands/update', function(req, res, next) {
 
+  if (!req.user) {
+    res.status(401).end();
+    return;
+  }
+
+  if (req.user && req.user.role !== 'admin') {
+    res.status(401).end();
+    return;
+  }
+
   let brands = req.body.brands;
 
   mongodb.connect(dbUrl, function(err, db){
