@@ -13,6 +13,10 @@ import CheckoutStep4 from './CheckoutStep4';
 import CheckoutStep5 from './CheckoutStep5';
 
 class CheckoutPage extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
     constructor(props, context) {
         super(props, context);
 
@@ -55,15 +59,14 @@ class CheckoutPage extends React.Component {
 
     submitOrder(cart) {
       let order = Object.assign({}, this.state.order, {cart: cart})
-      order.userId = this.state.account._id;
+      order.userId = this.props.account._id;
 
       this.setState({
         order: order
       }, function() {
         console.log('submit order', this.state.order);
-        this.props.actions.sumbitOrder(this.state.order);
+        this.props.actions.submitOrder(this.state.order);
       });
-      
     }
 
     updateStep(step) {
@@ -73,6 +76,13 @@ class CheckoutPage extends React.Component {
         currentStep : step
       })
 
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if (nextProps.newOrderStatus.status === "submitted") {
+          this.context.router.push('/products/checkoutCompleted');
+        }
     }
 
     render() {
@@ -94,7 +104,8 @@ class CheckoutPage extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    account: state.account
+    account: state.account,
+    newOrderStatus: state.newOrderStatus
   }
 }
 

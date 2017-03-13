@@ -48,5 +48,9 @@ export default {
   },
 
   admin_products:[],
-  orders:[]
+  orders:[],
+  newOrderStatus:{
+    status:'pending',
+    order_number: ''
+  }
 }

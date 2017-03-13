@@ -48,6 +48,10 @@ export default function cartReducer(state = initialState.cart, action) {
                 return item;
           });
 
+    case types.ORDER_SUBMIT_SUCCESS:
+        //order has been submitted, clean cart. done.
+        return initialState.cart;
+
     default:
       return state;
   }

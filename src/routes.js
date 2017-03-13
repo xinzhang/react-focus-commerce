@@ -16,6 +16,7 @@ import ProductListPage from './components/products/ProductListPage';
 import ProductPage from './components/products/ProductPage';
 import CartPage from './components/cart/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
+import CheckoutCompletedPage from './components/checkout/CheckoutCompletedPage';
 
 import AdminPage from './components/admin/AdminPage';
 import AdminCategoriesPage from './components/admin/AdminCategories';
@@ -44,6 +45,7 @@ export default (
       <Route path="/products/detail/:id" component={ProductPage} />
       <Route path="/products/cart" component={CartPage} />
       <Route path="/products/checkout" component={CheckoutPage} />
+      <Route path="/products/checkoutCompleted" component={CheckoutCompletedPage} />
     </Route>
     <Route path="/admin" component={AdminPage}>
       <Route path="/admin/categories" component={AdminCategoriesPage} />

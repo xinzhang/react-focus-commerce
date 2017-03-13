@@ -32,6 +32,14 @@ class CheckoutStep2 extends React.Component {
       console.log(e);
       this.setState({
         payment_address: e.currentTarget.value
+      }, function(){
+        if (e.currentTarget.value == "existing" && this.props.account.address) {
+          //update the order
+          let orderAddr = Object.assign({}, this.props.account.address);
+          orderAddr.firstname = this.props.account.firstname;
+          orderAddr.lastname = this.props.account.lastname;
+          this.props.updateOrder(orderAddr);
+        }
       })
     }
 
@@ -40,6 +48,9 @@ class CheckoutStep2 extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+    }
+
+    componentWillMount(){
     }
 
     render() {

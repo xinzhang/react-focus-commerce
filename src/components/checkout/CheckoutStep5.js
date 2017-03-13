@@ -87,7 +87,8 @@ class CheckoutStep5 extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     account: state.account,
-    cart: state.cart
+    cart: state.cart,
+    new_order: state.new_order
   }
 }
 
