@@ -44,7 +44,7 @@ export function loginFailure(error) {
 export function loadUserFromToken() {
   let token=sessionStorage.getItem('jwtToken');
   if (!token || token === '') {
-    return;
+    return {type: 'NULL'};
   }
 
   return function(dispatch) {
@@ -58,10 +58,14 @@ export function loadUserFromToken() {
 }
 
 export function getTokenSuccess(account) {
-  console.log(account);
   return {type: types.ACCOUNT_LOGIN_SUCESS, account: account.user}
 }
 
 export function getTokenFailure(error) {
   return {type: types.ACCOUNT_LOGIN_FAILURE, error: "Token expired or failure"}
+}
+
+export function resetToken() {
+  sessionStorage.removeItem('jwtToken');
+  return {type: types.RESET_TOKEN}
 }

@@ -16,6 +16,9 @@ export default function accountReducer(state = initialState.account, action) {
     case types.ACCOUNT_REGISTER_FAILURE:
       return Object.assign({}, initialState.account, {error_message: action.error});
 
+    case types.RESET_TOKEN:
+      return Object.assign({}, initialState.account);
+
     default:
       return state;
   }

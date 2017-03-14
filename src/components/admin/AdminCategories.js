@@ -25,6 +25,7 @@ class AdminCategoriesPage extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log('admin categories:', state.categories);
   return {
     categories: state.categories
   }

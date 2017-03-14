@@ -13,8 +13,8 @@ class AdminTopMenu extends React.Component {
                     <ul className="main-navigation">
                         <li><Link className="parent" to={'/'}>Back to home</Link></li>
                         <li className="dropdown">
-                            <a class="dropdown-toggle" role="button" aria-expanded="false"
-                              aria-haspopup="true" href="#" data-toggle="dropdown">Settings<span class="caret"></span></a>
+                            <a className="dropdown-toggle" role="button" aria-expanded="false"
+                              aria-haspopup="true" href="#" data-toggle="dropdown">Settings<span className="caret"></span></a>
                             <ul className="dropdown-menu">
                               <li><Link className="parent" to={'/admin/categories'}>Categories</Link></li>
                               <li><Link className="parent" to={'/admin/brands'}>Brands</Link></li>

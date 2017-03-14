@@ -1,10 +1,26 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as accountActions from '../../actions/accountActions';
 
 import CurrencyDropdown from './CurrencyDropdown';
 import LanguageDropdown from './LanguageDropdown';
 
 class Topbar extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(){
+      this.props.actions.resetToken();
+      this.context.router.push('/');
+  }
+
   render() {
     return (
       <div className="header-top">
@@ -30,7 +46,7 @@ class Topbar extends React.Component {
                                     <li className="dropdown"><a href="#" title="My Account" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> <span>Welcome {this.props.account.firstname}</span><span className="caret"></span></a>
                                       <ul className="dropdown-menu dropdown-menu-right">
                                           <li><a href="/account/settings">Settings</a></li>
-                                          <li><a href="/">Log out</a></li>
+                                          <li><a href="#" onClick={this.logout}>Log out</a></li>
                                       </ul>
                                     </li>
                                   }
@@ -47,9 +63,16 @@ class Topbar extends React.Component {
 }
 
 
-function mapStateToProps(state, ownProps) {  
+function mapStateToProps(state, ownProps) {
   return {
     account: state.account
   }
 }
-export default connect(mapStateToProps)( Topbar );
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(accountActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)( Topbar );

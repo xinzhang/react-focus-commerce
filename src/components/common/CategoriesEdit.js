@@ -5,7 +5,7 @@ class CategoriesEdit extends React.Component {
       super(props);
 
       this.state = {
-        categories:[]
+        categories:this.props.categories
       }
 
       this.editName = this.editName.bind(this);
@@ -32,6 +32,8 @@ class CategoriesEdit extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+      //console.log('categories edit - componentWillReceiveProps', nextProps);
+
       this.setState({
         categories:nextProps.categories
       })
