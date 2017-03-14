@@ -4,11 +4,8 @@ import accountApi from '../api/AccountApi';
 export function registerAccount(acct) {
   return function(dispatch) {
     return accountApi.registerAccount(acct).then(data => {
-      console.log(data);
       dispatch(registerAccountSuccess(data));
     }).catch(error => {
-      console.log('registerAccount error');
-      console.log(error);
       dispatch(registerAccountFailure(error));
       throw(error);
     });
@@ -35,9 +32,36 @@ export function login(acct) {
 }
 
 export function loginSuccess(account) {
-  return {type: types.ACCOUNT_LOGIN_SUCESS, account}
+  console.log(account);
+  sessionStorage.setItem('jwtToken', account.token);
+  return {type: types.ACCOUNT_LOGIN_SUCESS, account: account.user}
 }
 
 export function loginFailure(error) {
   return {type: types.ACCOUNT_LOGIN_FAILURE, error: "Invalid username or password"}
+}
+
+export function loadUserFromToken() {
+  let token=sessionStorage.getItem('jwtToken');
+  if (!token || token === '') {
+    return;
+  }
+
+  return function(dispatch) {
+    return accountApi.getUserFromToken(token).then(data => {
+      dispatch(getTokenSuccess(data));
+    }).catch(error => {
+      dispatch(getTokenFailure(error));
+      throw(error);
+    });
+  }
+}
+
+export function getTokenSuccess(account) {
+  console.log(account);
+  return {type: types.ACCOUNT_LOGIN_SUCESS, account: account.user}
+}
+
+export function getTokenFailure(error) {
+  return {type: types.ACCOUNT_LOGIN_FAILURE, error: "Token expired or failure"}
 }

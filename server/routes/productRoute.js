@@ -7,6 +7,8 @@ var mongodb = require('mongodb').MongoClient;
 var objectID = require('mongodb').ObjectID;
 var dbUrl = 'mongodb://localhost:27017/focus-commerce';
 
+var authorize = require('./authorize.js');
+
 function readJSONFile(filename, callback) {
   fs.readFile(filename, function (err, data) {
     if(err) {
@@ -25,11 +27,7 @@ let productJsonPath = path.resolve(__dirname, '../json/products.json');
 let productCategoryJsonPath = path.resolve(__dirname, '../json/productCategories.json');
 
 router.get('/products/:pageno', function(req, res, next) {
-  // readJSONFile(productJsonPath, function (err, data) {
-  //   if(err) { throw err; }
-  //   res.json(data);
-  //   res.end
-  // });
+
   mongodb.connect(dbUrl, function(err, db){
       var collection = db.collection('products');
       collection.find({}, function(err, results){
@@ -92,29 +90,6 @@ router.get('/products', function(req, res, next) {
 });
 
 router.get('/product/:id', function(req, res, next) {
-  //   readJSONFile(productJsonPath, function (err, data) {
-  //     if(err) { throw err; }
-  //
-  //     let reqId = req.params.id;
-  //     console.log("product detail ", reqId);
-  //
-  //     //let element = data.filter(function(d){
-  //     //  return d.id == reqId;
-  //     //});
-  //
-  //     let element = data.find(x => {
-  //       return x.id == reqId;
-  //     });
-  //
-  //     console.log(element);
-  //     if (element) {
-  //       res.json(element);
-  //     } else {
-  //       res.status(404).send("not found");
-  //     }
-  //
-  //     res.end;
-  // });
   let reqId = req.params.id;
   console.log("product detail ", reqId);
 
@@ -131,14 +106,6 @@ router.get('/product/:id', function(req, res, next) {
       }) //end find
   })
 });
-
-// router.get('/categories', function(req, res, next) {
-//     readJSONFile(productCategoryJsonPath, function (err, data) {
-//     if(err) { throw err; }
-//     res.json(data);
-//     res.end
-//   });
-// });
 
 router.get('/categories', function(req, res, next){
   mongodb.connect(dbUrl, function(err, db){
@@ -160,17 +127,7 @@ router.get('/categories', function(req, res, next){
   })
 });
 
-
 router.get('/admin/products', function(req, res, next){
-  if (!req.user) {
-    res.status(401).end();
-    return;
-  }
-
-  if (req.user && req.user.role !== 'admin') {
-    res.status(401).end();
-    return;
-  }
 
   mongodb.connect(dbUrl, function(err, db){
       var collection = db.collection('products');
@@ -192,15 +149,6 @@ router.get('/admin/products', function(req, res, next){
 });
 
 router.post('/admin/products/new', function(req, res, next){
-  if (!req.user) {
-    res.status(401).end();
-    return;
-  }
-
-  if (req.user && req.user.role !== 'admin') {
-    res.status(401).end();
-    return;
-  }
 
   mongodb.connect(dbUrl, function(err, db){
       var p = req.body.product;

@@ -12,12 +12,17 @@ class AdminTopMenu extends React.Component {
                 <div className="navbar-collapse">
                     <ul className="main-navigation">
                         <li><Link className="parent" to={'/'}>Back to home</Link></li>
-                        <li><Link className="parent" to={'/admin/categories'}>Categories</Link></li>
-                        <li><Link className="parent" to={'/admin/brands'}>Brands</Link></li>
+                        <li className="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false"
+                              aria-haspopup="true" href="#" data-toggle="dropdown">Settings<span class="caret"></span></a>
+                            <ul className="dropdown-menu">
+                              <li><Link className="parent" to={'/admin/categories'}>Categories</Link></li>
+                              <li><Link className="parent" to={'/admin/brands'}>Brands</Link></li>
+                            </ul>
+                        </li>
                         <li><Link className="parent" to={'/admin/products'}>Products</Link></li>
                         <li><Link className="parent" to={'/admin/users'}>Users</Link></li>
                         <li><Link className="parent" to={'/admin/prices'}>Prices</Link></li>
-                        <li><Link className="parent" to={'/admin/inventories'}>Invetories</Link></li>
                         <li><Link className="parent" to={'/admin/orders'}>Orders</Link></li>
                         <li><Link className="parent" to={'/admin/blogs'}>Blogs</Link></li>
                     </ul>

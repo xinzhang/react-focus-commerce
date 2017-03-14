@@ -1,7 +1,13 @@
 var passport = require('passport');
 
+var cfg = require("./config.js");
+
+var mongodb = require('mongodb');
+var dburl = 'mongodb://localhost:27017/focus-commerce';
+
 module.exports = function (app) {
     app.use(passport.initialize());
+
     app.use(passport.session());
 
     passport.serializeUser(function(user, done){

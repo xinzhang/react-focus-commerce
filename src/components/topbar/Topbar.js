@@ -47,7 +47,7 @@ class Topbar extends React.Component {
 }
 
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, ownProps) {  
   return {
     account: state.account
   }

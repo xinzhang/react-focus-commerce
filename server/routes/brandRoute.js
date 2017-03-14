@@ -7,6 +7,8 @@ var mongodb = require('mongodb').MongoClient;
 var objectID = require('mongodb').ObjectID;
 var dbUrl = 'mongodb://localhost:27017/focus-commerce';
 
+var authorize = require('./authorize.js');
+
 router.get('/brands', function(req, res, next){
   mongodb.connect(dbUrl, function(err, db){
       var collection = db.collection('brands');
@@ -28,16 +30,9 @@ router.get('/brands', function(req, res, next){
 });
 
 router.post('/admin/brands/update', function(req, res, next) {
+  console.log(req.user);
 
-  if (!req.user) {
-    res.status(401).end();
-    return;
-  }
-
-  if (req.user && req.user.role !== 'admin') {
-    res.status(401).end();
-    return;
-  }
+  //authorize.checkAdmin(req, res, next);
 
   let brands = req.body.brands;
 

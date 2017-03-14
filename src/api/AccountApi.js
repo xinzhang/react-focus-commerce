@@ -55,6 +55,25 @@ class AccountApi {
     });
   }
 
+  static getUserFromToken(token) {
+    const request = new Request('/api/account/token?token=' + token, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    });
+
+    return fetch(request).then(response => {
+      if (response.status == 401) {
+        throw("Token expired or wrong.");
+      } else {
+        return response.json();
+      }
+    }).catch(error => {
+      throw error;
+    });
+  }
 }
 
 export default AccountApi;

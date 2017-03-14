@@ -12,6 +12,9 @@ var brandRoute = require('./routes/brandRoute');
 var categoryRoute = require('./routes/categoryRoute');
 var orderRoute = require('./routes/orderRoute');
 
+var jwt = require('jsonwebtoken');
+var config = require('./config.js');
+
 var app = express();
 var port = process.env.PORT || 5000;
 
@@ -34,6 +37,28 @@ app.use(cookieParser());
 app.use(session({secret: 'xz_react_focus_commerce'}));
 
 passport(app);
+
+//middleware that checks if JWT token exists and verifies it if it does exist.
+//In all the future routes, this helps to know if the request is authenticated or not.
+app.use(function(req, res, next) {
+  // check header or url parameters or post parameters for token
+  var token = req.headers['authorization'];
+  if (!token) return next();
+
+  token = token.replace('Bearer ', '');
+
+  jwt.verify(token, config.jwtSecret, function(err, user) {
+    if (err) {
+      return res.status(401).json({
+        success: false,
+        message: 'Please register Log in using a valid email to submit'
+      });
+    } else {
+      req.user = user;
+      next();
+    }
+  });
+});
 
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);
