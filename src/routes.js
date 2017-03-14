@@ -5,6 +5,7 @@ import HomePage from './components/home/HomePage';
 import AccountPage from './components/account/AccountPage';
 import RegisterPage from './components/account/RegisterPage';
 import ForgotPassword from './components/account/ForgotPassword';
+import SettingsPage from './components/account/SettingsPage';
 
 import LoginPage from './components/account/LoginPage';
 import BlogPage from './components/blog/BlogPage';
@@ -38,6 +39,7 @@ export default (
       <Route path="/account/register" component={RegisterPage} />
       <Route path="/account/login" component={LoginPage} />
       <Route path="/account/forgotPassword" component={ForgotPassword} />
+      <Route path="/account/settings" component={SettingsPage} />
     </Route>
     <Route path="/products" component={ProductListPage}>
       <Route path="/products/list" component={ProductList} />
