@@ -17,8 +17,9 @@ node setup.js, setupCategories.js, setupProducts.js to create some sample data a
 
   *** In Progress ***
 
-[[Screenshots]]
-![alt tag](../screenshots/home-1489717235747.png)
-![alt tag](../screenshots/products-cart-1489717372990.png)
-![alt tag](../screenshots/admin-products-1489717410219.png)
-![alt tag](../screenshots/admin-newproduct-1489717420922.png)
+## Screenshots
+
+![alt tag](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/home-1489717235747.png)
+![alt tag](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/products-cart-1489717372990.png)
+![alt tag](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/admin-products-1489717410219.png)
+![alt tag](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/admin-newproduct-1489717420922.png)
