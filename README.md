@@ -19,7 +19,7 @@ node setup.js, setupCategories.js, setupProducts.js to create some sample data a
 
 ## Screenshots
 
-![alt homepage](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/home-1489717235747.png =600px)
-![alt shoppingcart](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/products-cart-1489717372990.png =600px)
-![alt adminproducts](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/admin-products-1489717410219.png =600px)
-![alt adminnewproduct](https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/admin-newproduct-1489717420922.png =600px)
+<img src="https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/home-1489717235747.png" alt="homepage" style="width: 200px;"/>
+<img src="https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/products-cart-1489717372990.png" alt="shopping cart" style="width: 200px;"/>
+<img src="https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/admin-products-1489717410219.png" alt="admin products" style="width: 200px;"/>
+<img src="https://github.com/xinzhang/react-focus-commerce/blob/master//screenshots/admin-newproduct-1489717420922.png" alt="admin new" style="width: 200px;"/>
