@@ -4,6 +4,7 @@ import CategoryApi from '../api/CategoryApi';
 import brandApi from '../api/BrandApi';
 
 export function getAdminProducts() {
+  console.log('getAdminProducts');
   return function(dispatch) {
     return adminProductApi.getAllProducts().then(data => {
       dispatch(getAdminProductsSuccess(data));
@@ -20,6 +21,7 @@ export function getAdminProductsSuccess(products) {
 }
 
 export function getAdminProductsFailure(error) {
+  console.log('getAdminProductsFailure');
   return {type: types.LOAD_ADMIN_PRODUCTS_FAILURE, error: "Load admin products error"}
 }
 

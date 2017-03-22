@@ -6,7 +6,7 @@ import * as accountActions from '../../actions/accountActions';
 import { Form } from 'formsy-react';
 import MyInput from '../common/formsy/Input';
 
-class LoginPage extends React.Component {
+export class LoginPage extends React.Component {
   static contextTypes = {
     router: PropTypes.object
   };
@@ -90,7 +90,7 @@ class LoginPage extends React.Component {
                 <MyInput type="password" className="form-control" id="input-password" placeholder="Password" name="password" onChange={this.updateLoginData} required />
                 <a href="/account/forgetpassword">Forgotten Password</a>
               </div>
-              <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Login</button>
+              <button name="submit" type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Login</button>
             </Form>
           </div>
         </div>
