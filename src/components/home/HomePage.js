@@ -8,6 +8,8 @@ import HomeSubBannerItem from './HomeSubBannerItem';
 import BlogSlider from '../blog/BlogSlider';
 import BrandCarousel from './BrandCarousel';
 
+import {Tabs,Tab} from 'react-bootstrap';
+
 import $ from 'jquery';
 
 class HomePage extends React.Component {
@@ -25,6 +27,13 @@ class HomePage extends React.Component {
             <div id="content" className="col-sm-9">
 
                 <div className="customtab">
+                  <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                    <Tab eventKey={1} title="Latest"><ProductsSlider sliderType="latest" /></Tab>
+                    <Tab eventKey={2} title="Special"><ProductsSlider sliderType="special" /></Tab>
+                    <Tab eventKey={3} title="Bestseller"><ProductsSlider sliderType="bestseller" /></Tab>
+                  </Tabs>
+
+                  {/*
                     <div id="tabs" className="customtab-wrapper">
                         <ul className='customtab-inner'>
                             <li className='tab'><a href="#tab-latest">Latest</a></li>
@@ -44,6 +53,7 @@ class HomePage extends React.Component {
                     <div id="tab-bestseller" className="tab-content">
                         <ProductsSlider sliderType="bestseller" />
                     </div>
+                    */}
 
                     <HomeSubBannerItem subbanner_id="4" />
 
