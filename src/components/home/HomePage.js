@@ -8,7 +8,13 @@ import HomeSubBannerItem from './HomeSubBannerItem';
 import BlogSlider from '../blog/BlogSlider';
 import BrandCarousel from './BrandCarousel';
 
+import $ from 'jquery';
+
 class HomePage extends React.Component {
+    componentDidMount() {
+        window.turnOnTabs();
+    }
+
     render() {
       return (
         <div>

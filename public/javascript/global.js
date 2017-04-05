@@ -123,7 +123,8 @@ $(window).load(function() {
 		$(".preloader").css("display","none");
 });
 
-$.fn.tabs = function() {	
+$.fn.tabs = function() {
+	console.log('call fn tabs');
 	var selector = this;
 	this.each(function() {
 		var obj = $(this);
