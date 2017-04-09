@@ -19,7 +19,10 @@ class AdminProducts extends React.Component {
     return  [
       { key: 'name', name: 'Name' },
       { key: 'price', name: 'Price' },
-      { key: 'category', name: 'Category' }
+      { key: 'category', name: 'Category' },
+      { key: 'subcategory', name: 'Sub-Category'},
+      { key: 'isLatest', name: 'Latest'},
+      { key: 'isSpecial', name: 'Special'}
     ];
   }
 

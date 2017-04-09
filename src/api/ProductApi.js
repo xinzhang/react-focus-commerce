@@ -7,6 +7,22 @@ class ProductApi {
     });
   }
 
+  static getSpecialProducts(itemcnt) {
+    return fetch('/api/products/special/' + itemcnt).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
+  static getLatestProducts(itemcnt) {
+    return fetch('/api/products/latest/' + itemcnt).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
   static getProductsByCategory(category) {
     return fetch('/api/products/category/' + category).then(response => {
       return response.json();

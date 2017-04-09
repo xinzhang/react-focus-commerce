@@ -81,12 +81,56 @@ router.get('/relatedproducts/:id', function(req, res, next) {
     res.end
 });
 
-router.get('/products', function(req, res, next) {
-    readJSONFile(productJsonPath, function (err, data) {
-    if(err) { throw err; }
-    res.json(data);
-    res.end
+router.get('/products/special/:itemcnt', function(req, res, next) {
+  console.log('get special products', req.params.itemcnt);
+  let itemcnt = req.params.itemcnt;
+  if (!itemcnt) {
+    itemcnt = 999999;
+  }
+  mongodb.connect(dbUrl, function(err, db){
+      var collection = db.collection('products');
+      collection.find({"isSpecial":true}, function(err, results){
+        if (err) {
+          res.status(500).send(err.errorMessage)
+        }
+        var prods = [];
+        results.each( function(err, item){
+          if (err || !item) {
+            res.status(200).send(prods);
+            db.close();
+          }else {
+            prods.push(item);
+          }
+        });
+      }) //end find
   });
+
+});
+
+
+router.get('/products/latest/:itemcnt', function(req, res, next) {
+  console.log('get latest products');
+  let itemcnt = req.params.itemcnt;
+  if (!itemcnt) {
+    itecnt = 999999
+  }
+  mongodb.connect(dbUrl, function(err, db){
+      var collection = db.collection('products');
+      collection.find({"isLatest":true}, function(err, results){
+        if (err) {
+          res.status(500).send(err.errorMessage)
+        }
+        var prods = [];
+        results.each( function(err, item){
+          if (err || !item) {
+            res.status(200).send(prods);
+            db.close();
+          }else {
+            prods.push(item);
+          }
+        });
+      }); //end find
+  })
 });
 
 router.get('/product/:id', function(req, res, next) {
@@ -164,15 +208,15 @@ router.post('/admin/products/new', function(req, res, next){
 });
 
 router.post('/admin/products/update', function(req, res, next) {
-  if (!req.user) {
-    res.status(401).end();
-    return;
-  }
-
-  if (req.user && req.user.role !== 'admin') {
-    res.status(401).end();
-    return;
-  }
+  // if (!req.user) {
+  //   res.status(401).end();
+  //   return;
+  // }
+  //
+  // if (req.user && req.user.role !== 'admin') {
+  //   res.status(401).end();
+  //   return;
+  // }
 
   let prod = req.body.product;
   let id = objectID(prod._id);
