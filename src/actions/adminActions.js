@@ -56,7 +56,7 @@ export function updateAdminProduct(prod) {
 }
 
 export function updateAdminProductSuccess(data) {
-  return {type: types.UPDATE_ADMIN_PRODUCTS_SUCESS, admin_product: data}
+  return {type: types.UPDATE_ADMIN_PRODUCTS_SUCCESS, admin_product: data}
 }
 
 export function updateAdminProductFailure(error) {

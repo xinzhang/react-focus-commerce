@@ -137,16 +137,18 @@ class CategoriesEdit extends React.Component {
         }
 
        return(
-         <ul>
+         <ul className="category">
            <li key={c.name}>
+             {/*
              {c.subcategories && c.subcategories.length > 0 && c.status==="collapse" &&
                <i className="glyphicon glyphicon-chevron-right" onClick={() => this.changestatus(c)}></i>
              }
              {c.subcategories && c.subcategories.length > 0 && c.status==="expand" &&
                <i className="glyphicon glyphicon-chevron-down" onClick={()=> this.changestatus(c)}></i>
-             }
+             }*/}
+             
               {!c.isEdit &&
-                  <span onDoubleClick={()=>this.edit(c)}>{c.name}
+                  <span onDoubleClick={()=>this.edit(c)} onClick={()=>this.changestatus(c)}>{c.name}
                     <i className="glyphicon glyphicon-plus" onClick={()=>this.addChild(c)}></i>
                     <i className="glyphicon glyphicon-remove" onClick={()=>this.remove(c)}></i>
                   </span>
