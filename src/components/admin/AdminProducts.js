@@ -10,6 +10,7 @@ const booleanFormatter = (props) => {
     );
 }
 
+
 class AdminProducts extends React.Component {
 
   cols = this.createCols();
@@ -28,7 +29,7 @@ class AdminProducts extends React.Component {
     return  [
       { key: 'name', name: 'Name' },
       { key: 'price', name: 'Price' },
-      { key: 'category', name: 'Category' },
+      { key: 'category_label', name: 'category_label' },
       { key: 'subcategory', name: 'Sub-Category'},
       { key: 'isLatest', name: 'Latest', formatter: booleanFormatter},
       { key: 'isSpecial', name: 'Special', formatter: booleanFormatter},

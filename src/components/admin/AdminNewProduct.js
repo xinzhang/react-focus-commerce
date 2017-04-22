@@ -266,7 +266,7 @@ class AdminNewProduct extends React.Component {
                     <option value=""> -- Please select an option --</option>
                     {this.props.categories.map( (cat, i) => {
                       return (
-                        <option key={cat.name} value={cat.name}>
+                        <option key={cat.name} value={cat._id}>
                           {cat.name}
                         </option>)
                     }) }
@@ -274,7 +274,7 @@ class AdminNewProduct extends React.Component {
                 </div>
             </div>
             <div className="form-group">
-                <label htmlFor="input-description" className="col-sm-2 control-label">Category</label>
+                <label htmlFor="input-description" className="col-sm-2 control-label">Sub-Category</label>
                 <div className="col-sm-10">
                   <SubcategoriesSelect
                     category={this.state.selectedCateogry}
