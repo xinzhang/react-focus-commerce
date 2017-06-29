@@ -2,7 +2,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongodb = require('mongodb');
 
-var dburl = 'mongodb://localhost:27017/focus-commerce';
+//var dburl = 'mongodb://localhost:27017/focus-commerce';
+var dburl = 'mongodb://mongodb:Password1@ds143132.mlab.com:43132/focus-commerce';
 
 module.exports = function() {
     console.log('local strategy is loading');

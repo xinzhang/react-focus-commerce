@@ -1,5 +1,6 @@
 var mongodb = require('mongodb').MongoClient;
-var dburl = 'mongodb://localhost:27017/focus-commerce';
+//var dburl = 'mongodb://localhost:27017/focus-commerce';
+var dburl = 'mongodb://mongodb:Password1@ds143132.mlab.com:43132/focus-commerce';
 var async = require('async');
 
 var admin = {
