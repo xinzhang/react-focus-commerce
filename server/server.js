@@ -60,12 +60,20 @@ app.use(function(req, res, next) {
   });
 });
 
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../build')));
+
 app.use('/api/', blogRoute);
 app.use('/api/', productRoute);
 app.use('/api/', accountRoute);
 app.use('/api/', brandRoute);
 app.use('/api/', categoryRoute);
 app.use('/api/', orderRoute);
+
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+});
 
 app.listen(port);
 console.log('start to listening ' + port);
