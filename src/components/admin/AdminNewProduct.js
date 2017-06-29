@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 
 import MyInput from '../common/formsy/Input';
+import MyCheckBox from '../common/formsy/CheckBox';
 import Formsy from 'formsy-react';
 
 import SubcategoriesSelect from '../common/SubcategoriesSelect';
@@ -265,7 +266,7 @@ class AdminNewProduct extends React.Component {
                     <option value=""> -- Please select an option --</option>
                     {this.props.categories.map( (cat, i) => {
                       return (
-                        <option key={cat.name} value={cat.name}>
+                        <option key={cat.name} value={cat._id}>
                           {cat.name}
                         </option>)
                     }) }
@@ -273,7 +274,7 @@ class AdminNewProduct extends React.Component {
                 </div>
             </div>
             <div className="form-group">
-                <label htmlFor="input-description" className="col-sm-2 control-label">Category</label>
+                <label htmlFor="input-description" className="col-sm-2 control-label">Sub-Category</label>
                 <div className="col-sm-10">
                   <SubcategoriesSelect
                     category={this.state.selectedCateogry}
@@ -308,6 +309,21 @@ class AdminNewProduct extends React.Component {
                   {this.renderPicture(this.state.product)}
               </div>
             </div>
+
+            <div className="form-group">
+                <label htmlFor="input-prodducttax" className="col-sm-2 control-label">Special Now</label>
+                <div className="col-sm-10">
+                    <MyCheckBox value={this.state.product.isSpecial} className="form-control" id="checkbox-isSpecial" name="isSpecial" onChange={this.updateProductState} />
+                </div>
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="input-prodducttax" className="col-sm-2 control-label">Latest Now</label>
+                <div className="col-sm-10">
+                <MyCheckBox value={this.state.product.isLatest} className="form-control" id="checkbox-isLatest" name="isLatest" onChange={this.updateProductState} />
+                </div>
+            </div>
+
 
             <div className="buttons">
                 <button type="submit" className="btn btn-default" onClick={this.props.goBack}>Back</button>

@@ -1,6 +1,16 @@
 import React, {PropTypes} from 'react';
 import ProductGrid from 'react-data-grid';
 
+// Custom Formatter component
+const booleanFormatter = (props) => {
+    const val = props.value;
+    console.log(val)
+    return (
+      <input type="checkbox" disabled checked={val} />
+    );
+}
+
+
 class AdminProducts extends React.Component {
 
   cols = this.createCols();
@@ -19,7 +29,11 @@ class AdminProducts extends React.Component {
     return  [
       { key: 'name', name: 'Name' },
       { key: 'price', name: 'Price' },
-      { key: 'category', name: 'Category' }
+      { key: 'category_label', name: 'category_label' },
+      { key: 'subcategory', name: 'Sub-Category'},
+      { key: 'isLatest', name: 'Latest', formatter: booleanFormatter},
+      { key: 'isSpecial', name: 'Special', formatter: booleanFormatter},
+      { key: 'rating', name:'Rating'}
     ];
   }
 
@@ -40,7 +54,6 @@ class AdminProducts extends React.Component {
   }
 
   render() {
-
     return (
       <ProductGrid
         columns={this.cols}

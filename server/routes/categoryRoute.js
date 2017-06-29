@@ -10,15 +10,17 @@ var dbUrl = 'mongodb://localhost:27017/focus-commerce';
 
 router.post('/admin/categories/update', function(req, res, next) {
 
-  if (!req.user) {
-    res.status(401).end();
-    return;
-  }
+  console.log(req);
 
-  if (req.user && req.user.role !== 'admin') {
-    res.status(401).end();
-    return;
-  }
+  // if (!req.user) {
+  //   res.status(401).end();
+  //   return;
+  // }
+  //
+  // if (req.user && req.user.role !== 'admin') {
+  //   res.status(401).end();
+  //   return;
+  // }
 
   let categories = req.body.categories;
 

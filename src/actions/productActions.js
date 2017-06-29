@@ -31,7 +31,7 @@ export function loadRelatedProductsSuccess(relatedProducts) {
 
 export function loadSpecialProducts() {
   return function(dispatch) {
-    return ProductApi.getAllProducts(0).then(data => {
+    return ProductApi.getSpecialProducts(5).then(data => {
       //let specialProducts = data.slice(0, 3);
       dispatch(loadSpecialProductsSuccess(data));
     }).catch(error => {
@@ -46,7 +46,7 @@ export function loadSpecialProductsSuccess(specialProducts) {
 
 export function loadLatestProducts() {
   return function(dispatch) {
-    return ProductApi.getAllProducts(0).then(data => {
+    return ProductApi.getLatestProducts(5).then(data => {
       //let prod = data.slice(-3);
       dispatch(loadLatestProductsSuccess(data));
     }).catch(error => {
