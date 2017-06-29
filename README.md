@@ -13,7 +13,7 @@ node setup.js, setupCategories.js, setupProducts.js to create some sample data a
 - Under app folder, run npm start to start the react commerce web site at port 3000
 
 - Browse to http://localhost:3000 to view it.
-  Login as admin by admin@focus.com/admin to manager categories and products
+  Login as admin by admin@focus.com/password to manager categories and products
 
   *** In Progress ***
 
