@@ -6,7 +6,8 @@ var eventproxy = require('eventproxy');
 
 var mongodb = require('mongodb').MongoClient;
 var objectID = require('mongodb').ObjectID;
-var dbUrl = 'mongodb://localhost:27017/focus-commerce';
+//var dbUrl = 'mongodb://localhost:27017/focus-commerce';
+var dbUrl = 'mongodb://mongodb:Password1@ds143132.mlab.com:43132/focus-commerce';
 
 var authorize = require('./authorize.js');
 

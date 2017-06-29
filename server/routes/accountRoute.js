@@ -10,7 +10,8 @@ var cfg = require('../config.js');
 
 var mongodb = require('mongodb').MongoClient;
 var objectID = require('mongodb').ObjectID;
-var dburl = 'mongodb://localhost:27017/focus-commerce';
+//var dburl = 'mongodb://localhost:27017/focus-commerce';
+var dburl = 'mongodb://mongodb:Password1@ds143132.mlab.com:43132/focus-commerce';
 
 let blogJsonPath = path.resolve(__dirname, '../json/blogs.json')
 let blogCategoryJsonPath = path.resolve(__dirname, '../json/blogCategories.json')

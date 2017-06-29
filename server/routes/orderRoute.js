@@ -3,7 +3,8 @@ var router = express.Router();
 
 var mongodb = require('mongodb').MongoClient;
 var objectID = require('mongodb').ObjectID;
-var dbUrl = 'mongodb://localhost:27017/focus-commerce';
+//var dbUrl = 'mongodb://localhost:27017/focus-commerce';
+var dbUrl = 'mongodb://mongodb:Password1@ds143132.mlab.com:43132/focus-commerce';
 
 router.post('/orders/new', function(req, res, next){
   mongodb.connect(dbUrl, function(err, db){
